@@ -28,18 +28,18 @@
 
 
 <script>
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    var playerImg = new Image();
-    playerImg.src = "../images/player.png";
-    var titleImg = new Image();
-    titleImg.src = "../images/survivethemob.png"; //temporary image and name
-    var spotlightLImg = new Image();
-    spotlightLImg.src = "../images/spotlight-left.png";
-    var spotlightRImg = new Image();
-    spotlightRImg.src = "../images/spotlight-right.png";
-    var startTextImg = new Image();
-    startTextImg.src = "../images/startText.png";
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    let playerImg = new Image();
+    playerImg.src = "0Main/images/player.png";
+    let titleImg = new Image();
+    titleImg.src = "0Main/images/survivethemob.png"; //temporary image and name
+    let spotlightLImg = new Image();
+    spotlightLImg.src = "0Main/images/spotlight-left.png";
+    let spotlightRImg = new Image();
+    spotlightRImg.src = "0Main/images/spotlight-right.png";
+    let startTextImg = new Image();
+    startTextImg.src = "0Main/images/startText.png";
 
 
     playerImg.onload = function() { //load player and background image
@@ -71,8 +71,8 @@
     }
 
     function startDraw() {                                                       //stroke text animation
-        var startText = "Press any button to start";
-        var dashLen = 150, dashOffset = dashLen, speed = 25, x = 240, y= 700, i = 0;
+        let startText = "Press any button to start";
+        let dashLen = 150, dashOffset = dashLen, speed = 25, x = 240, y= 700, i = 0;
 
         ctx.font = "40px Comic Sans MS";
         ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.globalAlpha = 1;
@@ -96,7 +96,7 @@
         })();
 
     }
-    var tog = 2, timer = undefined;
+    let tog = 2, timer = undefined;
     function setUpFlash()
     {
 
