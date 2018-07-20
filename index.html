@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Production2</title>
+
+    <style>
+        html
+        {
+            background-color:  #3c3c3c;
+        }
+        body
+        {
+            margin: 0 auto;
+            width: 1000px;
+            height: 800px;
+        }
+        #canvas{
+            margin: 0 auto;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+<br>
+<canvas id="canvas" width="1000" height="800">your browser does not support canvas!</canvas>
+
+
+
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var playerImg = new Image();
+    playerImg.src = "../images/player.png";
+    var titleImg = new Image();
+    titleImg.src = "../images/survivethemob.png"; //temporary image and name
+    var spotlightLImg = new Image();
+    spotlightLImg.src = "../images/spotlight-left.png";
+    var spotlightRImg = new Image();
+    spotlightRImg.src = "../images/spotlight-right.png";
+    var startTextImg = new Image();
+    startTextImg.src = "../images/startText.png";
+
+
+    playerImg.onload = function() { //load player and background image
+        playerDraw();
+    };
+
+    setTimeout(spotlightDraw, 1000);
+    setTimeout(titleDraw, 3000);
+    setTimeout(startDraw, 3000);
+    setTimeout(setUpFlash, 5300);
+
+
+    function playerDraw() {
+        ctx.drawImage(playerImg, 0, -20);
+
+    }
+
+    function titleDraw() {
+        ctx.drawImage(titleImg, 0, 0);
+
+    }
+
+    function spotlightDraw() {                                                  // draw spotlight in order
+        ctx.drawImage(spotlightLImg, -20,0);
+        function spotlightRight() {
+            ctx.drawImage(spotlightRImg, 0,0);
+        }
+        setTimeout(spotlightRight, 1000);
+    }
+
+    function startDraw() {                                                       //stroke text animation
+        var startText = "Press any button to start";
+        var dashLen = 150, dashOffset = dashLen, speed = 25, x = 240, y= 700, i = 0;
+
+        ctx.font = "40px Comic Sans MS";
+        ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.globalAlpha = 1;
+        ctx.strokeStyle = ctx.fillStyle = "#f99862";                           // stroke letter
+
+
+        (function draw() {                                                      // animate
+            ctx.setLineDash([dashLen - dashOffset, dashOffset - speed]);
+            dashOffset -= speed;
+            ctx.strokeText(startText[i], x, y);
+
+            if (dashOffset > 0) requestAnimationFrame(draw);
+            else {
+                ctx.fillText(startText[i], x, y);                                // fill final letter
+                dashOffset = dashLen;
+                x += ctx.measureText(startText[i++]).width + ctx.lineWidth * Math.random();
+                ctx.setTransform(1, 0, 0, 1, 0, 3 * Math.random());
+                if (i < startText.length) requestAnimationFrame(draw);           // loop until last letter
+            }
+
+        })();
+
+    }
+    var tog = 2, timer = undefined;
+    function setUpFlash()
+    {
+
+        timer = setInterval(flashyText, 500);
+    }
+
+    function flashyText()
+    {
+            tog = (tog === 1)? 2 : 1;
+            if (tog === 1)
+            {
+                ctx.clearRect(230, 660, 700, 70);
+            }
+            else
+            {
+                ctx.drawImage(startTextImg, 240, 663);
+            }
+    }
+
+    setTimeout(input, 6000);                                                    // after all effect, add keyboard input
+
+    function input() {
+        window.addEventListener("keyup", startGame);
+
+        function startGame()
+        {
+            clearInterval(timer);
+            location.href = 'warnings.html'                                         //next page link
+        }
+
+    }
+
+
+</script>
+
+
+</body>
+</html>
