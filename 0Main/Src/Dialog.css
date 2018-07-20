@@ -1,0 +1,31 @@
+#dialog
+{
+    width: 800px;
+    height: 162px;
+    margin: 4px auto;
+    background-image: none;
+}
+
+#portrait
+{
+    width: 150px;
+    height: 162px;
+    position:absolute;
+    background-image: none;
+}
+
+#name
+{
+    margin-left: 160px;
+    font-size: 25px;
+    color : white;
+    margin-top:3px;
+
+}
+
+#output
+{
+    margin-left: 160px;
+    font-size: 20px;
+    color : white;
+}

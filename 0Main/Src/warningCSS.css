@@ -1,0 +1,23 @@
+html
+{
+    background-color:  #3c3c3c;
+}
+body
+{   width: 800px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+/*Styling for #container                                 */
+#canvas
+{
+    border: 2px black solid;                            /*border colour for main container set to black               */
+                                                        /*border style for main container set to solid                */
+                                                        /*border thickness for main container set to thick            */
+/*    border-radius: 25px;  */                              /*border radius set to 25 px                                  */
+    margin: 0 auto;                                     /*body position set to auto (centered)                        */
+
+    background-image: url("../images/warning.gif");
+    background-position: center;
+}
+
