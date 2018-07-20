@@ -1,8 +1,0 @@
-player.png:
-made by Soyoung
-(resource is from here : 
-papers: https://www.canstockphoto.com/bureaucracy-17126695.html)
-character : https://www.pinterest.ca/pin/409264684865329992/
-
-spotlight-left, spotlight-right, survivethemob.png:
-made by Khanh
