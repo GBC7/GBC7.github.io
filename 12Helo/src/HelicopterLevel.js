@@ -3,7 +3,7 @@ let heliCanvas, ctx2, left, down, right, up, climbing, chopper, chicken, helo, s
     tutClimb, tutFall, pilotHadTo, doneTheTut, chickens;
 
 let pigs = new Image();
-pigs.src = "../../12Helo/images/FlyingPig.png";
+pigs.src = "12Helo/images/FlyingPig.png";
 
 
 //This probably initializes the level
@@ -30,15 +30,15 @@ function initializeCopterLevel()
         //Assign image source code's
         {
             //Canvas 1 background
-            canvas.style.backgroundImage = "url('../../12Helo/images/city.gif')";
+            canvas.style.backgroundImage = "url('12Helo/images/city.gif')";
 
             //Tell the stupid machine what the variables are
             helo = new Image();
             startBuilding = new Image();
 
             //Then tell what they look like
-            helo.src = "../../12Helo/images/helo.png";
-            startBuilding.src = "../../12Helo/images/startBuilding.png";
+            helo.src = "12Helo/images/helo.png";
+            startBuilding.src = "12Helo/images/startBuilding.png";
         }
 
         //Initialize some vars
@@ -295,7 +295,7 @@ function initializeCopterLevel()
                                         self.srcY = 5 * self.height;
 
                                         //Set it's image property
-                                        self.myImage.src = "../../12Helo/images/Flittens.png";
+                                        self.myImage.src = "12Helo/images/Flittens.png";
                                         break;
                                     case 2:
                                         //Set this objects properties based on the randomly chosen non-flying flying character
@@ -307,7 +307,7 @@ function initializeCopterLevel()
                                         self.srcY = 5 * self.height;
 
                                         //Set it's image property
-                                        self.myImage.src = "../../12Helo/images/FlittensandSphinxes.png";
+                                        self.myImage.src = "12Helo/images/FlittensandSphinxes.png";
                                         break;
                                     case 3:
                                         //Set this objects properties based on the randomly chosen non-flying flying character
@@ -319,7 +319,7 @@ function initializeCopterLevel()
                                         self.srcY = 1 * self.height;
 
                                         //Set it's image property
-                                        self.myImage.src = "../../12Helo/images/Flyingfox.png";
+                                        self.myImage.src = "12Helo/images/Flyingfox.png";
                                         break;
                                     case 4:
                                         //Set this objects properties based on the randomly chosen non-flying flying character
@@ -331,7 +331,7 @@ function initializeCopterLevel()
                                         self.srcY = 1 * self.height;
 
                                         //Set it's image property
-                                        self.myImage.src = "../../12Helo/images/FlyingPig.png";
+                                        self.myImage.src = "12Helo/images/FlyingPig.png";
                                         break;
                                     case 5:
                                         //Set this objects properties based on the randomly chosen non-flying flying character
@@ -343,7 +343,7 @@ function initializeCopterLevel()
                                         self.srcY = 1 * self.height;
 
                                         //Set it's image property
-                                        self.myImage.src = "../../12Helo/images/Wolfset.png";
+                                        self.myImage.src = "12Helo/images/Wolfset.png";
                                         break;
                                 }
                                 //Set the flying chicken to appear at a random yPos
@@ -929,7 +929,7 @@ function checkChickens()
                                 self.srcY = 5 * self.height;
 
                                 //Set it's image property
-                                self.myImage.src = "../../12Helo/images/Flittens.png";
+                                self.myImage.src = "12Helo/images/Flittens.png";
                                 break;
                             case 2:
                                 //Set this objects properties based on the randomly chosen non-flying flying character
@@ -941,7 +941,7 @@ function checkChickens()
                                 self.srcY = 5 * self.height;
 
                                 //Set it's image property
-                                self.myImage.src = "../../12Helo/images/FlittensandSphinxes.png";
+                                self.myImage.src = "12Helo/images/FlittensandSphinxes.png";
                                 break;
                             case 3:
                                 //Set this objects properties based on the randomly chosen non-flying flying character
@@ -953,7 +953,7 @@ function checkChickens()
                                 self.srcY = 1 * self.height;
 
                                 //Set it's image property
-                                self.myImage.src = "../../12Helo/images/Flyingfox.png";
+                                self.myImage.src = "12Helo/images/Flyingfox.png";
                                 break;
                             case 4:
                                 //Set this objects properties based on the randomly chosen non-flying flying character
@@ -965,7 +965,7 @@ function checkChickens()
                                 self.srcY = 1 * self.height;
 
                                 //Set it's image property
-                                self.myImage.src = "../../12Helo/images/FlyingPig.png";
+                                self.myImage.src = "12Helo/images/FlyingPig.png";
                                 break;
                             case 5:
                                 //Set this objects properties based on the randomly chosen non-flying flying character
@@ -977,7 +977,7 @@ function checkChickens()
                                 self.srcY = 1 * self.height;
 
                                 //Set it's image property
-                                self.myImage.src = "../../12Helo/images/Wolfset.png";
+                                self.myImage.src = "12Helo/images/Wolfset.png";
                                 break;
                         }
                         //Set the flying chicken to appear at a random yPos

@@ -5,7 +5,7 @@
 //Sounds
 let meow = new Audio;
 {
-    meow.src = ('../../5MomsPlace/audio/meow.wav');
+    meow.src = ('5MomsPlace/audio/meow.wav');
 }
 
 meow.volume = 0.3;
@@ -62,47 +62,47 @@ function initializeLV5 ()
 
 
         {
-            door.src = "../../5MomsPlace/images/door.png"; //1
-            wall.src = "../../5MomsPlace/images/wall.png";  //0
-            floor.src = "../../5MomsPlace/images/floor.png";  //2
-            cat.src = "../../5MomsPlace/images/cat.png";  //3
-            w1.src = "../../5MomsPlace/images/w1.png"; //4
-            w2.src = "../../5MomsPlace/images/w2.png"; //5
-            w3.src = "../../5MomsPlace/images/w3.png"; //6
-            w4.src = "../../5MomsPlace/images/w4.png"; //7
-            w5.src = "../../5MomsPlace/images/w5.png"; //8
-            granny2.src = "../../5MomsPlace/images/granny2.png"; //9
-            piano1.src = "../../5MomsPlace/images/piano1.png"; //10
-            piano2.src = "../../5MomsPlace/images/piano2.png"; //11
-            piano3.src = "../../5MomsPlace/images/piano3.png"; //12
-            piano4.src = "../../5MomsPlace/images/piano4.png"; //13
-            window1.src = "../../5MomsPlace/images/window1.png"; //14
-            catPro1.src = "../../5MomsPlace/images/catPro1.png"; //15
-            catPro2.src = "../../5MomsPlace/images/catPro2.png"; //16
-            catPro3.src = "../../5MomsPlace/images/catPro3.png"; //17
-            catPro4.src = "../../5MomsPlace/images/catPro4.png"; //18
-            wallv2.src = "../../5MomsPlace/images/wallv2.png"; //19
-            barrier2.src = "../../5MomsPlace/images/barrier2.png";//20
-            barrier3.src = "../../5MomsPlace/images/barrier3.png"; //21
-            barrier4.src = "../../5MomsPlace/images/barrier4.png"; //22
-            barrier5.src = "../../5MomsPlace/images/barrier5.png"; //23
-            barrier6.src = "../../5MomsPlace/images/barrier6.png"; //24
-            barrier7.src = "../../5MomsPlace/images/barrier7.png"; //25
-            bed1.src = "../../5MomsPlace/images/bed1.png"; //26
-            bed2.src = "../../5MomsPlace/images/bed2.png"; //27
-            lib1.src = "../../5MomsPlace/images/lib1.png"; //28
-            lib2.src = "../../5MomsPlace/images/lib2.png"; //29
-            flower.src = "../../5MomsPlace/images/flower.png"; //30
-            pan.src = "../../5MomsPlace/images/pan.png"; //31
-            art1.src = "../../5MomsPlace/images/art1.png"; //32
-            art2.src = "../../5MomsPlace/images/art2.png"; //33
-            book1.src = "../../5MomsPlace/images/book1.png"; //34
-            book2.src = "../../5MomsPlace/images/book2.png"; //35
-            paper.src = "../../5MomsPlace/images/paper.png"; //40
-            frid1.src = "../../5MomsPlace/images/frid1.png"; //36
-            frid2.src = "../../5MomsPlace/images/frid2.png"; //37
-            chop.src = "../../5MomsPlace/images/chop.png"; //38
-            kit.src = "../../5MomsPlace/images/kit.png"; //39
+            door.src = "5MomsPlace/images/door.png"; //1
+            wall.src = "5MomsPlace/images/wall.png";  //0
+            floor.src = "5MomsPlace/images/floor.png";  //2
+            cat.src = "5MomsPlace/images/cat.png";  //3
+            w1.src = "5MomsPlace/images/w1.png"; //4
+            w2.src = "5MomsPlace/images/w2.png"; //5
+            w3.src = "5MomsPlace/images/w3.png"; //6
+            w4.src = "5MomsPlace/images/w4.png"; //7
+            w5.src = "5MomsPlace/images/w5.png"; //8
+            granny2.src = "5MomsPlace/images/granny2.png"; //9
+            piano1.src = "5MomsPlace/images/piano1.png"; //10
+            piano2.src = "5MomsPlace/images/piano2.png"; //11
+            piano3.src = "5MomsPlace/images/piano3.png"; //12
+            piano4.src = "5MomsPlace/images/piano4.png"; //13
+            window1.src = "5MomsPlace/images/window1.png"; //14
+            catPro1.src = "5MomsPlace/images/catPro1.png"; //15
+            catPro2.src = "5MomsPlace/images/catPro2.png"; //16
+            catPro3.src = "5MomsPlace/images/catPro3.png"; //17
+            catPro4.src = "5MomsPlace/images/catPro4.png"; //18
+            wallv2.src = "5MomsPlace/images/wallv2.png"; //19
+            barrier2.src = "5MomsPlace/images/barrier2.png";//20
+            barrier3.src = "5MomsPlace/images/barrier3.png"; //21
+            barrier4.src = "5MomsPlace/images/barrier4.png"; //22
+            barrier5.src = "5MomsPlace/images/barrier5.png"; //23
+            barrier6.src = "5MomsPlace/images/barrier6.png"; //24
+            barrier7.src = "5MomsPlace/images/barrier7.png"; //25
+            bed1.src = "5MomsPlace/images/bed1.png"; //26
+            bed2.src = "5MomsPlace/images/bed2.png"; //27
+            lib1.src = "5MomsPlace/images/lib1.png"; //28
+            lib2.src = "5MomsPlace/images/lib2.png"; //29
+            flower.src = "5MomsPlace/images/flower.png"; //30
+            pan.src = "5MomsPlace/images/pan.png"; //31
+            art1.src = "5MomsPlace/images/art1.png"; //32
+            art2.src = "5MomsPlace/images/art2.png"; //33
+            book1.src = "5MomsPlace/images/book1.png"; //34
+            book2.src = "5MomsPlace/images/book2.png"; //35
+            paper.src = "5MomsPlace/images/paper.png"; //40
+            frid1.src = "5MomsPlace/images/frid1.png"; //36
+            frid2.src = "5MomsPlace/images/frid2.png"; //37
+            chop.src = "5MomsPlace/images/chop.png"; //38
+            kit.src = "5MomsPlace/images/kit.png"; //39
         }//Defining src properties for image objects
 
 

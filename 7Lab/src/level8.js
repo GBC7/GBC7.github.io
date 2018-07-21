@@ -26,24 +26,24 @@ function initializeLV8()
 
 
     {
-        openWindow.src = "../../7Lab/images/openWindow.png";
-        fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
-        fullShelvesTop.src = "../../7Lab/images/fullShelves-top.png";
-        glassCabinetBottom.src = "../../7Lab/images/glassCabinet-bottom.png";
-        glassCabinetTop.src = "../../7Lab/images/glassCabinet-top.png";
-        metalCabinetBottom.src = "../../7Lab/images/metalCabinet-bottom.png";
-        metalCabinetTop.src = "../../7Lab/images/metalCabinet-top.png";
-        computerBottom.src = "../../7Lab/images/computer-bottom.png";
-        computerTop.src = "../../7Lab/images/computer-top.png";
-        lockerBottom.src = "../../7Lab/images/locker-bottom.png";
-        lockerTop.src = "../../7Lab/images/locker-top.png";
-        emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
-        emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
-        stairs.src = "../../7Lab/images/stairs.png";
-        door1.src = "../../7Lab/images/door1.png";
-        wall.src = "../../7Lab/images/Wall.png";
-        floor.src = "../../7Lab/images/Floor.png";
-        closedWindow.src = "../../7Lab/images/closedWindow.png";
+        openWindow.src = "7Lab/images/openWindow.png";
+        fullShelvesBottom.src = "7Lab/images/fullShelves-bottom.png";
+        fullShelvesTop.src = "7Lab/images/fullShelves-top.png";
+        glassCabinetBottom.src = "7Lab/images/glassCabinet-bottom.png";
+        glassCabinetTop.src = "7Lab/images/glassCabinet-top.png";
+        metalCabinetBottom.src = "7Lab/images/metalCabinet-bottom.png";
+        metalCabinetTop.src = "7Lab/images/metalCabinet-top.png";
+        computerBottom.src = "7Lab/images/computer-bottom.png";
+        computerTop.src = "7Lab/images/computer-top.png";
+        lockerBottom.src = "7Lab/images/locker-bottom.png";
+        lockerTop.src = "7Lab/images/locker-top.png";
+        emptyShelvesBottom.src = "7Lab/images/emptyShelves-bottom.png";
+        emptyShelvesTop.src = "7Lab/images/emptyShelves-top.png";
+        stairs.src = "7Lab/images/stairs.png";
+        door1.src = "7Lab/images/door1.png";
+        wall.src = "7Lab/images/Wall.png";
+        floor.src = "7Lab/images/Floor.png";
+        closedWindow.src = "7Lab/images/closedWindow.png";
     }//Defining images src property
 
 

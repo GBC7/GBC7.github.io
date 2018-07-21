@@ -6,8 +6,8 @@
 let rock = new Audio;
 let streetSound = new Audio();
 {
-    rock.src = ("../../4Streetz/audio/rocksound.mp3");
-    streetSound.src = "../../4Streetz/audio/happy.mp3";
+    rock.src = ("4Streetz/audio/rocksound.mp3");
+    streetSound.src = "4Streetz/audio/happy.mp3";
 }
 
 rock.volume = true;
@@ -72,52 +72,52 @@ function initializeLV4()
 
     {
 
-        bank1.src = "../../4Streetz/images/bank1.png";
-        bank2.src = "../../4Streetz/images/bank2.png";
-        bank3.src = "../../4Streetz/images/bank3.png";
-        bank4.src = "../../4Streetz/images/bank4.png";
-        clothingStore1.src = "../../4Streetz/images/clothingStore1.png";
-        clothingStore2.src = "../../4Streetz/images/clothingStore2.png";
-        coffee1.src = "../../4Streetz/images/coffee1.png";
-        coffee2.src = "../../4Streetz/images/coffee2.png";
-        coffee3.src = "../../4Streetz/images/coffee3.png";
-        coffee4.src = "../../4Streetz/images/coffee4.png";
-        house.src = "../../4Streetz/images/house.png";
-        mall1.src = "../../4Streetz/images/mall1.png";
-        mall2.src = "../../4Streetz/images/mall2.png";
-        mall3.src = "../../4Streetz/images/mall3.png";
-        mall4.src = "../../4Streetz/images/mall4.png";
-        mall5.src = "../../4Streetz/images/mall5.png";
-        mall6.src = "../../4Streetz/images/mall6.png";
-        mall7.src = "../../4Streetz/images/mall7.png";
-        mall8.src = "../../4Streetz/images/mall8.png";
-        market1.src = "../../4Streetz/images/market1.png";
-        market2.src = "../../4Streetz/images/market2.png";
-        market3.src = "../../4Streetz/images/market3.png";
-        market4.src = "../../4Streetz/images/market4.png";
-        market5.src = "../../4Streetz/images/market5.png";
-        market6.src = "../../4Streetz/images/market6.png";
-        market7.src = "../../4Streetz/images/market7.png";
-        market8.src = "../../4Streetz/images/market8.png";
-        market9.src = "../../4Streetz/images/market9.png";
-        momsHouse2.src = "../../4Streetz/images/momsHouse2.png";
-        momsHouse4.src = "../../4Streetz/images/momsHouse4.png";
-        park1.src = "../../4Streetz/images/park1.png";
-        park2.src = "../../4Streetz/images/park2.png";
-        park3.src = "../../4Streetz/images/park3.png";
-        park4.src = "../../4Streetz/images/park4.png";
-        park5.src = "../../4Streetz/images/park5.png";
-        park6.src = "../../4Streetz/images/park6.png";
-        park8.src = "../../4Streetz/images/park8.png";
-        park9.src = "../../4Streetz/images/park9.png";
-        school1.src = "../../4Streetz/images/moblv4.png";
-        school2.src = "../../4Streetz/images/school2.png";
-        school3.src = "../../4Streetz/images/school3.png";
-        street.src = "../../4Streetz/images/street.png";
-        house1.src= "../../4Streetz/images/house.png";
-        side.src = "../../4Streetz/images/side.png";
-        school4.src = "../../4Streetz/images/school4.png";
-        momkey.src = "../../4Streetz/images/side.png";
+        bank1.src = "4Streetz/images/bank1.png";
+        bank2.src = "4Streetz/images/bank2.png";
+        bank3.src = "4Streetz/images/bank3.png";
+        bank4.src = "4Streetz/images/bank4.png";
+        clothingStore1.src = "4Streetz/images/clothingStore1.png";
+        clothingStore2.src = "4Streetz/images/clothingStore2.png";
+        coffee1.src = "4Streetz/images/coffee1.png";
+        coffee2.src = "4Streetz/images/coffee2.png";
+        coffee3.src = "4Streetz/images/coffee3.png";
+        coffee4.src = "4Streetz/images/coffee4.png";
+        house.src = "4Streetz/images/house.png";
+        mall1.src = "4Streetz/images/mall1.png";
+        mall2.src = "4Streetz/images/mall2.png";
+        mall3.src = "4Streetz/images/mall3.png";
+        mall4.src = "4Streetz/images/mall4.png";
+        mall5.src = "4Streetz/images/mall5.png";
+        mall6.src = "4Streetz/images/mall6.png";
+        mall7.src = "4Streetz/images/mall7.png";
+        mall8.src = "4Streetz/images/mall8.png";
+        market1.src = "4Streetz/images/market1.png";
+        market2.src = "4Streetz/images/market2.png";
+        market3.src = "4Streetz/images/market3.png";
+        market4.src = "4Streetz/images/market4.png";
+        market5.src = "4Streetz/images/market5.png";
+        market6.src = "4Streetz/images/market6.png";
+        market7.src = "4Streetz/images/market7.png";
+        market8.src = "4Streetz/images/market8.png";
+        market9.src = "4Streetz/images/market9.png";
+        momsHouse2.src = "4Streetz/images/momsHouse2.png";
+        momsHouse4.src = "4Streetz/images/momsHouse4.png";
+        park1.src = "4Streetz/images/park1.png";
+        park2.src = "4Streetz/images/park2.png";
+        park3.src = "4Streetz/images/park3.png";
+        park4.src = "4Streetz/images/park4.png";
+        park5.src = "4Streetz/images/park5.png";
+        park6.src = "4Streetz/images/park6.png";
+        park8.src = "4Streetz/images/park8.png";
+        park9.src = "4Streetz/images/park9.png";
+        school1.src = "4Streetz/images/moblv4.png";
+        school2.src = "4Streetz/images/school2.png";
+        school3.src = "4Streetz/images/school3.png";
+        street.src = "4Streetz/images/street.png";
+        house1.src= "4Streetz/images/house.png";
+        side.src = "4Streetz/images/side.png";
+        school4.src = "4Streetz/images/school4.png";
+        momkey.src = "4Streetz/images/side.png";
     }//Defining images src properties
 
 

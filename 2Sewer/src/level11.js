@@ -23,19 +23,19 @@ function initializeLV11()
 
 
     {
-        key.src = "../../2Sewer/images/key.png";//Change to key image when aquired
-        valveTm.src = "../../2Sewer/images/valveTm.png";
-        valveTl.src = "../../2Sewer/images/valveTl.png";
-        valveTr.src = "../../2Sewer/images/valveTr.png";
-        valveMl.src = "../../2Sewer/images/valveMl.png";
-        valveMm.src = "../../2Sewer/images/valveMm.png";
-        valveMr.src = "../../2Sewer/images/valveMr.png";
-        valveBl.src = "../../2Sewer/images/valveBl.png";
-        valveBm.src = "../../2Sewer/images/valveBm.png";
-        valveBr.src = "../../2Sewer/images/valveBr.png";
-        wall.src = "../../2Sewer/images/unusedWallTiles/wall.png";
-        upperWall.src = "../../2Sewer/images/upperWall.png";
-        pipeTopView.src = "../../2Sewer/images/pipe3.png";
+        key.src = "2Sewer/images/key.png";//Change to key image when aquired
+        valveTm.src = "2Sewer/images/valveTm.png";
+        valveTl.src = "2Sewer/images/valveTl.png";
+        valveTr.src = "2Sewer/images/valveTr.png";
+        valveMl.src = "2Sewer/images/valveMl.png";
+        valveMm.src = "2Sewer/images/valveMm.png";
+        valveMr.src = "2Sewer/images/valveMr.png";
+        valveBl.src = "2Sewer/images/valveBl.png";
+        valveBm.src = "2Sewer/images/valveBm.png";
+        valveBr.src = "2Sewer/images/valveBr.png";
+        wall.src = "2Sewer/images/unusedWallTiles/wall.png";
+        upperWall.src = "2Sewer/images/upperWall.png";
+        pipeTopView.src = "2Sewer/images/pipe3.png";
     }//Defining images src properties
 
 

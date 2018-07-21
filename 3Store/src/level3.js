@@ -67,8 +67,8 @@ let door2 = new Image();
 let level3sprite = new Image();
 let enemyImg = new Image();//enemy image (temp) FOR TESTING
 {
-    enemyImg.src = "../../3Store/images/enemy2.png";//enemy image (temp) FOR TESTING
-    level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
+    enemyImg.src = "3Store/images/enemy2.png";//enemy image (temp) FOR TESTING
+    level3sprite.src = "3Store/images/ClothingStoreSprite.png";
 }
 
 
@@ -78,10 +78,10 @@ let bgm_level3 = new Audio;
 let dangerous = new Audio;
 let doorSound = new Audio();
 {
-    warningSound.src = ('../../3Store/audio/warningsound.mp3');
-    bgm_level3.src = ("../../3Store/audio/clothingshop.mp3");
-    dangerous.src = ("../../3Store/audio/enemyappear.mp3");
-    doorSound.src = ('../../3Store/audio/open.mp3');
+    warningSound.src = ('3Store/audio/warningsound.mp3');
+    bgm_level3.src = ("3Store/audio/clothingshop.mp3");
+    dangerous.src = ("3Store/audio/enemyappear.mp3");
+    doorSound.src = ('3Store/audio/open.mp3');
 }
 
 bgm_level3.loop = true;
@@ -130,32 +130,32 @@ function initializeLV3()
 
 
     {
-        floor.src = "../../3Store/images/floor.png";
-        rack1.src = "../../3Store/images/rack_1.png";
-        rack2.src = "../../3Store/images/rack_2.png";
-        rack3.src = "../../3Store/images/rack_3.png";
-        display1.src = "../../3Store/images/display_1.png";
-        display2.src = "../../3Store/images/display_2.png";
-        display3.src = "../../3Store/images/display_3.png";
-        display4.src = "../../3Store/images/display_4.png";
-        counter1.src = "../../3Store/images/counter_1.png";
-        counter2.src = "../../3Store/images/counter_2.png";
-        counter3.src = "../../3Store/images/counter_3.png";
-        wall.src = "../../3Store/images/wall_1.png";
-        wallLeft.src = "../../3Store/images/wall_left.png";
-        wallRight.src = "../../3Store/images/wall_right.png";
-        cabinet.src = "../../3Store/images/cabinet.png";
-        stair.src = "../../3Store/images/downstair.png";
-        doorOpenRight.src = "../../3Store/images/door_open_right.png";
-        doorOpenLeft.src = "../../3Store/images/door_open_left.png";
-        windowClose.src = "../../3Store/images/window_close.png";
-        windowOpen.src = "../../3Store/images/window_open.png";
-        door1.src = "../../3Store/images/door_1.png";
-        door2.src = "../../3Store/images/door_2.png";
-        chair.src = "../../3Store/images/chair.png";
-        desk.src = "../../3Store/images/desk.png";
-        doorOpen_1.src = "../../3Store/images/door_open_1.png";
-        doorOpen_2.src = "../../3Store/images/door_open_2.png";
+        floor.src = "3Store/images/floor.png";
+        rack1.src = "3Store/images/rack_1.png";
+        rack2.src = "3Store/images/rack_2.png";
+        rack3.src = "3Store/images/rack_3.png";
+        display1.src = "3Store/images/display_1.png";
+        display2.src = "3Store/images/display_2.png";
+        display3.src = "3Store/images/display_3.png";
+        display4.src = "3Store/images/display_4.png";
+        counter1.src = "3Store/images/counter_1.png";
+        counter2.src = "3Store/images/counter_2.png";
+        counter3.src = "3Store/images/counter_3.png";
+        wall.src = "3Store/images/wall_1.png";
+        wallLeft.src = "3Store/images/wall_left.png";
+        wallRight.src = "3Store/images/wall_right.png";
+        cabinet.src = "3Store/images/cabinet.png";
+        stair.src = "3Store/images/downstair.png";
+        doorOpenRight.src = "3Store/images/door_open_right.png";
+        doorOpenLeft.src = "3Store/images/door_open_left.png";
+        windowClose.src = "3Store/images/window_close.png";
+        windowOpen.src = "3Store/images/window_open.png";
+        door1.src = "3Store/images/door_1.png";
+        door2.src = "3Store/images/door_2.png";
+        chair.src = "3Store/images/chair.png";
+        desk.src = "3Store/images/desk.png";
+        doorOpen_1.src = "3Store/images/door_open_1.png";
+        doorOpen_2.src = "3Store/images/door_open_2.png";
     }//Defining images src properties
 
 

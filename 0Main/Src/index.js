@@ -21,11 +21,11 @@ let scriptsLoaded = false;
     let playerImg = new Image();
 
     {
-        startTextImg.src = "../images/startText.png";
-        spotlightRImg.src = "../images/spotlight-right.png";
-        spotlightLImg.src = "../images/spotlight-left.png";
-        titleImg.src = "../images/survivethemob.png"; //temporary image and name
-        playerImg.src = "../images/player.png";
+        startTextImg.src = "images/startText.png";
+        spotlightRImg.src = "images/spotlight-right.png";
+        spotlightLImg.src = "images/spotlight-left.png";
+        titleImg.src = "images/survivethemob.png"; //temporary image and name
+        playerImg.src = "images/player.png";
     }//Define src
 
     playerImg.onload = function()
@@ -140,7 +140,7 @@ function warningPage()
     let canv = document.getElementById("regular");
     let ctxT = canv.getContext("2d");
 
-    canv.style.backgroundImage = "url('../images/warning.gif";
+    canv.style.backgroundImage = "url('images/warning.gif";
     canv.style.backgroundPosition = "center";
 
     ctxT.fillRect(550,0,300,600);
@@ -213,8 +213,8 @@ function controlsPage()
     let controlsTimer = undefined;
     let count = 0;
 
-    spacebar.src = "../images/computer_key_spacebar.png";
-    arrowKeys.src = "../images/arrow-keys-vectors.jpg";
+    spacebar.src = "images/computer_key_spacebar.png";
+    arrowKeys.src = "images/arrow-keys-vectors.jpg";
 
     arrowKeys.onload = function()
     {

@@ -23,8 +23,8 @@ let lockedDoor = new Audio;
 let waterRunning = new Audio;
 let ratOfDeath = new Audio;
 {
-    waterRunning.src = ('../../2Sewer/audio/waterRunning.mp3');
-    ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
+    waterRunning.src = ('2Sewer/audio/waterRunning.mp3');
+    ratOfDeath.src = ('2Sewer/audio/ratOfDeath.mp3');
 
     waterRunning.loop = true;
     waterRunning.volume = 0.05;
@@ -47,19 +47,19 @@ let torchSwamp = new Image();
 let door3 = new Image();
 let sciUndWater = new Image();
 {
-    swampFloor.src = "../../2Sewer/images/dirtySwampFloor.png";
-    cleanFloor.src = "../../2Sewer/images/cleanFloor.png";
-    ratImage.src = "../../2Sewer/images/rat.png";
-    wetPipe.src = "../../2Sewer/images/pipeWet.png";
-    sewerFloor.src = "../../2Sewer/images/floor.png";
-    door3.src = "../../2Sewer/images/door3.png";
-    wallBesideDoor.src = "../../2Sewer/images/wallBesideDoor.png";
-    floorAboveDoor.src = "../../2Sewer/images/floorAboveDoor.png";
-    floorClean.src = "../../2Sewer/images/floorClean.png";
-    doorBare.src = "../../2Sewer/images/doorBare.png";
-    torchSwamp.src = "../../2Sewer/images/torchSwamp.png";
-    torch.src = "../../2Sewer/images/torch.png";
-    sciUndWater.src = "../../2Sewer/images/scientist2.png";
+    swampFloor.src = "2Sewer/images/dirtySwampFloor.png";
+    cleanFloor.src = "2Sewer/images/cleanFloor.png";
+    ratImage.src = "2Sewer/images/rat.png";
+    wetPipe.src = "2Sewer/images/pipeWet.png";
+    sewerFloor.src = "2Sewer/images/floor.png";
+    door3.src = "2Sewer/images/door3.png";
+    wallBesideDoor.src = "2Sewer/images/wallBesideDoor.png";
+    floorAboveDoor.src = "2Sewer/images/floorAboveDoor.png";
+    floorClean.src = "2Sewer/images/floorClean.png";
+    doorBare.src = "2Sewer/images/doorBare.png";
+    torchSwamp.src = "2Sewer/images/torchSwamp.png";
+    torch.src = "2Sewer/images/torch.png";
+    sciUndWater.src = "2Sewer/images/scientist2.png";
 }
 
 let torchNum = [];                              //To hold torch objects
@@ -90,13 +90,13 @@ let torchNum = [];                              //To hold torch objects
                 switch (this.flameNum)//Decide which flame to draw
                 {
                     case 0:
-                        this.curFlame.src = "../../2Sewer/images/flameWall1.png";
+                        this.curFlame.src = "2Sewer/images/flameWall1.png";
                         break;
                     case 1:
-                        this.curFlame.src = "../../2Sewer/images/flameWall2.png";
+                        this.curFlame.src = "2Sewer/images/flameWall2.png";
                         break;
                     case 2:
-                        this.curFlame.src = "../../2Sewer/images/flameWall3.png";
+                        this.curFlame.src = "2Sewer/images/flameWall3.png";
                         break;
                 }
                 ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
@@ -133,13 +133,13 @@ let torchNum = [];                              //To hold torch objects
                     switch (this.flameNum)//Decide which flame to draw
                     {
                         case 0:
-                            this.curFlame.src = "../../2Sewer/images/flameWall1Dark.png";
+                            this.curFlame.src = "2Sewer/images/flameWall1Dark.png";
                             break;
                         case 1:
-                            this.curFlame.src = "../../2Sewer/images/flameWall2Dark.png";
+                            this.curFlame.src = "2Sewer/images/flameWall2Dark.png";
                             break;
                         case 2:
-                            this.curFlame.src = "../../2Sewer/images/flameWall3Dark.png";
+                            this.curFlame.src = "2Sewer/images/flameWall3Dark.png";
                             break;
                     }
                     ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
@@ -177,13 +177,13 @@ let torchNum = [];                              //To hold torch objects
                     switch (this.flameNum)//Decide which flame to draw
                     {
                         case 0:
-                            this.curFlame.src = "../../2Sewer/images/flame01.png";
+                            this.curFlame.src = "2Sewer/images/flame01.png";
                             break;
                         case 1:
-                            this.curFlame.src = "../../2Sewer/images/flame02.png";
+                            this.curFlame.src = "2Sewer/images/flame02.png";
                             break;
                         case 2:
-                            this.curFlame.src = "../../2Sewer/images/flame03.png";
+                            this.curFlame.src = "2Sewer/images/flame03.png";
                             break;
                     }
 
@@ -234,13 +234,13 @@ let torchNum = [];                              //To hold torch objects
                 switch (this.flameNum)//Decide which flame to draw
                 {
                     case 0:
-                        this.curFlame.src = "../../2Sewer/images/flameCorner1.png";
+                        this.curFlame.src = "2Sewer/images/flameCorner1.png";
                         break;
                     case 1:
-                        this.curFlame.src = "../../2Sewer/images/flameCorner2.png";
+                        this.curFlame.src = "2Sewer/images/flameCorner2.png";
                         break;
                     case 2:
-                        this.curFlame.src = "../../2Sewer/images/flameCorner3.png";
+                        this.curFlame.src = "2Sewer/images/flameCorner3.png";
                         break;
                 }
                 ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
@@ -287,26 +287,26 @@ function initializeLV2()
 
 
     {
-        torch.src = "../../2Sewer/images/torch.png";
-        stepsCorner.src = "../../2Sewer/images/stepsCorner.png";
-        steps.src = "../../2Sewer/images/steps.png";
-        topSide3.src = "../../2Sewer/images/topSide3.png";
-        leverUp.src = "../../2Sewer/images/leverUp.png";
-        topSide.src = "../../2Sewer/images/topSide.png";
-        topCorner.src = "../../2Sewer/images/topCorner.png";
-        wallCorner.src = "../../2Sewer/images/wallCorner.png";
-        wallSwamp2.src = "../../2Sewer/images/wallSwamp2.png";
-        topCorner2.src = "../../2Sewer/images/topCorner2.png";
-        topSide2.src = "../../2Sewer/images/topSide2.png";
-        door2.src = "../../2Sewer/images/door2.png";
-        wall.src = "../../2Sewer/images/upperWall.png";
-        wallDrain.src = "../../2Sewer/images/wallDrain2.png";
-        wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
-        pipe.src = "../../2Sewer/images/pipe.png";
-        door.src = "../../2Sewer/images/door.png";
-        pillar.src = "../../2Sewer/images/pillar.png";
-        drain.src = "../../2Sewer/images/drain.png";
-        stairs.src = "../../2Sewer/images/stairs.png";
+        torch.src = "2Sewer/images/torch.png";
+        stepsCorner.src = "2Sewer/images/stepsCorner.png";
+        steps.src = "2Sewer/images/steps.png";
+        topSide3.src = "2Sewer/images/topSide3.png";
+        leverUp.src = "2Sewer/images/leverUp.png";
+        topSide.src = "2Sewer/images/topSide.png";
+        topCorner.src = "2Sewer/images/topCorner.png";
+        wallCorner.src = "2Sewer/images/wallCorner.png";
+        wallSwamp2.src = "2Sewer/images/wallSwamp2.png";
+        topCorner2.src = "2Sewer/images/topCorner2.png";
+        topSide2.src = "2Sewer/images/topSide2.png";
+        door2.src = "2Sewer/images/door2.png";
+        wall.src = "2Sewer/images/upperWall.png";
+        wallDrain.src = "2Sewer/images/wallDrain2.png";
+        wallSwamp.src = "2Sewer/images/wallSwamp.png";
+        pipe.src = "2Sewer/images/pipe.png";
+        door.src = "2Sewer/images/door.png";
+        pillar.src = "2Sewer/images/pillar.png";
+        drain.src = "2Sewer/images/drain.png";
+        stairs.src = "2Sewer/images/stairs.png";
     }//Define pictures' source files
 
 

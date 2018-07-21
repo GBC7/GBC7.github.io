@@ -88,8 +88,8 @@ let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,
 let scientist = new Image();//   Both defined right
 let aghh = new Audio;//          below this one.
 {
-    scientist.src = "../../0Main/images/scientist2.png";
-    aghh.src = ("../audio/aghh.mp3");
+    scientist.src = "0Main/images/scientist2.png";
+    aghh.src = ("0Main/audio/aghh.mp3");
 }
 
 //Player object
@@ -1241,7 +1241,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
 
             let stairs = new Image();   //Define stairs so they can be re-drawn each 'step' taken
-            stairs.src = "../../2Sewer/images/stairs.png";  //Set stairs src property
+            stairs.src = "2Sewer/images/stairs.png";  //Set stairs src property
 
 
             stairs.onload = function()//When the stairs image loads
@@ -1924,18 +1924,18 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             let exit = new Image();
             let shrub = new Image();
             {
-                shrub.src = "../../6Roof/images/shrub.png";
-                exit.src = "../../6Roof/images/exit2.png";
-                helicopter.src = "../../6Roof/images/helicopter1.png";
-                helipad.src = "../../6Roof/images/helipad.png";
-                ladder.src = "../../6Roof/images/ladder.png";
-                car.src = "../../6Roof/images/car.png";
-                statue.src = "../../6Roof/images/statue.png";
-                cherryTree.src = "../../6Roof/images/cherryTree.png";
-                darkWindow.src = "../../6Roof/images/darkWindow.png";
-                litWindow.src = "../../6Roof/images/litWindow.png";
-                fence.src = "../../6Roof/images/fence.png";
-                gate.src = "../../6Roof/images/gate.png";
+                shrub.src = "6Roof/images/shrub.png";
+                exit.src = "6Roof/images/exit2.png";
+                helicopter.src = "6Roof/images/helicopter1.png";
+                helipad.src = "6Roof/images/helipad.png";
+                ladder.src = "6Roof/images/ladder.png";
+                car.src = "6Roof/images/car.png";
+                statue.src = "6Roof/images/statue.png";
+                cherryTree.src = "6Roof/images/cherryTree.png";
+                darkWindow.src = "6Roof/images/darkWindow.png";
+                litWindow.src = "6Roof/images/litWindow.png";
+                fence.src = "6Roof/images/fence.png";
+                gate.src = "6Roof/images/gate.png";
             }
 
             ctx.drawImage(darkWindow, 10, 427);
@@ -2953,7 +2953,7 @@ function checkActions()
             if (p.row === 15 && p.col === 1)//Under lever
             {
                 let leverDown = new Image();
-                leverDown.src = "../../2Sewer/images/leverDown.png";
+                leverDown.src = "2Sewer/images/leverDown.png";
                 cc = leverDown;
 
                 leverDown.onload = function()           //Draw the sewer drained
@@ -3276,8 +3276,8 @@ function checkActions()
             let emptyShelvesTop = new Image();
             let emptyShelvesBottom = new Image();
 
-            emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
-            emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
+            emptyShelvesTop.src = "7Lab/images/emptyShelves-top.png";
+            emptyShelvesBottom.src = "7Lab/images/emptyShelves-bottom.png";
 
             i = emptyShelvesTop;
             j = emptyShelvesBottom;
@@ -3305,7 +3305,7 @@ function checkActions()
             if (!windowClosed)
             {
                 let closedWindow = new Image();
-                    closedWindow.src = "../../7Lab/images/closedWindow.png";
+                    closedWindow.src = "7Lab/images/closedWindow.png";
                 r = closedWindow;
 
                 windowClosed = true;
@@ -3326,8 +3326,8 @@ function checkActions()
             let emptyShelvesTop = new Image();
             let emptyShelvesBottom = new Image();
 
-            emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
-            emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
+            emptyShelvesTop.src = "7Lab/images/emptyShelves-top.png";
+            emptyShelvesBottom.src = "7Lab/images/emptyShelves-bottom.png";
 
             s = emptyShelvesTop;
             t = emptyShelvesBottom;

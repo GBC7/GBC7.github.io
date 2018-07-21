@@ -2,7 +2,7 @@
 //LV1
 let jeffery = new Image();
 {
-    jeffery.src = "../../1Home/images/jeffery.png";
+    jeffery.src = "1Home/images/jeffery.png";
 }
 
 //LV2
@@ -16,27 +16,27 @@ let jeffery = new Image();
 //LV6
 let roofEnemy1 = new Image();
 {
-    roofEnemy1.src = "../../6Roof/images/roofEnemy1.png";
+    roofEnemy1.src = "6Roof/images/roofEnemy1.png";
 }
 let roofEnemy2 = new Image();
 {
-    roofEnemy2.src = "../../6Roof/images/roofEnemy2.png";
+    roofEnemy2.src = "6Roof/images/roofEnemy2.png";
 }
 let roofEnemy3 = new Image();
 {
-    roofEnemy3.src = "../../6Roof/images/roofEnemy3.png";
+    roofEnemy3.src = "6Roof/images/roofEnemy3.png";
 }
 let roofEnemy4 = new Image();
 {
-    roofEnemy4.src = "../../6Roof/images/roofEnemy4.png";
+    roofEnemy4.src = "6Roof/images/roofEnemy4.png";
 }
 let roofEnemy5 = new Image();
 {
-    roofEnemy5.src = "../../6Roof/images/roofEnemy5.png";
+    roofEnemy5.src = "6Roof/images/roofEnemy5.png";
 }
 let roofEnemy6 = new Image();
 {
-    roofEnemy6.src = "../../6Roof/images/roofEnemy6.png";
+    roofEnemy6.src = "6Roof/images/roofEnemy6.png";
 }
 
 //LV7
@@ -73,7 +73,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../2Sewer/images/rat.png";
+                img.src = "2Sewer/images/rat.png";
                 img.onload = function () {
                     walk();
                 };
@@ -962,7 +962,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../1Home/images/jeffery.png";
+                img.src = "1Home/images/jeffery.png";
                 img.onload = function () {
                     walk();
                 };
@@ -1854,7 +1854,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -2792,7 +2792,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy2.png";
+                img.src = "6Roof/images/roofEnemy2.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -3690,18 +3690,18 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                             let exit = new Image();
                             let shrub = new Image();
                             {
-                                shrub.src = "../../6Roof/images/shrub.png";
-                                exit.src = "../../6Roof/images/exit2.png";
-                                helicopter.src = "../../6Roof/images/helicopter1.png";
-                                helipad.src = "../../6Roof/images/helipad.png";
-                                ladder.src = "../../6Roof/images/ladder.png";
-                                car.src = "../../6Roof/images/car.png";
-                                statue.src = "../../6Roof/images/statue.png";
-                                cherryTree.src = "../../6Roof/images/cherryTree.png";
-                                darkWindow.src = "../../6Roof/images/darkWindow.png";
-                                litWindow.src = "../../6Roof/images/litWindow.png";
-                                fence.src = "../../6Roof/images/fence.png";
-                                gate.src = "../../6Roof/images/gate.png";
+                                shrub.src = "6Roof/images/shrub.png";
+                                exit.src = "6Roof/images/exit2.png";
+                                helicopter.src = "6Roof/images/helicopter1.png";
+                                helipad.src = "6Roof/images/helipad.png";
+                                ladder.src = "6Roof/images/ladder.png";
+                                car.src = "6Roof/images/car.png";
+                                statue.src = "6Roof/images/statue.png";
+                                cherryTree.src = "6Roof/images/cherryTree.png";
+                                darkWindow.src = "6Roof/images/darkWindow.png";
+                                litWindow.src = "6Roof/images/litWindow.png";
+                                fence.src = "6Roof/images/fence.png";
+                                gate.src = "6Roof/images/gate.png";
                             }
 
                             ctx.drawImage(darkWindow, 10, 427);
@@ -3769,7 +3769,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy3.png";
+                img.src = "6Roof/images/roofEnemy3.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -4666,18 +4666,18 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                             let exit = new Image();
                             let shrub = new Image();
                             {
-                                shrub.src = "../../6Roof/images/shrub.png";
-                                exit.src = "../../6Roof/images/exit2.png";
-                                helicopter.src = "../../6Roof/images/helicopter1.png";
-                                helipad.src = "../../6Roof/images/helipad.png";
-                                ladder.src = "../../6Roof/images/ladder.png";
-                                car.src = "../../6Roof/images/car.png";
-                                statue.src = "../../6Roof/images/statue.png";
-                                cherryTree.src = "../../6Roof/images/cherryTree.png";
-                                darkWindow.src = "../../6Roof/images/darkWindow.png";
-                                litWindow.src = "../../6Roof/images/litWindow.png";
-                                fence.src = "../../6Roof/images/fence.png";
-                                gate.src = "../../6Roof/images/gate.png";
+                                shrub.src = "6Roof/images/shrub.png";
+                                exit.src = "6Roof/images/exit2.png";
+                                helicopter.src = "6Roof/images/helicopter1.png";
+                                helipad.src = "6Roof/images/helipad.png";
+                                ladder.src = "6Roof/images/ladder.png";
+                                car.src = "6Roof/images/car.png";
+                                statue.src = "6Roof/images/statue.png";
+                                cherryTree.src = "6Roof/images/cherryTree.png";
+                                darkWindow.src = "6Roof/images/darkWindow.png";
+                                litWindow.src = "6Roof/images/litWindow.png";
+                                fence.src = "6Roof/images/fence.png";
+                                gate.src = "6Roof/images/gate.png";
                             }
 
                             ctx.drawImage(darkWindow, 10, 427);
@@ -4745,7 +4745,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy4.png";
+                img.src = "6Roof/images/roofEnemy4.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -5642,18 +5642,18 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                             let exit = new Image();
                             let shrub = new Image();
                             {
-                                shrub.src = "../../6Roof/images/shrub.png";
-                                exit.src = "../../6Roof/images/exit2.png";
-                                helicopter.src = "../../6Roof/images/helicopter1.png";
-                                helipad.src = "../../6Roof/images/helipad.png";
-                                ladder.src = "../../6Roof/images/ladder.png";
-                                car.src = "../../6Roof/images/car.png";
-                                statue.src = "../../6Roof/images/statue.png";
-                                cherryTree.src = "../../6Roof/images/cherryTree.png";
-                                darkWindow.src = "../../6Roof/images/darkWindow.png";
-                                litWindow.src = "../../6Roof/images/litWindow.png";
-                                fence.src = "../../6Roof/images/fence.png";
-                                gate.src = "../../6Roof/images/gate.png";
+                                shrub.src = "6Roof/images/shrub.png";
+                                exit.src = "6Roof/images/exit2.png";
+                                helicopter.src = "6Roof/images/helicopter1.png";
+                                helipad.src = "6Roof/images/helipad.png";
+                                ladder.src = "6Roof/images/ladder.png";
+                                car.src = "6Roof/images/car.png";
+                                statue.src = "6Roof/images/statue.png";
+                                cherryTree.src = "6Roof/images/cherryTree.png";
+                                darkWindow.src = "6Roof/images/darkWindow.png";
+                                litWindow.src = "6Roof/images/litWindow.png";
+                                fence.src = "6Roof/images/fence.png";
+                                gate.src = "6Roof/images/gate.png";
                             }
 
                             ctx.drawImage(darkWindow, 10, 427);
@@ -5721,7 +5721,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy5.png";
+                img.src = "6Roof/images/roofEnemy5.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -6618,18 +6618,18 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                             let exit = new Image();
                             let shrub = new Image();
                             {
-                                shrub.src = "../../6Roof/images/shrub.png";
-                                exit.src = "../../6Roof/images/exit2.png";
-                                helicopter.src = "../../6Roof/images/helicopter1.png";
-                                helipad.src = "../../6Roof/images/helipad.png";
-                                ladder.src = "../../6Roof/images/ladder.png";
-                                car.src = "../../6Roof/images/car.png";
-                                statue.src = "../../6Roof/images/statue.png";
-                                cherryTree.src = "../../6Roof/images/cherryTree.png";
-                                darkWindow.src = "../../6Roof/images/darkWindow.png";
-                                litWindow.src = "../../6Roof/images/litWindow.png";
-                                fence.src = "../../6Roof/images/fence.png";
-                                gate.src = "../../6Roof/images/gate.png";
+                                shrub.src = "6Roof/images/shrub.png";
+                                exit.src = "6Roof/images/exit2.png";
+                                helicopter.src = "6Roof/images/helicopter1.png";
+                                helipad.src = "6Roof/images/helipad.png";
+                                ladder.src = "6Roof/images/ladder.png";
+                                car.src = "6Roof/images/car.png";
+                                statue.src = "6Roof/images/statue.png";
+                                cherryTree.src = "6Roof/images/cherryTree.png";
+                                darkWindow.src = "6Roof/images/darkWindow.png";
+                                litWindow.src = "6Roof/images/litWindow.png";
+                                fence.src = "6Roof/images/fence.png";
+                                gate.src = "6Roof/images/gate.png";
                             }
 
                             ctx.drawImage(darkWindow, 10, 427);
@@ -6697,7 +6697,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy6.png";
+                img.src = "6Roof/images/roofEnemy6.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -7594,18 +7594,18 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                             let exit = new Image();
                             let shrub = new Image();
                             {
-                                shrub.src = "../../6Roof/images/shrub.png";
-                                exit.src = "../../6Roof/images/exit2.png";
-                                helicopter.src = "../../6Roof/images/helicopter1.png";
-                                helipad.src = "../../6Roof/images/helipad.png";
-                                ladder.src = "../../6Roof/images/ladder.png";
-                                car.src = "../../6Roof/images/car.png";
-                                statue.src = "../../6Roof/images/statue.png";
-                                cherryTree.src = "../../6Roof/images/cherryTree.png";
-                                darkWindow.src = "../../6Roof/images/darkWindow.png";
-                                litWindow.src = "../../6Roof/images/litWindow.png";
-                                fence.src = "../../6Roof/images/fence.png";
-                                gate.src = "../../6Roof/images/gate.png";
+                                shrub.src = "6Roof/images/shrub.png";
+                                exit.src = "6Roof/images/exit2.png";
+                                helicopter.src = "6Roof/images/helicopter1.png";
+                                helipad.src = "6Roof/images/helipad.png";
+                                ladder.src = "6Roof/images/ladder.png";
+                                car.src = "6Roof/images/car.png";
+                                statue.src = "6Roof/images/statue.png";
+                                cherryTree.src = "6Roof/images/cherryTree.png";
+                                darkWindow.src = "6Roof/images/darkWindow.png";
+                                litWindow.src = "6Roof/images/litWindow.png";
+                                fence.src = "6Roof/images/fence.png";
+                                gate.src = "6Roof/images/gate.png";
                             }
 
                             ctx.drawImage(darkWindow, 10, 427);
@@ -7673,7 +7673,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -8589,7 +8589,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -9507,7 +9507,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -10423,7 +10423,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -11341,7 +11341,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -12258,7 +12258,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -13175,7 +13175,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -14092,7 +14092,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -15010,7 +15010,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -15929,7 +15929,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
-                img.src = "../../6Roof/images/roofEnemy1.png";
+                img.src = "6Roof/images/roofEnemy1.png";
                 img.onload = function(){walk();};
 
                 //Walk the direction chosen if boundaries permit it
@@ -16850,7 +16850,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
             //Set image -- then start walking
             let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
             let img = new Image();
-            img.src = "../../6Roof/images/roofEnemy2.png";  //CHANGE HERE!!! *****
+            img.src = "6Roof/images/roofEnemy2.png";  //CHANGE HERE!!! *****
             img.onload = function(){walk();};
 
             //Walk the direction chosen if boundaries permit it
@@ -17747,18 +17747,18 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                         let exit = new Image();
                         let shrub = new Image();
                         {
-                            shrub.src = "../../6Roof/images/shrub.png";
-                            exit.src = "../../6Roof/images/exit2.png";
-                            helicopter.src = "../../6Roof/images/helicopter1.png";
-                            helipad.src = "../../6Roof/images/helipad.png";
-                            ladder.src = "../../6Roof/images/ladder.png";
-                            car.src = "../../6Roof/images/car.png";
-                            statue.src = "../../6Roof/images/statue.png";
-                            cherryTree.src = "../../6Roof/images/cherryTree.png";
-                            darkWindow.src = "../../6Roof/images/darkWindow.png";
-                            litWindow.src = "../../6Roof/images/litWindow.png";
-                            fence.src = "../../6Roof/images/fence.png";
-                            gate.src = "../../6Roof/images/gate.png";
+                            shrub.src = "6Roof/images/shrub.png";
+                            exit.src = "6Roof/images/exit2.png";
+                            helicopter.src = "6Roof/images/helicopter1.png";
+                            helipad.src = "6Roof/images/helipad.png";
+                            ladder.src = "6Roof/images/ladder.png";
+                            car.src = "6Roof/images/car.png";
+                            statue.src = "6Roof/images/statue.png";
+                            cherryTree.src = "6Roof/images/cherryTree.png";
+                            darkWindow.src = "6Roof/images/darkWindow.png";
+                            litWindow.src = "6Roof/images/litWindow.png";
+                            fence.src = "6Roof/images/fence.png";
+                            gate.src = "6Roof/images/gate.png";
                         }
 
                         ctx.drawImage(darkWindow, 10, 427);

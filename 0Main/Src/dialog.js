@@ -9,11 +9,11 @@ let tog = 2;
 let names = [" ", "Scientist", "Mom", "News Anchor", "Pilot", "Butler"];  //Speaker's name, [0] is initial value
 let portrait = [];
 portrait[0] = "none";
-portrait[1] = "url('../../0Main/images/Portrait_Scientist.png')";
-portrait[2] = "url('../../0Main/images/Portrait_Mom.png')";
-portrait[3] = "url('../../0Main/images/Portrait_newsanchor.png')";
-portrait[4] = "url('../../0Main/images/Portrait_Pilot.png')";
-portrait[5] = "url('../../0Main/images/Portrait_Butler.png')";
+portrait[1] = "url('0Main/images/Portrait_Scientist.png')";
+portrait[2] = "url('0Main/images/Portrait_Mom.png')";
+portrait[3] = "url('0Main/images/Portrait_newsanchor.png')";
+portrait[4] = "url('0Main/images/Portrait_Pilot.png')";
+portrait[5] = "url('0Main/images/Portrait_Butler.png')";
 
 
 let SystemMSGLevel1 = [];
@@ -208,7 +208,7 @@ function dialogText(n, t, fs, fc){
     DialogText.innerText = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
-    DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
+    DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
 
     // to change portrait
     if (n === names[0]) {
@@ -259,7 +259,7 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
     CharacterPortrait.style.backgroundImage = speakerPortrait;
     DialogText.innerText = d[dialogIndex];
 
-    DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
+    DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
     dialogIndex++;
 
     if (dialogIndex > d.length){

@@ -42,35 +42,35 @@ function initializeLV7()
 
 
     {
-        floor.src = "../../7Lab/images/Floor.png";
-        wall.src = "../../7Lab/images/Wall.png";
-        door1.src = "../../7Lab/images/door1.png";
-        stairs.src = "../../7Lab/images/stairs.png";
-        emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
-        emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
-        lockerTop.src = "../../7Lab/images/locker-top.png";
-        lockerBottom.src = "../../7Lab/images/locker-bottom.png";
-        computerTop.src = "../../7Lab/images/computer-top.png";
-        computerBottom.src = "../../7Lab/images/computer-bottom.png";
-        metalCabinetTop.src = "../../7Lab/images/metalCabinet-top.png";
-        metalCabinetBottom.src = "../../7Lab/images/metalCabinet-bottom.png";
-        glassCabinetTop.src = "../../7Lab/images/glassCabinet-top.png";
-        glassCabinetBottom.src = "../../7Lab/images/glassCabinet-bottom.png";
-        fullShelvesTop.src = "../../7Lab/images/fullShelves-top.png";
-        fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
-        openWindow.src = "../../7Lab/images/openWindow.png";
-        closedWindow.src = "../../7Lab/images/closedWindow.png";
-        trash.src = "../../7Lab/images/trash.png";
-        wire.src = "../../7Lab/images/wire.png";
-        table.src = "../../7Lab/images/table.png";
-        tableBlood.src = "../../7Lab/images/table-blood.png";
-        tableBlue.src = "../../7Lab/images/table-blue.png";
-        tableRed.src = "../../7Lab/images/table-red.png";
-        tableTop.src = "../../7Lab/images/table-top.png";
-        tableBottom.src = "../../7Lab/images/table-bottom.png";
-        screen.src = "../../7Lab/images/screen.png";
-        screenLeft.src = "../../7Lab/images/screen-left.png";
-        screenRight.src = "../../7Lab/images/screen-right.png";
+        floor.src = "7Lab/images/Floor.png";
+        wall.src = "7Lab/images/Wall.png";
+        door1.src = "7Lab/images/door1.png";
+        stairs.src = "7Lab/images/stairs.png";
+        emptyShelvesTop.src = "7Lab/images/emptyShelves-top.png";
+        emptyShelvesBottom.src = "7Lab/images/emptyShelves-bottom.png";
+        lockerTop.src = "7Lab/images/locker-top.png";
+        lockerBottom.src = "7Lab/images/locker-bottom.png";
+        computerTop.src = "7Lab/images/computer-top.png";
+        computerBottom.src = "7Lab/images/computer-bottom.png";
+        metalCabinetTop.src = "7Lab/images/metalCabinet-top.png";
+        metalCabinetBottom.src = "7Lab/images/metalCabinet-bottom.png";
+        glassCabinetTop.src = "7Lab/images/glassCabinet-top.png";
+        glassCabinetBottom.src = "7Lab/images/glassCabinet-bottom.png";
+        fullShelvesTop.src = "7Lab/images/fullShelves-top.png";
+        fullShelvesBottom.src = "7Lab/images/fullShelves-bottom.png";
+        openWindow.src = "7Lab/images/openWindow.png";
+        closedWindow.src = "7Lab/images/closedWindow.png";
+        trash.src = "7Lab/images/trash.png";
+        wire.src = "7Lab/images/wire.png";
+        table.src = "7Lab/images/table.png";
+        tableBlood.src = "7Lab/images/table-blood.png";
+        tableBlue.src = "7Lab/images/table-blue.png";
+        tableRed.src = "7Lab/images/table-red.png";
+        tableTop.src = "7Lab/images/table-top.png";
+        tableBottom.src = "7Lab/images/table-bottom.png";
+        screen.src = "7Lab/images/screen.png";
+        screenLeft.src = "7Lab/images/screen-left.png";
+        screenRight.src = "7Lab/images/screen-right.png";
     }
 
     {
