@@ -1,0 +1,39 @@
+html
+{
+    background-color: #3c3c3c;
+}
+
+#holder
+{
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+
+#center
+
+{
+    position: absolute;
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    border: 2px inset black;
+}
+
+#regular
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: black;
+    background-repeat: no-repeat;
+    background-position-y: 135px;
+}
+
+#HeloCanvas
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+}
