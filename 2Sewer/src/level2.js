@@ -2,7 +2,7 @@
 let lightSwitch = 1, sewerSwitch = 1;                                //*****Testing only*****//
 //*****Testing only*****//
 
-//L2
+//States
 let lightsOn = false, sewersDrained = false;                             //For sewer level
 let alreadySwitched = false;
 let floorSpriteX = undefined;                                           //For sewer level
@@ -25,12 +25,13 @@ let ratOfDeath = new Audio;
 {
     waterRunning.src = ('2Sewer/audio/waterRunning.mp3');
     ratOfDeath.src = ('2Sewer/audio/ratOfDeath.mp3');
+    lockedDoor.src = ('2Sewer/audio/lockedDoor.mp3');
 
-    waterRunning.loop = true;
+    lockedDoor.volume = 0.1;
+    ratOfDeath.volume = 0.1;
     waterRunning.volume = 0.05;
+    waterRunning.loop = true;
 }
-
-
 
 //Images
 let ratImage = new Image();
@@ -262,8 +263,11 @@ function initializeLV2()
     canvas.style.backgroundImage = "";
     newsReport.pause();
 
-    dialogText(names[1], SystemMSGLevel2[1], "20 px", "white");
-    setTimeout(dialogInitialize, 5000);
+    if (!lightsOn)
+    {
+        dialogText(names[1], SystemMSGLevel2[1], "20 px", "white");
+        setTimeout(dialogInitialize, 5000);
+    }
 
     let stepsCorner = new Image();
     let steps = new Image();

@@ -281,10 +281,6 @@ function CheckConversationAction() {
         {
             //Better light this place up first
         }
-        else if (p.row === 7 && p.col === 21 && p.frameY === 3 && !keyFound)
-        {
-            //Doors locked ... wonder if there's a key down here
-        }
     }
 
     else if (l5)

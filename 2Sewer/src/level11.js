@@ -7,7 +7,7 @@ function initializeLV11()
     canvas.style.backgroundImage = "";
 
 
-    let key = new Image();
+
     let valveTl = new Image();
     let valveTm = new Image();
     let valveTr = new Image();
@@ -20,10 +20,11 @@ function initializeLV11()
     let wall = new Image();
     let upperWall = new Image();
     let pipeTopView = new Image();
+    let key = new Image();
 
 
     {
-        key.src = "2Sewer/images/key.png";//Change to key image when aquired
+
         valveTm.src = "2Sewer/images/valveTm.png";
         valveTl.src = "2Sewer/images/valveTl.png";
         valveTr.src = "2Sewer/images/valveTr.png";
@@ -36,6 +37,7 @@ function initializeLV11()
         wall.src = "2Sewer/images/unusedWallTiles/wall.png";
         upperWall.src = "2Sewer/images/upperWall.png";
         pipeTopView.src = "2Sewer/images/pipe3.png";
+        key.src = "2Sewer/images/key.png";//Change to key image when aquired
     }//Defining images src properties
 
 
@@ -62,12 +64,12 @@ function initializeLV11()
     if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
     {
         lMap[level] =                                           //Initialize this levels map
-            //                                 10                            20
-            [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
+            //                                            10                                      20
+            [  //0,   1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4
 
                 [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  5,  6,  7,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],        //0
                 [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  8,  9, 10,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],        //1
-                [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 11, 12, 13,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],                        //2
+                [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 11, 12, 13,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],        //2                //2
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //4
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //5
@@ -95,8 +97,10 @@ function initializeLV11()
         }
     }
 
-    lMap[level][8][12] = 15;
-    lMap[level][18][12] = 14;
+    if (!keyFound)
+        lMap[level][8][12] = 15;//Key
+
+    lMap[level][18][12] = 14;//PipeTopView
 
 
     if (lPMap[level] === undefined)
@@ -114,7 +118,7 @@ function initializeLV11()
     }
 
     changePStartPos();
-    pipeTopView.onload = function(){l11Ready = true;};
+    key.onload = function(){l11Ready = true;};
 
     addEventListener("keydown", onKeyDown, false);
     notWalking = true;

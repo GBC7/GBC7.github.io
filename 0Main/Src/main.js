@@ -617,23 +617,26 @@ function drawPMap()//Player Map
 
     notWalking = true;
 
-    if (p.col === 10 && p.row === 0)//If in front of sewer pipe
+    if (l2)
     {
-        waterRunning.volume = 0.5;
-    }
-    else
-    {
-        waterRunning.volume = 0.1;
-    }
-    if (j === door3 && p.row !== 7)
-    {
-        ctx.drawImage(doorBare, 21*32, 7*32);
+        if (!sewersDrained)//If in front of sewer pipe
+        {
+            if (p.col === 10 && p.row === 0)
+            {
+                waterRunning.volume = 0.5;
+                dialogText(names[1], SystemMSGLevel2[3], "20 px", "white");
+                setTimeout(dialogInitialize, 3000);
+            }
+            else
+            {
+                waterRunning.volume = 0.1;
+            }
+        }
 
-    }
-    if (j === door3 && p.row !== 7)
-    {
-        ctx.drawImage(doorBare, 21*32, 7*32);
-
+        else if (j === door3 && p.row !== 7)
+        {
+            ctx.drawImage(doorBare, 21*32, 7*32);
+        }
     }
 
     if (l6 )
@@ -727,7 +730,7 @@ function drawOMap()//Object Map
 }
 
 function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling it is not neccessary) it allows
-// for you to draw the map without it calling the draw player map function if given a value
+// you to draw the map without it calling the draw player map function if given a value (any value)
 {
     let destX = 0, destY = 0;       //Used to decide which area of map to draw
 
@@ -1316,7 +1319,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                         p.frameY = 3;
                         ctx.clearRect(0,0,800,600);
                         l11Ready = false;
-                        startGame(0);
+                        startGame();
                         changePStartPos();
                         removeEventListener("keydown", onKeyDown, false);
                         waitForLoad();
@@ -2527,7 +2530,7 @@ function onKeyDown(e)
     }
 }
 
-function checkBoundaries(e)
+function checkBoundaries(e)//Gets called each step
 {
     if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
@@ -2762,6 +2765,57 @@ function checkBoundaries(e)
                 );
         }
     }
+
+    if (l2)
+    {
+        if (!lightsOn && p.row === 11 && p.col === 9)//Shiver
+        {
+            let shivers = 0;
+            removeEventListener("keydown", onKeyDown, false);
+
+            dialogText(names[1], SystemMSGLevel2[2], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+
+            if (!alreadyShivering)
+            {
+                shiver();
+                ratOfDeath.play();
+            }
+
+            function shiver()
+            {
+                shivers++;
+                alreadyShivering = true;
+
+                if (shivers !== 22)
+                {
+                    setTimeout(shiverLeft, 15);
+                }
+                else
+                {
+                    alreadyShivering = false;
+                    addEventListener("keydown", onKeyDown, false);
+
+                }
+                function shiverLeft()
+                {
+                    ctx.clearRect(p.col*32, p.row*32, 32, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32) - 1, (p.row * 32) + 0.25, 32, 48);
+                    setTimeout(shiverRight, 15);
+                }
+                function shiverRight()
+                {
+                    ctx.clearRect(p.col*32, p.row*32, 32, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32) + 1, (p.row * 32) - 0.25, 32, 48);
+                    setTimeout(shiver, 10);
+                }
+
+            }
+        }
+    }
+
 }
 
 function checkFloorObjects(e)//For picking something up when walking over it
@@ -2861,9 +2915,8 @@ function checkFloorObjects(e)//For picking something up when walking over it
 
 //Space bar actions
 
-function checkActions()
+function checkActions()//Gets called when pressing space
 {
-
     if (l1)
     {
         if(p.col ===1 && p.row === 10)
@@ -2937,9 +2990,8 @@ function checkActions()
             {
                 //Play locked door sound
                 lockedDoor.play();
-                CheckConversationAction();
-                fillErasedMap();
-                drawPMap();
+                dialogText(names[1], SystemMSGLevel2[4], "20 px", "white");
+                setTimeout(dialogInitialize, 3000);
             }
         }
 
@@ -3054,10 +3106,11 @@ function checkActions()
             {
                 dialogText(names[1], SystemMSGLevel3[7], "20 px", "white");
                 setTimeout(dialogInitialize, 3000);
+                lockedDoor.play();
             }
         }
 
-        //Distguise
+        //Disguise
         if (!findDisguise &&
             ((p.row === 9 && p.col === 10) || (p.row === 9 && p.col === 12) || (p.row === 9 && p.col === 14) || (p.row === 9 && p.col === 15) ||
                 (p.row === 11 && p.col === 11) || (p.row === 11 && p.col === 12) || (p.row === 11 && p.col === 14) || (p.row === 11 && p.col === 16) ||
