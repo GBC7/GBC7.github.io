@@ -1687,22 +1687,21 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
                 else
                 {
-                    level = 7;                  //Change level identifier appropriately
-                    l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
-                    l7 = true;                                  //Set level being travelled to as true
+                    level = 12;                  //Change level identifier appropriately
+                    l1 = l2 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+                    l12 = true;                                  //Set level being travelled to as true
                     ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
                     startGame();                                //Load settings and assets for next map
                     // setTimeout(drawMap, 40);                    //Draw next map
                 }
             }
-
-
         }
     }
 
     else if (l7)//If it's Lvl 8
     {
-        if (e === 38 && p.col === 0 && p.row === 0) //If going down and above Exit
+        // ChangeNeeded  --- Animation
+        if (e === 38 && p.col === 0 && p.row === 0) //If going up and above Exit
         {
 
             level = 8;                              //Change level identifier appropriately
@@ -1717,10 +1716,8 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
         }  //Go up stairs to level 8
 
-        if (e === 40 && p.col === 19 && p.row === 16 && researchBurned == true) //If going down and above staircase //If going down and above staircase
+        if (e === 40 && p.col === 19 && p.row === 16 && researchBurned) //If going down and above staircase
         {
-
-
             p.frameY = 0; //Change player tile sheet frame being drawn so that character is facing stairs if not already
 
             removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
@@ -1736,27 +1733,12 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                 p.srcX = p.width * (p.frameX % 4);
                 p.srcY = p.height * p.frameY;
 
-                if (staysClimbed < 5)
+                if (staysClimbed < 4)
                 {
                     fillErasedMap();        //Draw the map image that was cleared
                     //Draw scientist incrementally smaller each 'step' taken
                     // and move player slightly up to portray movement
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, 512 + (4 * staysClimbed), 32, 48);
-                    setTimeout(goUpALvl, 80);
-                }
-                else if (staysClimbed < 10)
-                {
-                    //Count each step taken
-                    fillErasedMap();        //Draw the map image that was cleared
-                    //Draw scientist incrementally smaller each 'step' taken
-                    // and move player slightly up to portray movement
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32 - (staysClimbed/4), 512 + (5 * staysClimbed), 32 + (staysClimbed - 3) * 3/2, 48);
-                    setTimeout(goUpALvl, 80);
-                }
-                else if (staysClimbed < 20)
-                {
-                    fillErasedMap();
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48 - (5 * staysClimbed), p.col*32 - 10, 562 + (5 * staysClimbed), 102.5, 48);
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32 - 2 * staysClimbed, 512 + ((16 - staysClimbed) * staysClimbed), 32 + 4 * staysClimbed, 48 + 4 * staysClimbed);
                     setTimeout(goUpALvl, 80);
                 }
                 else                            //Otherwise
@@ -1787,9 +1769,9 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             // cannot be changed while animating stair climbing
             let staysClimbed = 0;                               //Define variable to use to count stairs climbed
 
-            goUpALvl();                                      //Start climbing stairs
+            goUpALvl2();                                      //Start climbing stairs
 
-            function goUpALvl()                  //Climbing stairs animation function
+            function goUpALvl2()                  //Climbing stairs animation function
             {
                 staysClimbed ++;
                 p.frameX++;
@@ -1803,7 +1785,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     //Draw scientist incrementally smaller each 'step' taken
                     // and move player slightly up to portray movement
                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (4 * staysClimbed), 32, 48);
-                    setTimeout(goUpALvl, 80);
+                    setTimeout(goUpALvl2, 80);
                 }
                 else if (staysClimbed !== 20)
                 {
@@ -1813,7 +1795,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     //Draw scientist incrementally smaller each 'step' taken
                     // and move player slightly up to portray movement
                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (5 * staysClimbed), 32 + (staysClimbed - 3) * 3/2, 48);
-                    setTimeout(goUpALvl, 80);
+                    setTimeout(goUpALvl2, 80);
                 }
                 else                            //Otherwise
                 {
