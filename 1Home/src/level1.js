@@ -293,10 +293,11 @@ function initializeLV1()
             drawMap();                   //Draw next map
             //initializeTutorialLV1();
             addEventListener("keydown", onKeyDown, false);
+            enemy[1][0].roam();
         }
     }
 
-    enemy[1][0].roam();
+
 
     //dialogText(names[3], DialogNews[1], "20 px", "white");
     //setTimeout(dialogInitialize, 3000);
