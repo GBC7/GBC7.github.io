@@ -1,9 +1,8 @@
 let canvas;  //Not using these in any of the intro pages (title, controls, or warning)
 let ctx;    //These are only defined after running loadActualGame();
 let scriptsLoaded = false;
-
+let ctx3;
 //Uncomment the following to re-enable the title pages
-/*
 
 //TITLE PAGE
 {
@@ -21,11 +20,11 @@ let scriptsLoaded = false;
     let playerImg = new Image();
 
     {
-        startTextImg.src = "images/startText.png";
-        spotlightRImg.src = "images/spotlight-right.png";
-        spotlightLImg.src = "images/spotlight-left.png";
-        titleImg.src = "images/survivethemob.png"; //temporary image and name
-        playerImg.src = "images/player.png";
+        startTextImg.src = "0Main/images/startText.png";
+        spotlightRImg.src = "0Main/images/spotlight-right.png";
+        spotlightLImg.src = "0Main/images/spotlight-left.png";
+        titleImg.src = "0Main/images/survivethemob.png"; //temporary image and name
+        playerImg.src = "0Main/images/player.png";
     }//Define src
 
     playerImg.onload = function()
@@ -115,20 +114,20 @@ let scriptsLoaded = false;
         function startWarningPage()
         {
             clearInterval(titleFlashTimer);
-            holder.style.width = "800px";
+            holder.style.width = "965px";
             holder.style.height = "600px";
             removeEventListener("keyup", startWarningPage);
             {
                 holder.innerHTML =
 
-                "<div id=\"center\">\n" +
-                "\n" +
-                "\n" +
-                "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
-                "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
-                "\n" +
-                "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
-                "    </div>";
+                    "<div id=\"center\">\n" +
+                    "\n" +
+                    "\n" +
+                    "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
+                    "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
+                    "\n" +
+                    "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
+                    "    </div>";
 
             }//Add actual canvas while removing old one
             warningPage();
@@ -143,11 +142,10 @@ function warningPage()
     let canv = document.getElementById("regular");
     let ctxT = canv.getContext("2d");
     let statsCanvas = document.getElementById("statusInventory");
-    let ctx3 = statsCanvas.getContext("2d");
+    ctx3 = statsCanvas.getContext("2d");
 
-    canv.style.backgroundImage = "url('images/warning.gif";
-    canv.style.backgroundPosition = "center";
-
+/*    canv.style.backgroundImage = "url('0Main/images/warning.gif";
+    canv.style.backgroundPosition = "center";*/
     ctxT.fillRect(550,0,300,600);
     ctxT.fillRect(550,440,300,600);
     ctxT.fillRect(0,0,260,600);
@@ -173,7 +171,7 @@ function warningPage()
         }
         else
         {
-            /!*ctxT.clearRect(280, 420, 270, 50);*!/
+            /*ctxT.clearRect(280, 420, 270, 50);*/
             ctxT.fillStyle ='#FF0000';
             ctxT.fillRect(280,425,250,35);
             ctxT.fillStyle ='#ffe900';
@@ -218,8 +216,8 @@ function controlsPage()
     let controlsTimer = undefined;
     let count = 0;
 
-    spacebar.src = "images/computer_key_spacebar.png";
-    arrowKeys.src = "images/arrow-keys-vectors.jpg";
+    spacebar.src = "0Main/images/computer_key_spacebar.png";
+    arrowKeys.src = "0Main/images/arrow-keys-vectors.jpg";
 
     arrowKeys.onload = function()
     {
@@ -292,12 +290,12 @@ function controlsPage()
 }
 
 
-*/   //             <---------------------------------- This is the warning and
+   //             <---------------------------------- This is the warning and
 
 
 
 //  ********************TEMP********************
-    {
+    /*{
         let holder = document.getElementById("holder");
 
         holder.innerHTML =
@@ -332,6 +330,6 @@ function controlsPage()
         {
             startGame();
         }
-    }           //Waits for scripts to load to avoid errors
+    }     */      //Waits for scripts to load to avoid errors
                     //then calls the startGame function in main.js
 //  ********************TEMP********************

@@ -5,7 +5,8 @@ html
 
 #holder
 {
-    width: 962px;
+    position: relative;
+    width: 965px;
     height: 600px;
     margin: 0 auto;
 }
@@ -15,7 +16,7 @@ html
 
 {
     position: absolute;
-    width: 800px;
+    width: 965px;
     height: 600px;
     margin: 0 auto;
     /*border: 2px inset black;*/
