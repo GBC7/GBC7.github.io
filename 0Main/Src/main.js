@@ -538,7 +538,7 @@ function fillErasedMap()
 
 
                 //Below is exclusively for sewer level
-                if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
+                if (thingToDraw !== undefined && typeof thingToDraw === 'object')      //If there is something to be drawn in area being examined
                 {
                     if (thingToDraw === sewerFloor  && (l2 || l11))
                     // If drawing the floor on level 2
