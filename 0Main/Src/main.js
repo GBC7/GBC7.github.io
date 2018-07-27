@@ -142,6 +142,7 @@ let p =                                                         //PlayerObject
 
 //Sets the timeout period in the walk animation for the player (increasing this number makes the player walk slower)
 let walkingSpeed = 15;
+let elevenHealth = 3;
 let droppedPaper = false;
 let theyIsOff = false;
 let caneTrigger = false;
@@ -633,6 +634,7 @@ function fillErasedMap()
 
 function changePStartPos()
 {
+    if (lPMap[level] !== undefined)
     for (let y = 0; y < lPMap[level].length; y++) //Run through all Rows
     {
         for (let x = 0; x < lPMap[level][0].length; x++) // and columns
@@ -777,9 +779,14 @@ function waitForLoading(dontDrawP)
             }
             else
             {
-                drawMap();
-                turnOnEnemies();
-                addEventListener("keydown", onKeyDown, false);
+                setTimeout(iDontCare, 200);
+
+                function iDontCare()//This level is rude with its loading so I don't care right now
+                {
+                    drawMap();
+                    turnOnEnemies();
+                    addEventListener("keydown", onKeyDown, false);
+                }
             }
             break;
     }
@@ -3387,14 +3394,26 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
             //Animate character attack
             chooseAttack();
 
-            //Set enemy to dead so it stops its recursive roam function
-            enemy[level][enem].dead = true;
-            //Set enemy to destroyed so it does not set dead to true again upon level re-entry
-            enemy[level][enem].destroyed = true;
+            if (!l11)
+            {
+                //Set enemy to dead so it stops its recursive roam function
+                enemy[level][enem].dead = true;
+                //Set enemy to destroyed so it does not set dead to true again upon level re-entry
+                enemy[level][enem].destroyed = true;
+            }
+            else
+            {
+                elevenHealth --;
 
-            //Drop the key on level 11
-            if (l11)
-                lMap[11][Math.round(enemy[11][enem].yPos/32)][Math.round(enemy[11][enem].xPos/32)] = 15;//Key
+                if (elevenHealth === 0)
+                {
+                    //Set enemy to dead so it stops its recursive roam function
+                    enemy[level][enem].dead = true;
+                    //Set enemy to destroyed so it does not set dead to true again upon level re-entry
+                    enemy[level][enem].destroyed = true;
+                    lMap[11][Math.round(enemy[11][enem].yPos/32)][Math.round(enemy[11][enem].xPos/32)] = 15;//Key
+                }
+            }
 
             //Draw map after giving the enemy the exact amount of time it should need to finish its current action
             setTimeout(drawMap, enemy[level][enem].scurrySpeed);
@@ -3705,6 +3724,12 @@ function resetLevel(time = 40)
         p.frameY = 2;                           //Change tile sheet frame to match direction being faced
         startGame();                            //Load new levels assets and settings
         setTimeout(drawMap, 40);                //Draw its entire map
+    }
+    else if (l11)
+    {
+        Enemy(true, 96, 96, 4, 2, "2Sewer/images/bossRat.png", 4, 180, 120, 11, 8, 0, 800, 96, 600, 500);
+        enemy[11][0].xPos = 400; enemy[11][0].yPos = 400;
+        elevenHealth = 3;
     }
 
 

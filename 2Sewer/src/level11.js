@@ -29,7 +29,7 @@ function initializeLV11()
     let barrelPileB2 = new Image();
     let barrelPileB3 = new Image();
     let barrelPile2T1 = new Image();
-    let barrelPile2T2 = new Image();
+
     let barrelPile2T3 = new Image();
     let barrelPile2M1 = new Image();
     let barrelPile2M2 = new Image();
@@ -41,6 +41,9 @@ function initializeLV11()
     let sidewaysBarrelFloor = new Image();
     let pipeInWallT = new Image();
     let pipeInWallB = new Image();
+
+    let barrelPile2T2 = new Image();
+
 
 
     {
@@ -67,7 +70,6 @@ function initializeLV11()
         barrelPileB2.src = "2Sewer/images/barrelpileB2.png";
         barrelPileB3.src = "2Sewer/images/barrelpileB3.png";
         barrelPile2T1.src = "2Sewer/images/barrelpile2T1.png";
-        barrelPile2T2.src = "2Sewer/images/barrelpile2T2.png";
         barrelPile2T3.src = "2Sewer/images/barrelpile2T3.png";
         barrelPile2M1.src = "2Sewer/images/barrelpile2M1.png";
         barrelPile2M2.src = "2Sewer/images/barrelpile2M2.png";
@@ -79,6 +81,7 @@ function initializeLV11()
         sidewaysBarrelFloor.src = "2Sewer/images/sidewaysBarrel.png";
         pipeInWallT.src = "2Sewer/images/pipewwallnfloorT.png";
         pipeInWallB.src = "2Sewer/images/pipewwallnfloorB.png";
+        barrelPile2T2.src = "2Sewer/images/barrelpile2T2.png";
     }//Defining images src properties
 
 
@@ -110,7 +113,7 @@ function initializeLV11()
         aa = barrelPileB2;        //25
         bb = barrelPileB3;          //26
         cc = barrelPile2T1;         //27
-        dd = barrelPile2T2;         //28
+
         ee = barrelPile2T3;         //29
         ff = barrelPile2M1;         //30
         gg = barrelPile2M2;         //31
@@ -122,6 +125,10 @@ function initializeLV11()
         mm = sidewaysBarrelFloor;   //37
         nn = pipeInWallT;           //38
         oo = pipeInWallB;           //39
+
+
+
+        dd = barrelPile2T2;         //28   ///This is here
     }//Assigning images to global variables
 
 
@@ -171,7 +178,7 @@ function initializeLV11()
 
     changePStartPos();
 
-    pipeInWallB.onload = function() {l11Ready = true;};
+    barrelPile2T2.onload = function() {l11Ready = true;};
     waitForLoading();//Universal.. ish
 
     notWalking = true;
