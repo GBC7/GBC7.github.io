@@ -20,7 +20,7 @@ let ctx3;
     let playerImg = new Image();
 
     {
-        startTextImg.src = "0Main/images/startText.png";
+        startTextImg.src = "0Main/images/starttext.png";
         spotlightRImg.src = "0Main/images/spotlight-right.png";
         spotlightLImg.src = "0Main/images/spotlight-left.png";
         titleImg.src = "0Main/images/survivethemob.png"; //temporary image and name
