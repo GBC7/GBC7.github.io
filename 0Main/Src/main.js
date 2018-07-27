@@ -1217,7 +1217,7 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
                         // based on sprite
                         // sheet positions
                         // defined earlier
-                        else                              //If its anything else
+                        else if (typeof thingToDraw === 'object')                              //If its anything else
                             ctx.drawImage(thingToDraw, (col * 32), (row * 32)); //Draw whatever it is
                     }
                     destX += 32;            //increment variable based on width ratio of map array elements to canvas width
