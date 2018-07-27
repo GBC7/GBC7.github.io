@@ -104,6 +104,9 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     self.img.src = self.imagePath;
                     self.drawMe = function ()//Public function
                     {
+                        if (l5)
+                            enemy[level][10].drawMe2();
+
                         if (l2)
                         {
                             if ((self.bottomSide > (p.row - 1) * 32 && self.topSide < (p.row + 3) * 32 && self.rightSide > (p.row - 1.5) * 32 && self.leftSide < (p.col + 2.5) * 32) || lightsOn)
@@ -466,7 +469,6 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                 }
                             }
                         }
-
                         else
                         {
                             //Draw player over map and mouse
@@ -490,6 +492,10 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                             }
                         }
+                    };
+                    self.drawMe2 = function ()//Public function
+                    {
+                        ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
                     };
                     self.startWalking = function ()
                     {

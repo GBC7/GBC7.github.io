@@ -168,8 +168,8 @@ DialogLevel5[5] = "I told the publisher not to publish the story.  But he is any
 DialogLevel5[6] = "Remind me which cat that is?"; //Scientist to Mom
 DialogLevel5[7] = "The cat with the"; //Mom to Scientist **************Need variable names from Jed
 DialogLevel5[8] = "There it is...but you can't rollerblade all the way to the lab.  You are going to have to take the helicopter.";  //Mom to Scientist
-DialogLevel5[9] = "There are people on my roof or I would have flown here already and not rollerbladed across town."; //Scientist to Mom
-DialogLevel5[10] = "Here...Take my cane.  You can use it as a weapon."; //Mom to Scientist
+DialogLevel5[9] = "There are people on my roof otherwise I would have flown here already and not rollerbladed across town."; //Scientist to Mom
+DialogLevel5[10] = "Here...Take my cane.  Maybe it will help you make it through the crowd on your roof."; //Mom to Scientist
 DialogLevel5[11] = "Thank you.  Guess I am heading back home to get the helicopter."; //Scientist ***Leave
 
 

@@ -147,6 +147,7 @@ let droppedPaper = false;
 let theyIsOff = false;
 let caneTrigger = false;
 let lighterTrigger = false;
+let l5DialogNum = 0;
 
 function startGame(dontDrawP)
 {
@@ -2373,8 +2374,8 @@ function onKeyDown(e)
         }
     }
     
-    checkFloorObjects(e.keyCode);
 
+    checkFloorObjects(e.keyCode);
 
     drawZeeEnemy();
     healthInventory();
@@ -2674,7 +2675,12 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 1][p.col - 1] === floorObjects[level])
         {
-            if (l11)
+            if (l5)
+            {
+                lMap[level][p.row + 1][p.col - 1] = 2;
+                publishersPaper = true;
+            }
+            else if (l11)
             {
                 lMap[level][p.row + 1][p.col - 1] = 4;//Change that tile to a floor tile
                 drawMap();
@@ -2686,7 +2692,12 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 1][p.col + 1] === floorObjects[level])
         {
-            if (l11)
+            if (l5)
+            {
+                lMap[level][p.row + 1][p.col + 1] = 2;
+                publishersPaper = true;
+            }
+            else if (l11)
             {
                 lMap[level][p.row + 1][p.col + 1] = 4;//Change that tile to a floor tile
                 drawMap();
@@ -2698,7 +2709,12 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row][p.col] === floorObjects[level])
         {
-            if (l11)
+            if (l5)
+            {
+                lMap[level][p.row][p.col] = 2;
+                publishersPaper = true;
+            }
+            else if (l11)
             {
                 lMap[level][p.row][p.col] = 4;//Change that tile to a floor tile
                 drawMap();
@@ -2710,7 +2726,12 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 2][p.col] === floorObjects[level])
         {
-            if (l11)
+            if (l5)
+            {
+                lMap[level][p.row + 2][p.col] = 2;
+                publishersPaper = true;
+            }
+            else if (l11)
             {
                 lMap[level][p.row + 2][p.col] = 4;//Change that tile to a floor tile
                 drawMap();
@@ -3259,13 +3280,13 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
         //Check cats for objects and check if mother is feral
         function level5Checks()
         {
-            if (enemy[level][enem].cat)
+            if (enemy[level][enem].cat && caneTrigger)
             {
                 catsKicked++;
                 meow.play();
 
                 //If the NPC is the cat that has the publishers paper
-                if (enemy[level][enem].hasPaper/* && !droppedPaper*/)
+                if (enemy[level][enem].hasPaper && !droppedPaper)
                 {
                     let thisX = Math.round(enemy[level][enem].xPos / 32);
                     let thisY = Math.round(enemy[level][enem].yPos / 32) + Math.ceil(enemy[level][enem].height/32);
@@ -3306,6 +3327,49 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
                     enemy[level][enemy[level].length - 1].fov = 100;
                     enemy[level][enemy[level].length - 1].rangeOV = 100;
                     enemy[level][enemy[level].length - 1].sighted = true;
+                }
+            }
+            else if (!enemy[level][enem].cat)
+            {
+                removeEventListener("keydown", onKeyDown, false);
+                enemy[level][10].dead = true;
+                enemy[level][10].drawMe2();
+                addEventListener('keydown', nextDialog, false);
+
+                function nextDialog(e)
+                {
+                    if (e.keyCode === 32)
+                    {
+                        l5DialogNum++;
+
+                        if (l5DialogNum > 11)
+                        {
+                            removeEventListener('keydown', nextDialog, false);
+                            addEventListener("keydown", onKeyDown, false);
+                            enemy[level][10].dead = false;
+                            enemy[level][10].startWalking();
+                            dialogInitialize();
+                        }
+                        else if (l5DialogNum === 6)
+                        {
+                            dialogText(names[1], DialogLevel5[l5DialogNum], "20 px", "white");
+                        }
+                        else if (l5DialogNum === 10)
+                        {
+                            dialogText(names[2], DialogLevel5[l5DialogNum], "20 px", "white");
+                            caneTrigger = true;
+                            healthInventory();
+                        }
+                        else if (l5DialogNum === 5 || l5DialogNum === 7)
+                            dialogText(names[2], DialogLevel5[l5DialogNum], "20 px", "white");
+                        else if (l5DialogNum % 2 === 1)
+                            dialogText(names[1], DialogLevel5[l5DialogNum], "20 px", "white");
+                        else
+                            dialogText(names[2], DialogLevel5[l5DialogNum], "20 px", "white");
+
+                        //Draw mom since she will be erased
+                        /*enemy[level][10].drawMe2();*/
+                    }
                 }
             }
         }

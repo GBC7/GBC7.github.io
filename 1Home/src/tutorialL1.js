@@ -215,6 +215,7 @@ function gotTheLight(e)
     {
         removeEventListener("keydown", getTheLight, false);
         removeEventListener("keydown", gotTheLight, false);
+
         lighterTrigger = true;
         healthInventory();
     }
