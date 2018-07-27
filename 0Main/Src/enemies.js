@@ -111,258 +111,334 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                 ctx.clearRect(self.prevX, self.prevY, self.width, self.height);
 
                                 let remainX = (self.xPos % 32), remainY = (self.yPos % 32);
+                                let col = (self.xPos - remainX)/32, row = (self.yPos - remainY)/32;
+                                let columns;
 
-                                for (let mR = ((self.yPos - remainY) / 32) - 2; mR < ((self.yPos - remainY) / 32) + 4; mR++) //Run through all that would have been erased
+                                if (level === 11)
+                                    columns = 4;
+                                else columns = 3;
+
+                                for (let mR = row - 2; mR < row + 4; mR ++) //Run through all rows in the levels map (mR = map row)
                                 {
-                                    for (let mC = ((self.xPos - remainX) / 32) - 2; mC < ((self.xPos - remainX) / 32) + 4; mC++)//Run through all columns that would have been erased
+                                    for (let mC = col - 2; mC < col + columns; mC ++)//Run through all the columns in the levels map (mC = map Column)
                                     {
+                                        let xPos = undefined, yPos= undefined; //Defined vars that will be used for positioning images to be drawn
 
-                                        if (lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
+                                        if (lMap[level] !== undefined && lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
                                         {
-                                            switch (lMap[level][mR][mC])//check what needs drawing based on levels map index
+                                            xPos = mC*32;
+                                            yPos = mR*32;
+
+                                            switch (lMap[level][mR][mC])//check what needs drawing based on map index
                                             {
                                                 case 0:
-                                                    self.thingToDraw = a;
+                                                    thingToDraw = a;
                                                     break;
                                                 case 1:
-                                                    self.thingToDraw = b;
+                                                    thingToDraw = b;
                                                     break;
                                                 case 2:
-                                                    self.thingToDraw = c;
+                                                    thingToDraw = c;
                                                     break;
                                                 case 3:
                                                     floorSpriteX = 32;
-                                                    self.thingToDraw = d;
+                                                    thingToDraw = d;
                                                     break;
                                                 case 4:
                                                     floorSpriteX = 64;
-                                                    self.thingToDraw = e;
+                                                    thingToDraw = e;
                                                     break;
                                                 case 5:
                                                     floorSpriteX = 96;
-                                                    self.thingToDraw = f;
+                                                    thingToDraw = f;
                                                     break;
                                                 case 6:
-                                                    self.thingToDraw = g;
+                                                    thingToDraw = g;
                                                     break;
                                                 case 7:
                                                     if (l2 && !sewersDrained)
-                                                        self.thingToDraw = wetPipe;
+                                                        thingToDraw = wetPipe;
                                                     else
-                                                        self.thingToDraw = h;
+                                                        thingToDraw = h;
                                                     break;
                                                 case 8:
-                                                    self.thingToDraw = i;
+                                                    thingToDraw = i;
                                                     break;
                                                 case 9:
-                                                    self.thingToDraw = j;
+                                                    thingToDraw = j;
                                                     break;
                                                 case 10:
-                                                    self.thingToDraw = k;
+                                                    thingToDraw = k;
                                                     break;
                                                 case 11:
-                                                    self.thingToDraw = l;
+                                                    thingToDraw = l;
                                                     break;
                                                 case 12:
-                                                    self.thingToDraw = m;
+                                                    thingToDraw = m;
                                                     break;
                                                 case 13:
-                                                    self.thingToDraw = n;
+                                                    thingToDraw = n;
                                                     break;
                                                 case 14:
-                                                    self.thingToDraw = o;
+                                                    thingToDraw = o;
                                                     break;
                                                 case 15:
-                                                    self.thingToDraw = q;
+                                                    thingToDraw = q;
                                                     break;
                                                 case 16:
-                                                    self.thingToDraw = r;
+                                                    thingToDraw = r;
                                                     break;
                                                 case 17:
-                                                    self.thingToDraw = s;
+                                                    thingToDraw = s;
                                                     break;
                                                 case 18:
-                                                    self.thingToDraw = t;
+                                                    thingToDraw = t;
                                                     break;
                                                 case 19:
-                                                    self.thingToDraw = u;
+                                                    thingToDraw = u;
                                                     break;
                                                 case 20:
-                                                    self.thingToDraw = v;
+                                                    thingToDraw = v;
                                                     break;
                                                 case 21:
-                                                    self.thingToDraw = w;
+                                                    thingToDraw = w;
                                                     break;
                                                 case 22:
-                                                    self.thingToDraw = x;
+                                                    thingToDraw = x;
                                                     break;
                                                 case 23:
-                                                    self.thingToDraw = y;
+                                                    thingToDraw = y;
                                                     break;
                                                 case 24:
-                                                    self.thingToDraw = z;
+                                                    thingToDraw = z;
                                                     break;
                                                 case 25:
-                                                    self.thingToDraw = aa;
+                                                    thingToDraw = aa;
                                                     break;
                                                 case 26:
-                                                    self.thingToDraw = bb;
+                                                    thingToDraw = bb;
                                                     break;
                                                 case 27:
-                                                    self.thingToDraw = cc;
+                                                    thingToDraw = cc;
                                                     break;
                                                 case 28:
-                                                    self.thingToDraw = dd;
+                                                    thingToDraw = dd;
                                                     break;
                                                 case 29:
-                                                    self.thingToDraw = ee;
+                                                    thingToDraw = ee;
                                                     break;
                                                 case 30:
-                                                    self.thingToDraw = ff;
+                                                    thingToDraw = ff;
                                                     break;
                                                 case 31:
-                                                    self.thingToDraw = gg;
+                                                    thingToDraw = gg;
                                                     break;
                                                 case 32:
-                                                    self.thingToDraw = hh;
+                                                    thingToDraw = hh;
                                                     break;
                                                 case 33:
-                                                    self.thingToDraw = ii;
+                                                    thingToDraw = ii;
                                                     break;
                                                 case 34:
-                                                    self.thingToDraw = jj;
+                                                    thingToDraw = jj;
                                                     break;
                                                 case 35:
-                                                    self.thingToDraw = kk;
+                                                    thingToDraw = kk;
                                                     break;
                                                 case 36:
-                                                    self.thingToDraw = ll;
+                                                    thingToDraw = ll;
                                                     break;
                                                 case 37:
-                                                    self.thingToDraw = mm;
+                                                    thingToDraw = mm;
                                                     break;
                                                 case 38:
-                                                    self.thingToDraw = nn;
+                                                    thingToDraw = nn;
                                                     break;
                                                 case 39:
-                                                    self.thingToDraw = oo;
+                                                    thingToDraw = oo;
                                                     break;
                                                 case 40:
-                                                    self.thingToDraw = qq;
+                                                    thingToDraw = qq;
                                                     break;
                                                 case 41:
-                                                    self.thingToDraw = rr;
+                                                    thingToDraw = rr;
                                                     break;
                                                 case 42:
-                                                    self.thingToDraw = ss;
+                                                    thingToDraw = ss;
                                                     break;
                                                 case 43:
-                                                    self.thingToDraw = tt;
+                                                    thingToDraw = tt;
                                                     break;
                                                 case 44:
-                                                    self.thingToDraw = uu;
+                                                    thingToDraw = uu;
                                                     break;
                                                 case 45:
-                                                    self.thingToDraw = vv;
+                                                    thingToDraw = vv;
                                                     break;
                                                 case 46:
-                                                    self.thingToDraw = ww;
+                                                    thingToDraw = ww;
                                                     break;
                                                 case 47:
-                                                    self.thingToDraw = xx;
+                                                    thingToDraw = xx;
                                                     break;
                                                 case 48:
-                                                    self.thingToDraw = yy;
+                                                    thingToDraw = yy;
                                                     break;
                                                 case 49:
-                                                    self.thingToDraw = zz;
+                                                    thingToDraw = zz;
                                                     break;
                                                 case 50:
-                                                    self.thingToDraw = aaa;
+                                                    thingToDraw = aaa;
                                                     break;
                                                 case 51:
-                                                    self.thingToDraw = bbb;
+                                                    thingToDraw = bbb;
                                                     break;
                                                 case 52:
-                                                    self.thingToDraw = ccc;
+                                                    thingToDraw = ccc;
                                                     break;
                                                 case 53:
-                                                    self.thingToDraw = ddd;
+                                                    thingToDraw = ddd;
                                                     break;
                                                 case 54:
-                                                    self.thingToDraw = eee;
+                                                    thingToDraw = eee;
                                                     break;
                                                 case 55:
-                                                    self.thingToDraw = fff;
+                                                    thingToDraw = fff;
                                                     break;
                                                 case 56:
-                                                    self.thingToDraw = ggg;
+                                                    thingToDraw = ggg;
                                                     break;
                                                 case 57:
-                                                    self.thingToDraw = hhh;
+                                                    thingToDraw = hhh;
                                                     break;
                                                 case 58:
-                                                    self.thingToDraw = iii;
+                                                    thingToDraw = iii;
                                                     break;
                                                 case 59:
-                                                    self.thingToDraw = jjj;
+                                                    thingToDraw = jjj;
                                                     break;
                                                 case 60:
-                                                    self.thingToDraw = kkk;
+                                                    thingToDraw = kkk;
                                                     break;
                                                 case 61:
-                                                    self.thingToDraw = lll;
+                                                    thingToDraw = lll;
                                                     break;
                                                 case 62:
-                                                    self.thingToDraw = mmm;
+                                                    thingToDraw = mmm;
                                                     break;
                                                 case 63:
-                                                    self.thingToDraw = nnn;
+                                                    thingToDraw = nnn;
                                                     break;
                                                 case 64:
-                                                    self.thingToDraw = ooo;
+                                                    thingToDraw = ooo;
                                                     break;
                                                 case 65:
-                                                    self.thingToDraw = qqq;
+                                                    thingToDraw = qqq;
                                                     break;
                                                 case 66:
-                                                    self.thingToDraw = rrr;
+                                                    thingToDraw = rrr;
                                                     break;
                                                 case 67:
-                                                    self.thingToDraw = sss;
+                                                    thingToDraw = sss;
                                                     break;
                                                 case 68:
-                                                    self.thingToDraw = ttt;
+                                                    thingToDraw = ttt;
                                                     break;
                                                 case 69:
-                                                    self.thingToDraw = uuu;
+                                                    thingToDraw = uuu;
                                                     break;
                                                 case 70:
-                                                    self.thingToDraw = vvv;
+                                                    thingToDraw = vvv;
                                                     break;
                                                 case 71:
-                                                    self.thingToDraw = www;
+                                                    thingToDraw = www;
                                                     break;
                                                 case 72:
-                                                    self.thingToDraw = xxx;
+                                                    thingToDraw = xxx;
                                                     break;
                                                 case 73:
-                                                    self.thingToDraw = yyy;
+                                                    thingToDraw = yyy;
                                                     break;
                                                 case 74:
-                                                    self.thingToDraw = zzz;
+                                                    thingToDraw = zzz;
                                                     break;
                                             }
 
-                                            if (self.thingToDraw !== undefined)//If there is something to be drawn in area being examined
+
+                                            //Below is exclusively for sewer level
+                                            if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
                                             {
-                                                if (self.thingToDraw === sewerFloor && (l2 || l11))
+                                                if (thingToDraw === sewerFloor  && (l2 || l11))
                                                 // If drawing the floor on level 2
-                                                // then draw it based on floorSpriteX var positioning
-                                                    ctx.drawImage(self.thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
+                                                // then draw based on floorSpriteX var positioning
+                                                    ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
                                                 else
                                                 //Otherwise draw regularly
-                                                    ctx.drawImage(self.thingToDraw, (mC * 32), (mR * 32));
+                                                    ctx.drawImage(thingToDraw, (mC * 32), (mR * 32));
+                                            }
+
+                                            if (xPos !== undefined && yPos !== undefined)
+                                            {
+                                                if (!sewersDrained && l2)//Draw the section of sewage that was just erased
+                                                {
+                                                    ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
+                                                    if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                                                        ctx.fillRect(xPos, yPos + 24, 32, 24);//Draw over the bottom quarter of the tiles on row 0 (to make water look knee level)
+                                                    else if (yPos === 352 && xPos < 384)
+                                                        ctx.fillRect(xPos, yPos, 32, 2);
+                                                    else if (yPos === 352 && xPos === 384)//Steps
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                    else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                                                    {
+                                                        ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                                                        ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                                                        ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
+
+
+                                                        ctx.fillRect(xPos + 15, yPos, 17, 32);
+                                                    }
+                                                    else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                    else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                    else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
+                                                        ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
+                                                    else if (yPos > 0 && yPos < 352 && xPos === 320)                  //      ^^^^^
+                                                        ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
+                                                    else if (yPos === 224 && xPos >= 576)
+                                                        ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles// of the secondary rooms outer wall// (to make water look knee level)
+                                                    else if (yPos > 224 && xPos >= 576)
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+
+                                                    ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
+
+                                                    if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                                                        ctx.fillRect(xPos, yPos + 24, 32, 24);
+                                                    else if (yPos === 352 && xPos < 384)
+                                                        ctx.fillRect(xPos, yPos, 32, 2);
+                                                    else if (yPos === 352 && xPos === 384)//Steps
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                    else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                                                    {
+                                                        ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                                                        ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                                                        ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
+
+                                                        ctx.fillRect(xPos + 15, yPos, 17, 32);
+                                                    }
+                                                    else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                    else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                    else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                    else if (yPos > 0 && yPos < 352 && xPos === 320)
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                    else if (yPos === 224 && xPos >= 576)
+                                                        ctx.fillRect(xPos, yPos + 28, 32, 4);
+                                                    else if (yPos > 224 && xPos >= 576)
+                                                        ctx.fillRect(xPos, yPos, 32, 32);
+                                                }
                                             }
                                         }
                                     }
@@ -1671,258 +1747,334 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         ctx.clearRect(self.prevX, self.prevY, self.width, self.height);
 
                         let remainX = (self.xPos % 32), remainY = (self.yPos % 32);
+                        let col = (self.xPos - remainX)/32, row = (self.yPos - remainY)/32;
+                        let columns;
 
-                        for (let mR = ((self.yPos - remainY) / 32) - 2; mR < ((self.yPos - remainY) / 32) + 4; mR++) //Run through all that would have been erased
+                        if (level === 11)
+                            columns = 4;
+                        else columns = 3;
+
+                        for (let mR = row - 2; mR < row + 4; mR ++) //Run through all rows in the levels map (mR = map row)
                         {
-                            for (let mC = ((self.xPos - remainX) / 32) - 2; mC < ((self.xPos - remainX) / 32) + 4; mC++)//Run through all columns that would have been erased
+                            for (let mC = col - 2; mC < col + columns; mC ++)//Run through all the columns in the levels map (mC = map Column)
                             {
+                                let xPos = undefined, yPos= undefined; //Defined vars that will be used for positioning images to be drawn
 
-                                if (lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
+                                if (lMap[level] !== undefined && lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
                                 {
-                                    switch (lMap[level][mR][mC])//check what needs drawing based on levels map index
+                                    xPos = mC*32;
+                                    yPos = mR*32;
+
+                                    switch (lMap[level][mR][mC])//check what needs drawing based on map index
                                     {
                                         case 0:
-                                            self.thingToDraw = a;
+                                            thingToDraw = a;
                                             break;
                                         case 1:
-                                            self.thingToDraw = b;
+                                            thingToDraw = b;
                                             break;
                                         case 2:
-                                            self.thingToDraw = c;
+                                            thingToDraw = c;
                                             break;
                                         case 3:
                                             floorSpriteX = 32;
-                                            self.thingToDraw = d;
+                                            thingToDraw = d;
                                             break;
                                         case 4:
                                             floorSpriteX = 64;
-                                            self.thingToDraw = e;
+                                            thingToDraw = e;
                                             break;
                                         case 5:
                                             floorSpriteX = 96;
-                                            self.thingToDraw = f;
+                                            thingToDraw = f;
                                             break;
                                         case 6:
-                                            self.thingToDraw = g;
+                                            thingToDraw = g;
                                             break;
                                         case 7:
                                             if (l2 && !sewersDrained)
-                                                self.thingToDraw = wetPipe;
+                                                thingToDraw = wetPipe;
                                             else
-                                                self.thingToDraw = h;
+                                                thingToDraw = h;
                                             break;
                                         case 8:
-                                            self.thingToDraw = i;
+                                            thingToDraw = i;
                                             break;
                                         case 9:
-                                            self.thingToDraw = j;
+                                            thingToDraw = j;
                                             break;
                                         case 10:
-                                            self.thingToDraw = k;
+                                            thingToDraw = k;
                                             break;
                                         case 11:
-                                            self.thingToDraw = l;
+                                            thingToDraw = l;
                                             break;
                                         case 12:
-                                            self.thingToDraw = m;
+                                            thingToDraw = m;
                                             break;
                                         case 13:
-                                            self.thingToDraw = n;
+                                            thingToDraw = n;
                                             break;
                                         case 14:
-                                            self.thingToDraw = o;
+                                            thingToDraw = o;
                                             break;
                                         case 15:
-                                            self.thingToDraw = q;
+                                            thingToDraw = q;
                                             break;
                                         case 16:
-                                            self.thingToDraw = r;
+                                            thingToDraw = r;
                                             break;
                                         case 17:
-                                            self.thingToDraw = s;
+                                            thingToDraw = s;
                                             break;
                                         case 18:
-                                            self.thingToDraw = t;
+                                            thingToDraw = t;
                                             break;
                                         case 19:
-                                            self.thingToDraw = u;
+                                            thingToDraw = u;
                                             break;
                                         case 20:
-                                            self.thingToDraw = v;
+                                            thingToDraw = v;
                                             break;
                                         case 21:
-                                            self.thingToDraw = w;
+                                            thingToDraw = w;
                                             break;
                                         case 22:
-                                            self.thingToDraw = x;
+                                            thingToDraw = x;
                                             break;
                                         case 23:
-                                            self.thingToDraw = y;
+                                            thingToDraw = y;
                                             break;
                                         case 24:
-                                            self.thingToDraw = z;
+                                            thingToDraw = z;
                                             break;
                                         case 25:
-                                            self.thingToDraw = aa;
+                                            thingToDraw = aa;
                                             break;
                                         case 26:
-                                            self.thingToDraw = bb;
+                                            thingToDraw = bb;
                                             break;
                                         case 27:
-                                            self.thingToDraw = cc;
+                                            thingToDraw = cc;
                                             break;
                                         case 28:
-                                            self.thingToDraw = dd;
+                                            thingToDraw = dd;
                                             break;
                                         case 29:
-                                            self.thingToDraw = ee;
+                                            thingToDraw = ee;
                                             break;
                                         case 30:
-                                            self.thingToDraw = ff;
+                                            thingToDraw = ff;
                                             break;
                                         case 31:
-                                            self.thingToDraw = gg;
+                                            thingToDraw = gg;
                                             break;
                                         case 32:
-                                            self.thingToDraw = hh;
+                                            thingToDraw = hh;
                                             break;
                                         case 33:
-                                            self.thingToDraw = ii;
+                                            thingToDraw = ii;
                                             break;
                                         case 34:
-                                            self.thingToDraw = jj;
+                                            thingToDraw = jj;
                                             break;
                                         case 35:
-                                            self.thingToDraw = kk;
+                                            thingToDraw = kk;
                                             break;
                                         case 36:
-                                            self.thingToDraw = ll;
+                                            thingToDraw = ll;
                                             break;
                                         case 37:
-                                            self.thingToDraw = mm;
+                                            thingToDraw = mm;
                                             break;
                                         case 38:
-                                            self.thingToDraw = nn;
+                                            thingToDraw = nn;
                                             break;
                                         case 39:
-                                            self.thingToDraw = oo;
+                                            thingToDraw = oo;
                                             break;
                                         case 40:
-                                            self.thingToDraw = qq;
+                                            thingToDraw = qq;
                                             break;
                                         case 41:
-                                            self.thingToDraw = rr;
+                                            thingToDraw = rr;
                                             break;
                                         case 42:
-                                            self.thingToDraw = ss;
+                                            thingToDraw = ss;
                                             break;
                                         case 43:
-                                            self.thingToDraw = tt;
+                                            thingToDraw = tt;
                                             break;
                                         case 44:
-                                            self.thingToDraw = uu;
+                                            thingToDraw = uu;
                                             break;
                                         case 45:
-                                            self.thingToDraw = vv;
+                                            thingToDraw = vv;
                                             break;
                                         case 46:
-                                            self.thingToDraw = ww;
+                                            thingToDraw = ww;
                                             break;
                                         case 47:
-                                            self.thingToDraw = xx;
+                                            thingToDraw = xx;
                                             break;
                                         case 48:
-                                            self.thingToDraw = yy;
+                                            thingToDraw = yy;
                                             break;
                                         case 49:
-                                            self.thingToDraw = zz;
+                                            thingToDraw = zz;
                                             break;
                                         case 50:
-                                            self.thingToDraw = aaa;
+                                            thingToDraw = aaa;
                                             break;
                                         case 51:
-                                            self.thingToDraw = bbb;
+                                            thingToDraw = bbb;
                                             break;
                                         case 52:
-                                            self.thingToDraw = ccc;
+                                            thingToDraw = ccc;
                                             break;
                                         case 53:
-                                            self.thingToDraw = ddd;
+                                            thingToDraw = ddd;
                                             break;
                                         case 54:
-                                            self.thingToDraw = eee;
+                                            thingToDraw = eee;
                                             break;
                                         case 55:
-                                            self.thingToDraw = fff;
+                                            thingToDraw = fff;
                                             break;
                                         case 56:
-                                            self.thingToDraw = ggg;
+                                            thingToDraw = ggg;
                                             break;
                                         case 57:
-                                            self.thingToDraw = hhh;
+                                            thingToDraw = hhh;
                                             break;
                                         case 58:
-                                            self.thingToDraw = iii;
+                                            thingToDraw = iii;
                                             break;
                                         case 59:
-                                            self.thingToDraw = jjj;
+                                            thingToDraw = jjj;
                                             break;
                                         case 60:
-                                            self.thingToDraw = kkk;
+                                            thingToDraw = kkk;
                                             break;
                                         case 61:
-                                            self.thingToDraw = lll;
+                                            thingToDraw = lll;
                                             break;
                                         case 62:
-                                            self.thingToDraw = mmm;
+                                            thingToDraw = mmm;
                                             break;
                                         case 63:
-                                            self.thingToDraw = nnn;
+                                            thingToDraw = nnn;
                                             break;
                                         case 64:
-                                            self.thingToDraw = ooo;
+                                            thingToDraw = ooo;
                                             break;
                                         case 65:
-                                            self.thingToDraw = qqq;
+                                            thingToDraw = qqq;
                                             break;
                                         case 66:
-                                            self.thingToDraw = rrr;
+                                            thingToDraw = rrr;
                                             break;
                                         case 67:
-                                            self.thingToDraw = sss;
+                                            thingToDraw = sss;
                                             break;
                                         case 68:
-                                            self.thingToDraw = ttt;
+                                            thingToDraw = ttt;
                                             break;
                                         case 69:
-                                            self.thingToDraw = uuu;
+                                            thingToDraw = uuu;
                                             break;
                                         case 70:
-                                            self.thingToDraw = vvv;
+                                            thingToDraw = vvv;
                                             break;
                                         case 71:
-                                            self.thingToDraw = www;
+                                            thingToDraw = www;
                                             break;
                                         case 72:
-                                            self.thingToDraw = xxx;
+                                            thingToDraw = xxx;
                                             break;
                                         case 73:
-                                            self.thingToDraw = yyy;
+                                            thingToDraw = yyy;
                                             break;
                                         case 74:
-                                            self.thingToDraw = zzz;
+                                            thingToDraw = zzz;
                                             break;
                                     }
 
-                                    if (self.thingToDraw !== undefined)//If there is something to be drawn in area being examined
+
+                                    //Below is exclusively for sewer level
+                                    if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
                                     {
-                                        if (self.thingToDraw === sewerFloor && (l2 || l11))
+                                        if (thingToDraw === sewerFloor  && (l2 || l11))
                                         // If drawing the floor on level 2
-                                        // then draw it based on floorSpriteX var positioning
-                                            ctx.drawImage(self.thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
+                                        // then draw based on floorSpriteX var positioning
+                                            ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
                                         else
                                         //Otherwise draw regularly
-                                            ctx.drawImage(self.thingToDraw, (mC * 32), (mR * 32));
+                                            ctx.drawImage(thingToDraw, (mC * 32), (mR * 32));
+                                    }
+
+                                    if (xPos !== undefined && yPos !== undefined)
+                                    {
+                                        if (!sewersDrained && l2)//Draw the section of sewage that was just erased
+                                        {
+                                            ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
+                                            if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                                                ctx.fillRect(xPos, yPos + 24, 32, 24);//Draw over the bottom quarter of the tiles on row 0 (to make water look knee level)
+                                            else if (yPos === 352 && xPos < 384)
+                                                ctx.fillRect(xPos, yPos, 32, 2);
+                                            else if (yPos === 352 && xPos === 384)//Steps
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                            else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                                            {
+                                                ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                                                ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                                                ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
+
+
+                                                ctx.fillRect(xPos + 15, yPos, 17, 32);
+                                            }
+                                            else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                            else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                            else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
+                                                ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
+                                            else if (yPos > 0 && yPos < 352 && xPos === 320)                  //      ^^^^^
+                                                ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
+                                            else if (yPos === 224 && xPos >= 576)
+                                                ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles// of the secondary rooms outer wall// (to make water look knee level)
+                                            else if (yPos > 224 && xPos >= 576)
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+
+                                            ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
+
+                                            if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                                                ctx.fillRect(xPos, yPos + 24, 32, 24);
+                                            else if (yPos === 352 && xPos < 384)
+                                                ctx.fillRect(xPos, yPos, 32, 2);
+                                            else if (yPos === 352 && xPos === 384)//Steps
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                            else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                                            {
+                                                ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                                                ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                                                ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
+
+                                                ctx.fillRect(xPos + 15, yPos, 17, 32);
+                                            }
+                                            else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                            else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                            else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                            else if (yPos > 0 && yPos < 352 && xPos === 320)
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                            else if (yPos === 224 && xPos >= 576)
+                                                ctx.fillRect(xPos, yPos + 28, 32, 4);
+                                            else if (yPos > 224 && xPos >= 576)
+                                                ctx.fillRect(xPos, yPos, 32, 32);
+                                        }
                                     }
                                 }
                             }
