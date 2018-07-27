@@ -538,7 +538,7 @@ function fillErasedMap()
 
 
                 //Below is exclusively for sewer level
-                if (thingToDraw !== undefined && typeof thingToDraw === 'object')      //If there is something to be drawn in area being examined
+                if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
                 {
                     if (thingToDraw === sewerFloor  && (l2 || l11))
                     // If drawing the floor on level 2
@@ -1217,8 +1217,10 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
                         // based on sprite
                         // sheet positions
                         // defined earlier
-                        else if (typeof thingToDraw === 'object')                              //If its anything else
-                            ctx.drawImage(thingToDraw, (col * 32), (row * 32)); //Draw whatever it is
+                        else                            //If its anything else
+                        {
+                            ctx.drawImage(thingToDraw, (col * 32), (row * 32));
+                        } //Draw whatever it is
                     }
                     destX += 32;            //increment variable based on width ratio of map array elements to canvas width
                 }

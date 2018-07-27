@@ -291,7 +291,6 @@ function initializeLV2(dontDrawP)
     let barrelPile2B3 = new Image();
     let sidewaysBarrelFloor = new Image();
     let uprightBarrel = new Image();
-    let brokenWheelChair = new Image();
     let destroyedBedT = new Image();
     let destroyedBedB = new Image();
     let floorBarrel = new Image();
@@ -353,7 +352,6 @@ function initializeLV2(dontDrawP)
         barrelPile2B3.src = "2Sewer/images/barrelpile2B3.png";
         sidewaysBarrelFloor.src = "2Sewer/images/sidewaysBarrel.png";
         uprightBarrel.src = "2Sewer/images/uprightBarrel.png";
-        brokenWheelChair.src = "2Sewer/images/brokenWheelChair.png";
         destroyedBedT.src = "2Sewer/images/destroyedBedT.png";
         destroyedBedB.src = "2Sewer/images/destroyedBedB.png";
         floorBarrel.src = "2Sewer/images/floorCleanBarrel.png";
@@ -419,7 +417,7 @@ function initializeLV2(dontDrawP)
         aaa = barrelPile2B3;     //50
         bbb = sidewaysBarrelFloor; //51
         ccc = uprightBarrel;        //52
-        ddd = brokenWheelChair;     //53
+        ddd = undefined;     //53
         eee = destroyedBedT;        //54
         fff = destroyedBedB;         //55
         ggg = floorBarrel;          //56
@@ -446,7 +444,7 @@ function initializeLV2(dontDrawP)
                 [ 4,  3, 48, 49, 50,  3,  3, 39, 40, 41,   3,  4,  4, 33, 34, 35,  3,  4,  3,  3,  4,  3,  3, 52,  4],       //9
                 [ 4,  3,  4,  3,  3,  4, 52,  4,  3,  3,   4, 52, 51, 36, 37, 38, 51,  4,  4,  4,  3,  3,  3,  4,  4],       //10
                 [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,  20,  2, 39, 40, 41, 52,  3, 33, 34, 35,  3,  4,  3, 52],       //11
-                [53,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 30,  4,  52,  42, 43, 44, 36, 37, 38,  3, 42, 43, 44],       //12
+                [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 30,  4,  52,  42, 43, 44, 36, 37, 38,  3, 42, 43, 44],       //12
                 [ 5,  5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 21,  3,  3,  3,  45, 46, 47, 39, 40, 41,  3,  45, 46, 47],       //13
                 [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  2,  4,  3,  48, 49, 50, 42, 43, 44,  4,  48, 49, 50],       //14
                 [10, 27, 10, 10, 10, 10, 10, 10, 10,  5,  5, 26, 51,  4,  4,  4,  3,  4,  45, 46, 47, 3,  3,  52, 51],       //15
