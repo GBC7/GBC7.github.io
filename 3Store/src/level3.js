@@ -13,45 +13,7 @@ let enemyAppearLevel3 = false;
 let detectPlayerLevel3 = false;
 let enemyIndexLevel3 = 0; //global variable
 
-let enemyLevel3 = function(row, col) {
-    this.row = row;
-    this.col = col;
-    this.width = 32;
-    this.height = 64;
-    this.sw = 1;
-    // add enemy property if need
-};
-
-let enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10;
-{
-    enemy1 = new enemyLevel3(0, 6);
-    enemy2 = new enemyLevel3(1, 6);
-    enemy3 = new enemyLevel3(2, 6);
-    enemy4 = new enemyLevel3(3, 6);
-    enemy5 = new enemyLevel3(6, 6);
-    enemy6 = new enemyLevel3(7, 0);
-    enemy7 = new enemyLevel3(9, 6);
-    enemy8 = new enemyLevel3(11, 7);
-    enemy9 = new enemyLevel3(13, 0);
-    enemy10 = new enemyLevel3(15, 0);
-}
-
-let enemiesLevel3 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10];
-let enemyArr = [];
-
-enemiesLevel3[0] = clothingStoreEnemy1;
-enemiesLevel3[1] = clothingStoreEnemy2;
-enemiesLevel3[2] = clothingStoreEnemy3;
-enemiesLevel3[3] = clothingStoreEnemy4;
-enemiesLevel3[4] = clothingStoreEnemy5;
-enemiesLevel3[5] = clothingStoreEnemy6;
-enemiesLevel3[6] = clothingStoreEnemy7;
-enemiesLevel3[7] = clothingStoreEnemy8;
-enemiesLevel3[8] = clothingStoreEnemy9;
-enemiesLevel3[9] = clothingStoreEnemy10;
-
-
-
+let enemyPosX = [], enemyPosY = [];
 
 
 
@@ -90,8 +52,7 @@ bgm_level3.volume = 0.2;
 dangerous.loop = true;
 dangerous.volume = 0.2;
 
-
-let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
+let warningTime = Math.floor(Math.random() * 20 + 15); // generate time to move 15~20
 let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
 
 function initializeLV3()
@@ -100,7 +61,10 @@ function initializeLV3()
     bgm_level3.play();
     if(findAllLevel3 === false){
         dialogText(names[1],DialogLevel3[0], "20 px", "white");
-        setTimeout(dialogInitialize, 5000);
+        setTimeout(function(){
+                dialogText(names[1],DialogLevel3[1], "20 px", "white");}
+            , 4000);
+        setTimeout(dialogInitialize, 8000);
     }
 
 
@@ -225,7 +189,7 @@ function initializeLV3()
         {
             lPMap[level][y] = [];
 
-            for (let x = 0; x < 24; x++)
+            for (let x = 0; x < 25; x++)
             {
                 lPMap[level][y].push(0)
             }
@@ -236,28 +200,9 @@ function initializeLV3()
 
     changePStartPos();
 
-
-    l3Ready = false;
     doorOpen_2.onload = function(){l3Ready=true;};
-    waitForLoading();
+    waitForLoading();//Universal.. ish
 
-
-    function waitForLoading()
-    {
-        if (!l3Ready)
-        {
-            ctx.fillStyle = '#ffffff';
-            ctx.font="20px Arial";
-            ctx.fillText("Loading...", 350, 290);
-            setTimeout(waitForLoading, 1);
-        }
-        else
-        {
-            drawMap();                   //Draw next map
-        }
-    }
-
-    addEventListener("keydown", onKeyDown, false);
 
     if (enemyIndexLevel3 < 10)
     {
@@ -268,12 +213,6 @@ function initializeLV3()
 
     else if (enemyIndexLevel3 === 10)
         resetTimer();
-
-    for (let i = 0; i < enemy[3].length; i++)
-    {
-        enemy[3][i].roam();
-    }
-
 }
 
 function detectMovementLevel3()
@@ -282,9 +221,14 @@ function detectMovementLevel3()
     {
         //initial set
         warningSound.play();
-        enemy[3].push(enemiesLevel3[enemyIndexLevel3]);
-        enemy[3][enemyIndexLevel3].roam();
-        drawZeeEnemy();
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 120, 40, 3, 8, 200, 500, 50, 600, 1000);
+        enemy[3][enemy[3].length-1].yPos = 0; enemy[3][enemy[3].length-1].xPos = 320;
+        enemy[3][enemy[3].length-1].roam();
+
+
+        //enemy[3].push(enemiesLevel3[enemyIndexLevel3]);
+        //enemy[3][enemyIndexLevel3].roam();
+        //drawZeeEnemy();
         enemyIndexLevel3++;
 
         // add mob, start timer again. alert is temp msg.
@@ -335,7 +279,7 @@ function appearEnemy()
     {
         bgm_level3.pause();
         dangerous.play();
-        dialogText(names[1], SystemMSGLevel3[1] + warningTime + " second later!", "25px", "red");
+        dialogText(names[1], DialogLevel3[11] + ".. better hold still!", "25px", "red");
 
     }
     else if (warningTime === 0) {
@@ -373,84 +317,8 @@ function appearEnemy()
     }
 }
 
-function resetLevel(time = 40)
-{
-    p.lives--;
-    if (l1)
-    {
-
-    }
-    else if (l2)
-    {
-        //Turn the water back on and the lights back off
-        sewersDrained = false;
-        lightsOn = false;
-
-        //Set key back to not found
-        keyFound = false;
-
-        //Turn off the torches
-        keepDrawingFlames = false;
-        alreadySwitched = false;
-        clearInterval(burning);
-        clearInterval(countingFlames);
-        for (let t = 0; t < torchNum.length; t++)
-        {
-            torchNum[t].lit = false;
-        }
-
-        //Reset players health
-        p.health = 6;
-
-        //Set level to reload and redraw itself
-        l2Ready = false;
-        alreadyBeenHere = false;
-    }
-    else if (l3)
-    {
-        // finding item reset
-        leftDoorOpen = false;
-        rightDoorOpen = false;
-        findPasscode = false;
-        findMap = false;
-        findRollerblades = false;
-        findDisguise = false;
-        findAllLevel3 = false;
-
-        // enemy information reset
-        detectPlayerLevel3 = false;
-        enemyIndexLevel3 = 0;
-        enemy[3].splice(0, enemy[3].length);
-        resetTimer();
-
-        // map image reset
-        lMap[level][7][4] = 21;
-        lMap[level][6][5] = 13;
-        lMap[level][7][20] = 20;
-        lMap[level][6][19] = 12;
-        lMap[level][0][10] = 20;
-        lMap[level][0][11] = 21;
-
-        // player position reset
-        lPMap[level][16][1] = 1;
-
-        // re-draw map
-        clearLevel3();
-        ctx.clearRect(0,0,800,600);
-    }
-
-    if (p.lives > 0)
-        setTimeout(startGame, time);
-    else
-    {
-        gameover();
-    }
-}
-
 function clearLevel3()
 {
-    bgm_level3.pause();
-    dangerous.pause();
     clearInterval(timer_level3);
     dialogInitialize();
 }

@@ -9,6 +9,8 @@ pigs.src = "12Helo/images/FlyingPig.png";
 //This probably initializes the level
 function initializeCopterLevel()
 {
+    canvas.style.backgroundPositionX = "0px";
+    canvas.style.backgroundPositionY = "120px";
     //The stuff that's gotta be done before doing stuff
     {
         //Stop input for tutorial portion of level
@@ -358,7 +360,7 @@ function initializeCopterLevel()
                                 //Give a bird a fly.. it eats for one day. Tell the computer to redraw it each frame... it usually does
                                 self.drawMeNow = function()
                                 {
-                                    ctx.drawImage(this.myImage, this.srcX, this.srcY, this.width, this.height, this.xPos, this.yPos, this.width, this.height);
+                                    ctx.drawImage(this.myImage, this.srcX, this.srcY, this.width, this.height, self.xPos, self.yPos, this.width, this.height);
                                 };
 
                                 //Finished setup

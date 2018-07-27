@@ -3,9 +3,29 @@ let keyPressCount = 0;
 
 function initializeTutorialLV1()
 {
+    turnOnEnemies();
     removeEventListener("keydown", onKeyDown, false);
-    dialogText(names[4], TutorialL1[1], "20 px", "white");
-    setTimeout(startChecks, 1000);
+    dialogText(names[5], TutorialL1[1], "20 px", "white");
+    setTimeout(partTwo, 3500);
+
+    function partTwo()
+    {
+        dialogText(names[5], TutorialL1[2], "20 px", "white");
+        setTimeout(partThree, 3500);
+    }
+
+
+    function partThree()
+    {
+        dialogText(names[5], TutorialL1[3], "20 px", "white");
+        setTimeout(partFour, 3500);
+    }
+
+    function partFour()
+    {
+        dialogText(names[5], TutorialL1[4], "20 px", "white");
+        setTimeout(startChecks, 3500);
+    }
 }
 
 function startChecks()
@@ -20,7 +40,7 @@ function leftCheck(e)
         onKeyDown(e);//Move Left
 
         //New dialog message
-        dialogText(names[4], TutorialL1[8], "20 px", "white");
+        dialogText(names[5], TutorialL1[5], "20 px", "white");
 
         //Move on
         removeEventListener("keydown", leftCheck, false);
@@ -29,7 +49,7 @@ function leftCheck(e)
     else
     {
         //Incorrect input dialog
-        dialogText(names[4], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 }
 
@@ -40,7 +60,7 @@ function rightCheck(e)
         onKeyDown(e);//Move Right
 
         //New dialog message
-        dialogText(names[4], TutorialL1[2], "20 px", "white");
+        dialogText(names[5], TutorialL1[6], "20 px", "white");
 
         //Move on
         removeEventListener("keydown", rightCheck, false);
@@ -49,7 +69,7 @@ function rightCheck(e)
     else
     {
         //Incorrect input dialog
-        dialogText(names[4], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 }
 
@@ -60,7 +80,7 @@ function upCheck(e)
         onKeyDown(e);//Move Up
 
         //New dialog message
-        dialogText(names[4], TutorialL1[9], "20 px", "white");
+        dialogText(names[5], TutorialL1[7], "20 px", "white");
 
         //Move on
         removeEventListener("keydown", upCheck, false);
@@ -70,7 +90,7 @@ function upCheck(e)
     else
     {
         //Incorrect input dialog
-        dialogText(names[4], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 }
 
@@ -81,7 +101,7 @@ function downCheck(e)
         onKeyDown(e);//Move Down
 
         //New dialog message
-        dialogText(names[4], TutorialL1[5], "20 px", "white");
+        dialogText(names[5], TutorialL1[8], "20 px", "white");
 
         //Move on
         removeEventListener("keydown", downCheck, false);
@@ -90,7 +110,7 @@ function downCheck(e)
     else
     {
         //Incorrect input dialog
-        dialogText(names[4], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 }
 
@@ -105,7 +125,7 @@ function checkWalk(e)//Allow player to walk up to the arcade game
     else
     {
         //Incorrect input dialog
-        dialogText(names[4], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 
     if(keyPressCount === 6)
@@ -123,90 +143,79 @@ function spaceObjectCheck(e)//Allow player to select the arcade game
         onKeyDown(e);//Will call check actions
 
         //New dialog message
-        dialogText(names[4], TutorialL1[3], "20 px", "white");
+        dialogText(names[5], TutorialL1[9], "20 px", "white");
+        setTimeout(dialogInitialize, 3000);
 
         //Move on
         removeEventListener("keydown", spaceObjectCheck, false);
-        addEventListener("keydown", spaceButlerCheck, false);
-    }
-    else
-    {
-        //Incorrect input dialog
-        dialogText(names[4], TutorialL1[4], "20 px", "white");
+        setTimeout(secretEntrance, 3000);
     }
 }
 
-function spaceButlerCheck(e)//Allow player to walk around freely and continuously check if butler has been selected
+function secretEntrance()
 {
-    let selectedButler = false;
+    dialogText(names[5], TutorialL1[11], "20 px", "white");
+    setTimeout(dialogInitialize, 6000);
+    setTimeout(takeTheTorch, 6000);
+}
+function takeTheTorch()
+{
+    dialogText(names[5], TutorialL1[12], "20 px", "white");
+    setTimeout(dialogInitialize, 6000);
+    addEventListener("keydown", getTheLight, false);
+    addEventListener("keydown", onKeyDown, false);
+}
 
-    onKeyDown(e);//All input since is outside of conditional statement
-
-    if(e.keyCode === 32) //Space
+function getTheLight()
+{
+    switch (p.frameY)
     {
-        selectedButler = checkIfButlersThere();
-
-        if (selectedButler)
-        {
-            //New dialog message
-            dialogText(names[4], TutorialL1[6], "20 px", "white");
-
-            //Setup for actual level
-            removeEventListener("keydown", spaceButlerCheck, false);
-            addEventListener("keydown", onKeyDown, false);
-            dialogInitialize();
-        }
+        case 0://Down
+            if (p.row * 32 <  enemy[level][0].topSide && (p.row * 32 + p.height + p.attackSpace) >= enemy[level][0].topSide)
+            {
+                if ((enemy[level][0].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][0].leftSide <= (p.col * 32 + (p.width/2))))
+                {
+                    addEventListener("keydown", gotTheLight, false);
+                }
+            }
+            break;
+        case 1://Left
+            if (enemy[level][0].rightSide < p.col * 32 + p.width && enemy[level][0].leftSide >= p.col * 32 - p.attackSpace)
+            {
+                if ((enemy[level][0].bottomSide >= (p.row * 32 + (p.height/2))) && (enemy[level][0].topSide <= (p.row * 32 + (p.height/2))))
+                {
+                    addEventListener("keydown", gotTheLight, false);
+                }
+            }
+            break;
+        case 2://Right
+            if (enemy[level][0].leftSide > p.col * 32 && enemy[level][0].rightSide <= p.col * 32 + p.width + p.attackSpace)
+            {
+                if ((enemy[level][0].bottomSide >= (p.row * 32 + (p.height/2))) && (enemy[level][0].topSide <= (p.row * 32 + (p.height/2))))
+                {
+                    addEventListener("keydown", gotTheLight, false);
+                }
+            }
+            break;
+        case 3://Up
+            if ((enemy[level][0].bottomSide < ((p.row * 32) + p.height)) && (enemy[level][0].topSide > ((p.row * 32) - p.attackSpace)))
+            {
+                if ((enemy[level][0].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][0].leftSide <= (p.col * 32 + (p.width/2))))
+                {
+                    addEventListener("keydown", gotTheLight, false);
+                }
+            }
+            break;
     }
-    else
+}
+
+function gotTheLight(e)
+{
+    if (e.keyCode === 32)
     {
-        //Incorrect input dialog
-        dialogText(names[4], TutorialL1[7], "20 px", "white");
-    }
-
-    function checkIfButlersThere()//Hit detect for butler
-    {
-        if (p.frameY === 0)//Down
-        {
-            if ((p.row * 32) < enemy[1][0].yPos && ((p.row * 32) + 48) >= enemy[1][0].yPos)
-            {
-                if (((p.col * 32) - 16) < enemy[1][0].xPos && ((p.col * 32) + 48) > enemy[1][0].xPos)
-                {
-                    return true;
-                }
-            }
-        }
-
-        else if (p.frameY === 1)//Left
-        {
-            if (((p.row * 32) - 32) < enemy[1][0].yPos && ((p.row * 32) + 32) > enemy[1][0].yPos)
-            {
-                if (((p.col * 32) - 48) <= enemy[1][0].xPos && (p.col * 32) >=  enemy[1][0].xPos)
-                {
-                    return true;
-                }
-            }
-        }
-
-        else if (p.frameY === 2)//Right
-        {
-            if (((p.row * 32) - 32) < enemy[1][0].yPos && ((p.row * 32) + 32) > enemy[1][0].yPos)
-            {
-                if (p.col * 32 + 80 >= enemy[1][0].xPos && p.col * 32 + 32 <= enemy[1][0].xPos)
-                {
-                    return true;
-                }
-            }
-        }
-
-        else if (p.frameY === 3)//Up
-        {
-            if ((p.row * 32) > enemy[1][0].yPos && ((p.row * 32) - 48) <= enemy[1][0].yPos)
-            {
-                if (((p.col * 32) - 16) < enemy[1][0].xPos && ((p.col * 32) + 48) > enemy[1][0].xPos)
-                {
-                    return true;
-                }
-            }
-        }
+        removeEventListener("keydown", getTheLight, false);
+        removeEventListener("keydown", gotTheLight, false);
+        lighterTrigger = true;
+        healthInventory();
     }
 }

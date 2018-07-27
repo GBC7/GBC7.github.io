@@ -2,11 +2,8 @@
 let uncovered = false;
 
 
-//Images
-let tv = new Image();
-{
-    tv.src = "1Home/images/tv.png";
-}
+
+
 
 
 //Audio
@@ -20,15 +17,18 @@ let arcadeNoise = new Audio;
 
 newsReport.loop = true;                         //RYN
 newsReport.volume = 0.1;                        //RYN
-
 arcadeNoise.volume = 0.4;
+
 
 function initializeLV1()
 {
-    canvas.style.backgroundImage = "";
+    canvas.style.backgroundImage = "url('1Home/images/breakingNews.gif')";
+    canvas.style.backgroundPositionX = "492px";
+    canvas.style.backgroundPositionY = "445px";
+
     newsReport.play();          //RYN
 
-
+    //Images
     let floor = new Image();
     let darkWindowT = new Image();
     let darkWindowB = new Image();
@@ -60,7 +60,6 @@ function initializeLV1()
     let bedTC = new Image();
     let bedTR = new Image();
     let bedTL = new Image();
-    let LNightstand = new Image();
     let RNightstand = new Image();
     let poolTableT1 = new Image();
     let poolTableT2 = new Image();
@@ -89,6 +88,15 @@ function initializeLV1()
     let stairsB1 = new Image();
     let stairsB2 = new Image();
     let stairsB3 = new Image();
+    let couchL = new Image();
+    let couchR = new Image();
+    let tvTL = new Image();
+    let tvTR = new Image();
+    let tvBL = new Image();
+    let tvBR = new Image();
+    let LNightstand = new Image();
+
+
 
 
 
@@ -124,7 +132,6 @@ function initializeLV1()
         bedTC.src = "1Home/images/bedTC.png";
         bedTR.src = "1Home/images/bedTR.png";
         bedTL.src = "1Home/images/bedTL.png";
-        LNightstand.src = "1Home/images/LNightstand.png";
         RNightstand.src = "1Home/images/RNightstand.png";
         poolTableT1.src = "1Home/images/poolTableT1.png";
         poolTableT2.src = "1Home/images/poolTableT2.png";
@@ -153,6 +160,14 @@ function initializeLV1()
         stairsB1.src = "1Home/images/stairsB1.png";
         stairsB2.src = "1Home/images/stairsB2.png";
         stairsB3.src = "1Home/images/stairsB3.png";
+        couchL.src = "1Home/images/couchL.png";
+        couchR.src = "1Home/images/couchR.png";
+        tvTL.src = "1Home/images/tvTL.png";
+        tvTR.src = "1Home/images/tvTR.png";
+        tvBL.src = "1Home/images/tvBL.png";
+        tvBR.src = "1Home/images/tvBR.png";
+        LNightstand.src = "1Home/images/LNightstand.png";
+
     }//Define SRC property of images
 
 
@@ -191,7 +206,6 @@ function initializeLV1()
         gg = bedBL;                         //31
         hh = bedBC;                         //32
         ii = bedBR;                         //33
-        jj = LNightstand;                   //34
         kk = RNightstand;                   //35
         ll = poolTableT1;                   //36
         mm = poolTableT2;                   //37
@@ -219,7 +233,16 @@ function initializeLV1()
         jjj = stairsB1;                     //59
         kkk = stairsB2;                     //60
         lll = stairsB3;                     //61
+        mmm = tvTL;                         //62
+        nnn = tvTR;                         //63
+        ooo = tvBL;                         //64
+        qqq = tvBR;                         //65
+        rrr = couchL;                       //66
+        sss = couchR;                       //67
 
+
+
+        jj = LNightstand;                   //34        //I put this here for fun... or was there a reason... :S
 
     }//Assign images to global letter variables
 
@@ -245,13 +268,15 @@ function initializeLV1()
                 [11, 50, 50, 50, 11, 10,  0,  0, 50, 50, 50, 11, 10, 56, 57, 58, 11, 10,  0, 11, 10,  0, 11, 10,  0],       //10
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 59, 60, 61,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //11
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //12
-                [ 0,  0,  0, 36, 37, 38, 39,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 34, 25, 26, 27, 35,  0],       //13
-                [ 0,  0,  0, 40, 41, 42, 43,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 28, 29, 30,  0,  0],       //14
+                [ 0,  0,  0, 36, 37, 38, 39,  0,  0,  0,  0,  0,  0,  0,  0, 62,  63,  0,  0, 34, 25, 26, 27, 35,  0],       //13
+                [ 0,  0,  0, 40, 41, 42, 43,  0,  0,  0,  0,  0,  0,  0,  0, 64,  65,  0,  0,  0, 28, 29, 30,  0,  0],       //14
                 [ 0,  0,  0, 44, 45, 46, 48,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 31, 32, 33,  0,  0],       //15
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //16
-                [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //17
+                [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 34, 66, 67, 35,  0,  0,  0,  0,  0,  0,  0],       //17
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //18
             ];
+        //L1
+        Enemy(false, 32, 48, 6, 3, "1Home/images/jeffery.png", 3, 180, 60, 1, 8, 0, 800, 352, 600, undefined);
     }
 
 
@@ -262,7 +287,7 @@ function initializeLV1()
         {
             lPMap[level][y] = [];
 
-            for (let x = 0; x < 24; x++)
+            for (let x = 0; x < 25; x++)
             {
                 lPMap[level][y].push(0)
             }
@@ -275,27 +300,9 @@ function initializeLV1()
     changePStartPos();
 
 
-    stairsB3.onload = function(){l1Ready=true;};
-    waitForLoading2();
+    LNightstand.onload = function(){l1Ready=true;};
 
-
-    function waitForLoading2()
-    {
-        if (!l1Ready)
-        {
-            ctx.fillStyle = '#ffffff';
-            ctx.font="20px Arial";
-            ctx.fillText("Loading...", 350, 290);
-            setTimeout(waitForLoading2, 1);
-        }
-        else
-        {
-            drawMap();                   //Draw next map
-            //initializeTutorialLV1();
-            addEventListener("keydown", onKeyDown, false);
-            enemy[1][0].roam();
-        }
-    }
+    waitForLoading();//Universal.. ish
 
 
 

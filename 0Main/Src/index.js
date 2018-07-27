@@ -120,13 +120,16 @@ let scriptsLoaded = false;
             removeEventListener("keyup", startWarningPage);
             {
                 holder.innerHTML =
-                    "<div id=\"center\">\n" +
-                    "\n" +
-                    "\n" +
-                    "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
-                    "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
-                    "\n" +
-                    "    </div>";
+
+                "<div id=\"center\">\n" +
+                "\n" +
+                "\n" +
+                "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
+                "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
+                "\n" +
+                "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
+                "    </div>";
+
             }//Add actual canvas while removing old one
             warningPage();
         }
@@ -139,6 +142,8 @@ function warningPage()
     //Canvas Declarations
     let canv = document.getElementById("regular");
     let ctxT = canv.getContext("2d");
+    let statsCanvas = document.getElementById("statusInventory");
+    let ctx3 = statsCanvas.getContext("2d");
 
     canv.style.backgroundImage = "url('images/warning.gif";
     canv.style.backgroundPosition = "center";
@@ -303,10 +308,15 @@ function controlsPage()
             "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
             "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
             "\n" +
+            "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
             "    </div>";
+
 
     }   //   <------ Removes extra div and over-sized canvas
     canvas = document.getElementById("regular");                    //For testing, to enable
+    let statsCanvas = document.getElementById("statusInventory");
+    let ctx3 = statsCanvas.getContext("2d");
+
     ctx = canvas.getContext("2d");                                  //skipping through the
     ctx.clearRect(0, 0, 800, 600);                                  //title, controls, and warning
                                                                     //pages to save time

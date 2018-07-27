@@ -33,6 +33,8 @@ let shrub = new Image();
 
 function initializeLV6()
 {
+    canvas.style.backgroundPositionX = "0px";
+    canvas.style.backgroundPositionY = "120px";
     canvas.style.backgroundImage = "url('6Roof/images/city.gif')";
     drawL6Full();
 
@@ -97,6 +99,13 @@ function initializeLV6()
                 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2],      //17
                 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]       //18
             ];
+
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy1.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy2.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy3.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy4.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy5.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy6.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
     }
 
 
@@ -107,7 +116,7 @@ function initializeLV6()
         {
             lPMap[level][y] = [];
 
-            for (let x = 0; x < 24; x++)
+            for (let x = 0; x < 25; x++)
             {
                 lPMap[level][y].push(0)
             }
@@ -122,21 +131,11 @@ function initializeLV6()
     alreadyDoinIt = false;
 
     shinglesBRight.onload = function(){l6Ready=true;};
-    addEventListener("keydown", onKeyDown, false);
-
-
-    for (let i = 0; i < enemy[6].length; i++)
-    {
-        enemy[6][i].roam();
-    }
-
-
+    waitForLoading();//Universal.. ish
 }
 
 function drawL6Full()
 {
-    l6Ready2 = false;
-
     let gate = new Image();
     let fence = new Image();
     let litWindow = new Image();
@@ -168,6 +167,8 @@ function drawL6Full()
     {
         shrub.onload = function(){l6Ready2 = true;}
     }
+
+    //If l6 and l6Read2 === true??? and paste the following code into it???
     if (l6)
     {
         ctx.drawImage(ladder, 5, 160);

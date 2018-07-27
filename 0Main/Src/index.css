@@ -5,7 +5,7 @@ html
 
 #holder
 {
-    width: 800px;
+    width: 962px;
     height: 600px;
     margin: 0 auto;
 }
@@ -18,7 +18,7 @@ html
     width: 800px;
     height: 600px;
     margin: 0 auto;
-    border: 2px inset black;
+    /*border: 2px inset black;*/
 }
 
 #regular
