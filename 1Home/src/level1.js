@@ -299,6 +299,8 @@ function initializeLV1()
 
     changePStartPos();
 
+    if (lMap[2]===undefined)
+        initializeTutorialLV1();
 
     LNightstand.onload = function(){l1Ready=true;};
 

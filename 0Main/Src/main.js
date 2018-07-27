@@ -160,10 +160,7 @@ function startGame(dontDrawP)
         if (l1)//Home(roof)
         {
             l1Ready = false;
-            if (lMap[2] === undefined)
-                initializeLV1();
-            else
-                initializeLV1();
+            initializeLV1();
         }
 
         else if (l2)//Sewer
@@ -669,14 +666,8 @@ function waitForLoading(dontDrawP)
             else
             {
                 drawMap();
-
-                ////TEMP////
-                /*turnOnEnemies();*/
-                ////TEMP////
-
-                //// PERM /////
-                initializeTutorialLV1();
-                //// PERM /////
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
             }
             break;
         case 2:
@@ -3794,9 +3785,8 @@ function resetLevel(time = 40)
     }
     else if (l11)
     {
-        Enemy(true, 96, 96, 4, 2, "2Sewer/images/bossRat.png", 4, 180, 120, 11, 8, 0, 800, 96, 600, 500);
-        enemy[11][0].xPos = 400; enemy[11][0].yPos = 400;
         elevenHealth = 3;
+        startGame();
     }
 
 
@@ -3876,6 +3866,11 @@ function resetLevel(time = 40)
             {
                 Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 8, 8, 0, 768, 96, 568, 1000);
             }
+        }
+        else if(l11)
+        {
+            Enemy(true, 96, 96, 4, 2, "2Sewer/images/bossRat.png", 4, 180, 120, 11, 8, 0, 800, 96, 600, 500);
+            enemy[11][0].xPos = 400; enemy[11][0].yPos = 400;
         }
 
     }
