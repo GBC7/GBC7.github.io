@@ -638,9 +638,12 @@ function changePStartPos()
     if (lPMap[level] !== undefined)
     for (let y = 0; y < lPMap[level].length; y++) //Run through all Rows
     {
+        if (lPMap[level][0] !== undefined)
         for (let x = 0; x < lPMap[level][0].length; x++) // and columns
         {
-            lPMap[level][y][x] = 0;                           // and set their value to 0 (0 is nothing - 1 is player)
+            if (lPMap[level][y] !== undefined)
+                if (lPMap[level][y][x] !== undefined)
+                    lPMap[level][y][x] = 0;                           // and set their value to 0 (0 is nothing - 1 is player)
         }
     }
 
@@ -3811,9 +3814,9 @@ function resetLevel(time = 40)
     {
         if (l2)
         {
-            for (let rats = 0; rats !== 10; rats ++)
+            for (let rats = 0; rats !== 5; rats ++)
             {
-                Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 70, 2, 8, 0, 800, 32, 600, 1000);
+                Enemy(true, 32, 32, 3, 2, "2Sewer/images/rat.png", 3, 180, 90, 2, 8, 0, 800, 32, 600, 1500);
             }
         }
         else if (l3)

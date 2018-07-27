@@ -453,10 +453,11 @@ function initializeLV2(dontDrawP)
                 [12, 54, 55,  5,  5,  5,  5, 54, 55,  5, 58, 26, 39, 40, 41,  3, 52,  3,  3,  4,  3,  4,  39, 40, 41]        //18
             ];
 
-        for (let rats = 0; rats !== 10; rats ++)
+        for (let rats = 0; rats !== 5; rats ++)
         {
-            Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 70, 2, 8, 0, 800, 32, 600, 1000);
+            Enemy(true, 32, 32, 3, 2, "2Sewer/images/rat.png", 3, 180, 90, 2, 8, 0, 800, 32, 600, 1500);
         }
+
     }
 
     if (lPMap[level] === undefined)
