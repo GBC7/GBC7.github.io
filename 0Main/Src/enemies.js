@@ -1326,7 +1326,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                             {
                                 aghh.play();
                                 p.health--;
-                                ctx3.clearRect(10, 75, 112, 82);//Clear hearts
+                                ctx3.clearRect(15, 117, 112, 82);//Clear hearts
                                 healthInventory();
 
                                 if (p.health === 0)

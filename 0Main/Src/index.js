@@ -2,9 +2,13 @@ let canvas;  //Not using these in any of the intro pages (title, controls, or wa
 let ctx;    //These are only defined after running loadActualGame() inside of the controlsPage() function;
 let scriptsLoaded = false;
 let ctx3;
+let name = "";
 
 //TITLE PAGE
 {
+    name = prompt("Enter your name: (Up to 5 characters)", "James");
+    name = name.substring(0, 5);
+
     let holder = document.getElementById("holder");
     holder.style.width = "1000px";
     holder.style.height = "800px";

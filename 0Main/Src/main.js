@@ -3564,7 +3564,6 @@ function turnOnEnemies()
 
 function healthInventory()
 {
-
     let characterImage = new Image();
     let hearts = new Image();
     {
@@ -3575,44 +3574,68 @@ function healthInventory()
     //Draw images once they load
     characterImage.onload = function()
     {
-        ctx3.drawImage(characterImage, 4, 470, 105, 110);
+        ctx3.fillStyle = "#6a3abe";
+        ctx3.fillText(name, 10, 672);
+        ctx3.fillText(name, 14, 672);
+        ctx3.fillStyle = "#0cff00";
+        ctx3.fillText(name, 12, 670);
+        ctx3.drawImage(characterImage, 6, 680, 105, 110);
     };
     hearts.onload = function()//Draw hearts
     {
+        //Output "Health" to differentiate between lives
+        ctx3.font = "30px Arial";
+        ctx3.fillStyle = "#630105";
+        ctx3.fillText("Health", 28, 100);
+        //Draw red square around hearts
+        ctx3.fillRect(13, 110, 116, 1);
+        ctx3.fillRect(13, 200, 116, 1);
+        ctx3.fillRect(12, 110, 1, 91);
+        ctx3.fillRect(129, 110, 1, 91);
+
+        //Output "Health" to differentiate between lives
+        ctx3.fillStyle = "#ff00b9";
+        ctx3.fillText("Health", 31, 103);
+        //Draw red square around hearts
+        ctx3.fillRect(15, 112, 116, 1);
+        ctx3.fillRect(15, 202, 116, 1);
+        ctx3.fillRect(14, 112, 1, 91);
+        ctx3.fillRect(131, 112, 1, 91);
+
         switch (p.health)
         {
             case 6:
-                ctx3.drawImage(hearts, 10, 75, 32, 32);
-                ctx3.drawImage(hearts, 50, 75, 32, 32);
-                ctx3.drawImage(hearts, 90, 75, 32, 32);
-                ctx3.drawImage(hearts, 10, 125, 32, 32);
-                ctx3.drawImage(hearts, 50, 125, 32, 32);
-                ctx3.drawImage(hearts, 90, 125, 32, 32);
+                ctx3.drawImage(hearts, 15, 117, 32, 32);
+                ctx3.drawImage(hearts, 55, 117, 32, 32);
+                ctx3.drawImage(hearts, 95, 117, 32, 32);
+                ctx3.drawImage(hearts, 15, 167, 32, 32);
+                ctx3.drawImage(hearts, 55, 167, 32, 32);
+                ctx3.drawImage(hearts, 95, 167, 32, 32);
                 break;
             case 5:
-                ctx3.drawImage(hearts, 10, 75, 32, 32);
-                ctx3.drawImage(hearts, 50, 75, 32, 32);
-                ctx3.drawImage(hearts, 90, 75, 32, 32);
-                ctx3.drawImage(hearts, 10, 125, 32, 32);
-                ctx3.drawImage(hearts, 50, 125, 32, 32);
+                ctx3.drawImage(hearts, 15, 117, 32, 32);
+                ctx3.drawImage(hearts, 55, 117, 32, 32);
+                ctx3.drawImage(hearts, 95, 117, 32, 32);
+                ctx3.drawImage(hearts, 15, 167, 32, 32);
+                ctx3.drawImage(hearts, 55, 167, 32, 32);
                 break;
             case 4:
-                ctx3.drawImage(hearts, 10, 75, 32, 32);
-                ctx3.drawImage(hearts, 50, 75, 32, 32);
-                ctx3.drawImage(hearts, 90, 75, 32, 32);
-                ctx3.drawImage(hearts, 10, 125, 32, 32);
+                ctx3.drawImage(hearts, 15, 117, 32, 32);
+                ctx3.drawImage(hearts, 55, 117, 32, 32);
+                ctx3.drawImage(hearts, 95, 117, 32, 32);
+                ctx3.drawImage(hearts, 15, 167, 32, 32);
                 break;
             case 3:
-                ctx3.drawImage(hearts, 10, 75, 32, 32);
-                ctx3.drawImage(hearts, 50, 75, 32, 32);
-                ctx3.drawImage(hearts, 90, 75, 32, 32);
+                ctx3.drawImage(hearts, 15, 117, 32, 32);
+                ctx3.drawImage(hearts, 55, 117, 32, 32);
+                ctx3.drawImage(hearts, 95, 117, 32, 32);
                 break;
             case 2:
-                ctx3.drawImage(hearts, 10, 75, 32, 32);
-                ctx3.drawImage(hearts, 50, 75, 32, 32);
+                ctx3.drawImage(hearts, 15, 117, 32, 32);
+                ctx3.drawImage(hearts, 55, 117, 32, 32);
                 break;
             case 1:
-                ctx3.drawImage(hearts, 10, 75, 32, 32);
+                ctx3.drawImage(hearts, 15, 117, 32, 32);
                 break;
         }
     };
@@ -3626,56 +3649,59 @@ function healthInventory()
 
     //And draw the lives
     ctx3.font = "30px Arial";
-    ctx3.fillStyle = "red";
-    ctx3.fillText("Lives: " + p.lives, 10, 55);
+    ctx3.fillStyle = "#07ff01";
+    ctx3.fillText("Lives: " + p.lives, 20, 55);
+    ctx3.fillRect(20, 60, 103, 2);
+    ctx3.fillStyle = "#7b00ff";
+    ctx3.fillText("Lives: " + p.lives, 21, 56);
+    ctx3.fillRect(21, 61, 103, 2);
 
 
 
-
-    if(lighterTrigger === true)
+    if(lighterTrigger)
     {
-        ctx3.drawImage(lighter, 15, 202, 40, 32);
+        ctx3.drawImage(lighter, 15, 302, 40, 32);
     }
     if(keyFound)
     {
-        ctx3.drawImage(key, 67, 200, 32, 32);
+        ctx3.drawImage(key, 67, 300, 32, 32);
     }
     if(findPasscode)
     {
-        ctx3.drawImage(passcode, 15, 254, 32, 32);
+        ctx3.drawImage(passcode, 15, 354, 32, 32);
     }
     if(findDisguise)
     {
-        ctx3.drawImage(disguise, 63, 254, 32, 32);
+        ctx3.drawImage(disguise, 63, 354, 32, 32);
     }
     if(findRollerblades)
     {
-        ctx3.drawImage(rollerblades, 15, 306, 32, 32);
+        ctx3.drawImage(rollerblades, 15, 406, 32, 32);
     }
     if(findMap)
     {
-        ctx3.drawImage(mapV, 63, 306, 32, 32);
+        ctx3.drawImage(mapV, 63, 406, 32, 32);
     }
-    if(caneTrigger === true)
+    if(caneTrigger)
     {
-        ctx3.drawImage(cane, 15, 358, 32, 32);
+        ctx3.drawImage(cane, 15, 458, 32, 32);
     }
     if(publishersPaper)
     {
-        ctx3.drawImage(publishersAddress, 67, 358, 32, 32);
+        ctx3.drawImage(publishersAddress, 67, 458, 32, 32);
     }
     if(researchPaper)
     {
-        ctx3.drawImage(research, 15, 410, 32, 32);
+        ctx3.drawImage(research, 15, 510, 32, 32);
     }
     if(lighterFluid)
     {
-        ctx3.drawImage(lighterFluidInv, 67, 410, 32, 32);
+        ctx3.drawImage(lighterFluidInv, 67, 510, 32, 32);
     }
     if(researchBurned)
     {
-        ctx3.clearRect(10, 409, 100, 35);
-        ctx3.drawImage(research, 15, 410, 32, 32);
+        ctx3.clearRect(10, 509, 100, 35);
+        ctx3.drawImage(research, 15, 510, 32, 32);
     }
 }
 
