@@ -1,14 +1,14 @@
-let CharacterName = document.getElementById("name");
-let DialogText = document.getElementById("output");
-let CharacterPortrait = document.getElementById("portrait");
-let DialogBG = document.getElementById("dialog");
+let CharacterName;
+let DialogText;
+let CharacterPortrait;
+let DialogBG;
 
 let dialogIndex = 0;
 let tog = 2;
 
 let names = [" ", "Scientist", "Mom", "News Anchor", "Pilot", "Butler", "GAME OVER"];  //Speaker's name, [0] is initial value
 let portrait = [];
-portrait[0] = "none";
+portrait[0] = "url('0Main/images/GBC7_Logo.gif')";
 portrait[1] = "url('0Main/images/Portrait_Scientist.png')";
 portrait[2] = "url('0Main/images/Portrait_Mom.png')";
 portrait[3] = "url('0Main/images/Portrait_newsanchor.png')";
@@ -74,7 +74,7 @@ SystemMSGLevel4[0] = " "; //initial value
 //level5 system text
 SystemMSGLevel5[0] = " "; //initial value
 SystemMSGLevel5[1] = "Mob has moved on to the lab in order to find and disprove the paper. " +
-    "However, the ones who somehow found their way to the roof didn’t plan a way to get down. They are stuck there."
+    "However, the ones who somehow found their way to the roof didn’t plan a way to get down. They are stuck there.";
 
 //level6 system text
 SystemMSGLevel6[0] = " "; //initial value
@@ -103,18 +103,21 @@ DialogNews[1] = "Last night we received a tip from a source who wishes to remain
 
 //Tutorial text
 TutorialL1[0] = "";
-TutorialL1[1] = "Welcome Sir...let me get you up to speed on what has happened since you laid down for your nap.";
-TutorialL1[2] = "Your Mother, in all her wisdom, felt that your research concerning the world being flat needed to be published.";
-TutorialL1[3] = "I know, I know...Grave mistake.  Now the local population is in an uproar and is out to kill you.";
-TutorialL1[4] = "Just in case you don't remember how to walk around or interact with things, let's go through some basics.\nTo move your character, use the arrow keys.  Go ahead and move left.";
-TutorialL1[5] = "Now right.";
-TutorialL1[6] = "Now up.";
-TutorialL1[7] = "Now down.";
-TutorialL1[8] = "Now try interacting with the arcade game directly above you.  Use space bar to do that.";
-TutorialL1[9] = "Excellent.  Now you know how to operate the game.  Arrows to move, space bar to interact with people and things.";
-TutorialL1[10] = "That isn't the right key.  Don't play dumb.  Get the keys right...";
-TutorialL1[11] = "Some of the angry mob has somehow made their way to the roof. Fortunately the previous owners mentioned there was a secret entrance to the sewer somewhere around here.";
-TutorialL1[12] = "Feel free to walk around. Come on over and take this lighter when you're ready to set out.";
+TutorialL1[1] = "Hey! I'm glad you're finally awake. Press Space or Enter to continue..";
+TutorialL1[2] = "In case you haven't figured it out yet, you can use the W A S D or Arrow keys to get around and the SpaceBar or Enter button to interact with your surroundings.";
+TutorialL1[3] = "Just make sure you're facing and near whatever it is you want to interact with.";
+TutorialL1[4] = "This is where you will get information about anything you need to know to carry on with your mission.";
+TutorialL1[5] = "What's the mission? Oh.. I guess I haven't told you that yet! Ha..ha..ha";
+TutorialL1[6] = "Well, the problem started last night when you told your mother about how you stumbled upon evidence that the world is actually flat.";
+TutorialL1[7] = "I know.. I know. You told her nobody can know about this! Yet the angry mobs outside, social media and the news all seem to suggest that she didn't listen.";
+TutorialL1[8] = "As you told me and her last night, society having proof that they've been lied to all these years would be extremely dangerous.";
+TutorialL1[9] = "You even mentioned something about a nuclear war... I feel like that might be a little over-dramatic, but I'm not the scientist.";
+TutorialL1[10] = "Anyway! Your mission, if it isn't already clear.. Stop the world from erupting into chaos.";
+TutorialL1[11] = "First, you're going to need to make your way to your mom's place to find out who she's told.";
+TutorialL1[12] = "Then find a way to get to the lab so that you can destroy the evidence before someone finds it. It's too dangerous. You can't let anybody get their hands on it.";
+TutorialL1[13] = "Normally you would take your helicopter wherever you go, through the windows up those wonderfully decorative stairs, but some of the angry mob has somehow made their way to the roof.";
+TutorialL1[14] = "Fortunately before the previous owners moved out, they mentioned there was a secret entrance to the sewer somewhere around here. ";
+TutorialL1[15] = "Try interacting with some of the objects around the room to see if you can find it. Oh.. and take this lighter. You might need it to see down there.";
 
 //Game Over
 DialogLevel0[0] = "Press the space bar to restart.";
@@ -228,8 +231,9 @@ DialogLevel12 = [
 function dialogInitialize() {  //clear dialogue
     CharacterName.innerHTML = names[0];
     DialogText.innerHTML = " ";
+    CharacterPortrait.style.backgroundColor = "black";
+    CharacterPortrait.style.backgroundPosition = "center center";
     CharacterPortrait.style.backgroundImage = portrait[0];
-    DialogBG.style.backgroundImage = "none";
     DialogText.style.fontSize = "20px";
     DialogText.style.color = "white";
 }
@@ -243,7 +247,6 @@ function dialogText(n, t, fs, fc){
     DialogText.innerHTML = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
-    DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
 
     // to change portrait
     if (n === names[0]) {

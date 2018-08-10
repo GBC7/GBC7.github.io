@@ -1,10 +1,15 @@
+#placeHolder
+{
+    position: relative;
+    margin: 0px auto;
+    width: 965px;
+}
 
 #dialog
 {
-    width: 960px;
+    width: 800px;
     height: 162px;
-    margin: 4px auto;
-    background-image: none;
+    background-image: url('../images/dialogueBG.png');
     background-repeat: no-repeat;
 }
 
@@ -13,6 +18,7 @@
     width: 150px;
     height: 162px;
     position:absolute;
+    left: 0;
     background-image: none;
     background-repeat: no-repeat;
 }
@@ -31,4 +37,24 @@
     margin-left: 160px;
     font-size: 20px;
     color : white;
+}
+
+#logoCenterer
+{
+    width: 1000px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#logo
+{
+    width: 145px;
+    height: 192px;
+    position: absolute;
+    left: 800px;
+    top: -162px;
+    background-image: url("../images/GBC7_Logo.gif");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #000000;
 }
