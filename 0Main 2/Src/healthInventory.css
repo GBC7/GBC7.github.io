@@ -1,0 +1,11 @@
+
+
+#statusInventory
+{
+    width: 165px;
+    height: 600px;
+    position: absolute;
+    left: 800px;
+    background-image: url("../../0Main/images/healthInventory.png");
+    background-repeat: no-repeat;
+}
