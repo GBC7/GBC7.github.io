@@ -29,6 +29,7 @@ function initializeLV7()
     let openWindow = new Image();
     let closedWindow = new Image();
     let trash = new Image();
+    let trashFire = new Image();
     let wire = new Image();
     let table = new Image();
     let tableBlood = new Image();
@@ -39,7 +40,6 @@ function initializeLV7()
     let screen = new Image();
     let screenLeft = new Image();
     let screenRight = new Image();
-    let trashFire = new Image();
 
 
     {
@@ -62,6 +62,7 @@ function initializeLV7()
         openWindow.src = "7Lab/images/openWindow.png";
         closedWindow.src = "7Lab/images/closedWindow.png";
         trash.src = "7Lab/images/trash.png";
+        trashFire.src = "7Lab/images/trash-fire.png"
         wire.src = "7Lab/images/wire.png";
         table.src = "7Lab/images/table.png";
         tableBlood.src = "7Lab/images/table-blood.png";
@@ -72,7 +73,6 @@ function initializeLV7()
         screen.src = "7Lab/images/screen.png";
         screenLeft.src = "7Lab/images/screen-left.png";
         screenRight.src = "7Lab/images/screen-right.png";
-        trashFire.src = "7Lab/images/trash-fire.png"
     }
 
     {

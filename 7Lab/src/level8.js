@@ -6,6 +6,7 @@ function initializeLV8()
 
 
     let floor = new Image();
+    let floor2 = new Image();
     let wall = new Image();
     let door1 = new Image();
     let stairs = new Image();
@@ -34,6 +35,11 @@ function initializeLV8()
     let screen = new Image();
     let screenLeft = new Image();
     let screenRight = new Image();
+    let labEquipmentTop = new Image();
+    let labEquipmentMiddle = new Image();
+    let labEquipmentBottom = new Image();
+    let computer2Top = new Image();
+    let computer2Bottom = new Image();
 
 
     {
@@ -66,7 +72,14 @@ function initializeLV8()
         screen.src = "7Lab/images/screen.png";
         screenLeft.src = "7Lab/images/screen-left.png";
         screenRight.src = "7Lab/images/screen-right.png";
-        }//Defining images src property
+        floor2.src = "7Lab/images/Floor2.png";
+        labEquipmentTop.src = "7Lab/images/labEquipment-top.png";
+        labEquipmentMiddle.src = "7Lab/images/labEquipment-middle.png";
+        labEquipmentBottom.src = "7Lab/images/labEquipment-bottom.png";
+        computer2Top.src = "7Lab/images/computer2-top.png";
+        computer2Bottom.src = "7Lab/images/computer2-bottom.png";
+
+    }//Defining images src property
 
 
     {
@@ -96,14 +109,14 @@ function initializeLV8()
         }
         if (!lighterFluid)
         {
-             s = fullShelvesTop;		// 17
-             t = fullShelvesBottom;	// 18
-         }
-         else
-         {
-             s = emptyShelvesTop;	// 17
-             t = emptyShelvesBottom;	// 18
-         }
+            s = fullShelvesTop;		// 17
+            t = fullShelvesBottom;	// 18
+        }
+        else
+        {
+            s = emptyShelvesTop;	// 17
+            t = emptyShelvesBottom;	// 18
+        }
         u = wire; 					// 19
         v = table; 					// 20
         w = tableBlood; 			// 21
@@ -114,11 +127,11 @@ function initializeLV8()
         bb = screen; 				// 26
         cc = screenLeft; 			// 27
         dd = screenRight; 			// 28
-        ee = undefined;
-        ff = undefined;
-        gg = undefined;
-        hh = undefined;
-        ii = undefined;
+        ee = labEquipmentTop;		// 29
+        ff = labEquipmentMiddle;	// 30
+        gg = labEquipmentBottom;	// 31
+        hh = computer2Top;			// 32
+        ii = computer2Bottom		// 33
         jj = undefined;
         kk = undefined;
     }//Assigning images to global variables
@@ -128,27 +141,27 @@ function initializeLV8()
     {
         lMap[level] =
          //                    10                  20
-         [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
-             [0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0],
-             [0, 2,  0, 27, 28,  0,  0, 27, 28,  0,  0, 14, 17, 14, 16, 14, 10, 10, 10, 10, 6, 6, 6, 4, 0],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 15, 18, 15,  1, 15, 11, 11, 11, 11, 7, 7, 7, 5, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 8],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 9],
-             [1, 1,  1,  1,  1, 20, 20, 20, 20, 20, 20,  1,  1, 19, 20, 20, 20, 22, 23, 21, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1, 20, 20, 21, 20, 22, 23,  1,  1,  1, 20, 20, 20, 20, 20, 20, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1, 19,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1, 20, 20, 20, 20, 20, 20,  1,  1,  1, 20, 20, 20, 20, 20, 19, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1, 20, 20, 20, 23, 20, 20,  1,  1,  1, 20, 22, 20, 20, 20, 20, 1, 1, 1, 1, 1],
-             [1, 1, 19,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1],
-             [1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 3]
-         ];
+            [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
+                [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+                [0,  2,  0, 27, 28,  0,  0, 27, 28,  0,  0, 14, 17, 14, 16, 14, 10, 10, 10, 10,  6,  6,  6,  4,  0],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 15, 18, 15,  1, 15, 11, 11, 11, 11,  7,  7,  7,  5,  1],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  8],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  9],
+                [1,  1,  1,  1,  1,  1,  1, 20, 20, 20, 20, 20,  1, 20, 20, 20, 20, 20,  1,  1,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  8,  1,  1,  1,  1,  1,  1, 29,  1,  1,  1,  1,  1,  1, 32,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  9,  1,  1,  1,  1,  1,  1, 30,  1,  1,  1,  1,  1,  1, 33,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 31,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  8,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 32,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  9,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 33,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  8,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 32,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  9,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 33,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  1,  1, 20, 20, 20, 20, 20,  1, 20, 20, 20, 20, 20,  1,  1,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+                [1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  3]
+            ];
 
         for (let numOf = 0; numOf !== 6; numOf++)
         {
@@ -176,6 +189,6 @@ function initializeLV8()
     changePStartPos();
 
 
-    closedWindow.onload = function(){l8Ready=true;};
+    computer2Bottom.onload = function(){l8Ready=true;};
     waitForLoading();//Universal.. ish
 }
