@@ -1,4 +1,4 @@
-let heliCanvas, ctx2, left, down, right, up, climbing, chopper, helo, startBuilding, angle, rotAngle, climbSpeed, canvasX,
+let heliCanvas, ctx2, left, down, right, up, climbing, chopper, helo, startBuilding, endBuilding, angle, rotAngle, climbSpeed, canvasX,
     canvasY, checkMoving, distanceTravelled, tutSpeed, helaIntro, leftAndRight, upAndDown, whew, tutTurns,
     tutClimb, tutFall, pilotHadTo, doneTheTut, chickens, numOfChickens, thudSound, hover, explode, unrotated, tutorialPart;
 
@@ -38,10 +38,12 @@ function initializeCopterLevel()
             //Tell the stupid machine what the variables are
             helo = new Image();
             startBuilding = new Image();
+            endBuilding = new Image();
 
             //Then tell what they look like
             helo.src = "12Helo/images/helo.png";
             startBuilding.src = "12Helo/images/startBuilding.png";
+            endBuilding.src = "12Helo/images/endBuilding.png";
         }
 
         //Initialize some vars
@@ -972,8 +974,8 @@ function lackOfInput(e)
 
 function landIt()
 {
-    let remainingDistance = 50;
-    let endX = 450, endY = 150;
+    let remainingDistance = 100;
+    let endX = 600, endY = 150;
 
     //Stop moving
     clearInterval(addChickens);
@@ -985,13 +987,27 @@ function landIt()
     function goTheDistance()
     {
         moveBackground();
+        chopper.done = true;
+
+        ctx.drawImage(endBuilding, 0, 0, 300, 300, 700 - (100-remainingDistance), 300, 300, 300);
+
+        chopper.drawIt = function()
+        {
+            //Erase EVERYTHING.. on the secondary canvas anyway
+            ctx2.clearRect(0, 0, 360, 360);
+
+            //Draw the chopper where it's at .. just .. smaller
+            ctx2.drawImage(helo, self.srcX, self.srcY * self.actualHeight, self.actualWidth, self.actualHeight, self.xPos, self.yPos, self.startWidth, self.startHeight);
+        };
+
+        //300, 198
         remainingDistance--;
 
+
         if (remainingDistance > 0)
-            goTheDistance();
+            setTimeout(goTheDistance, 10);
         else
         {
-            chopper.done = true;
             removeEventListener("keydown", input, false);
             removeEventListener("keyup", lackOfInput, false);
             keepItGoing();
@@ -1006,30 +1022,50 @@ function landIt()
             chopper.srcX = (chopper.frame % 6) * chopper.actualWidth;
 
             if (canvasX > endX)
-                canvasX -= 0.01 * (endX - canvasX);
+                canvasX -= 0.01 * (canvasX - endX);
             else if (canvasX < endX)
                 canvasX += 0.01 * (endX - canvasX);
 
             if (canvasY > endY)
-                canvasY -= 0.01 * (endY - canvasY);
+                canvasY -= 0.01 * (canvasY - endY);
             else if (canvasY < endY)
                 canvasY += 0.01 * (endY - canvasY);
 
             moveCanvas(canvasX, canvasY);
 
 
+            //Zoom out
+            if (chopper.startWidth > 45)
+            {
+                chopper.startWidth -= (chopper.startWidth/300);
+                chopper.startHeight -= (chopper.startHeight/300);
+
+                //Setup chopper in middle of canvas based on its new size
+                chopper.xPos = 180 - (chopper.startWidth / 2);
+                chopper.yPos = 180 - (chopper.startHeight / 2);
+            }
+
+
             if (!unrotated)
                 unRotate();
+
+            console.log("still going");
 
             //Draw it
             chopper.drawIt();
 
-
-
-            if (l12 && (chopper.xPos !== endX || chopper.yPos !== endY))
+            if (l12 && (canvasX > endX + 0.5 || canvasX < endX - 0.5 || canvasY > endY + 0.5 || canvasY < endY - 0.5))
                 setTimeout(keepItGoing, 10);
             else
+            {
                 hover.pause();
+                ctx2.clearRect(0, 0, 360, 360);
+                l12 = false;
+                level = 7;
+                l7 = true;
+                startGame();
+            }
+
         }
     }
 }
