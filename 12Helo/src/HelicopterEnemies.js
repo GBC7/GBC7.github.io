@@ -1,6 +1,5 @@
 makeChicken = function(ind)
 {
-    console.log("made one");
     let thisChicken =
         {
             width: undefined,
@@ -31,6 +30,7 @@ makeChicken = function(ind)
             chosenImage: undefined,
             choseRandom: false,
             atEnd: false,
+            ending: false,
 
             fly: function()
             {
@@ -128,7 +128,6 @@ makeChicken = function(ind)
                 //Fly across screen
                 function whenWeFly()
                 {
-
                     //Cycle through frames
                     self.frame++;
                     self.srcX = ((self.frame % self.numOfFrames) * self.width);
@@ -147,15 +146,37 @@ makeChicken = function(ind)
 
                 function checkIfIHitTheChopper()
                 {
+                    chopper.leftSide = canvasX + 180 - (chopper.actualWidth / 2);
+                    chopper.rightSide = canvasX + 180 + (chopper.actualWidth / 2);
+                    chopper.topSide = canvasY + 180 - (chopper.actualHeight / 2);
+                    chopper.bottomSide = canvasY + 180 + (chopper.actualHeight / 2);
+
+                    let x, y;
+
                     if (self.leftSide < chopper.rightSide && self.rightSide > chopper.leftSide)
                     {
-                        if (self.bottomSide < chopper.topSide && self.topSide > chopper.bottomSide)
+                        if (self.bottomSide > chopper.topSide && self.topSide < chopper.bottomSide)
                         {
-                            chopper.health--;
+                            if (!self.ending)
+                            {
+                                x = self.xPos - self.width/4;
+                                y = self.yPos - self.width/4;
 
-                            if (chopper.health === 0)
-                                chopper.crashed = true;
+                                self.ending = true;
+                                chopper.takeDamage();
+                                ctx.beginPath();
+                                ctx.arc(self.xPos, self.yPos, self.width/8, 0, 2 * Math.PI, false);
+                                ctx.fillStyle = '#ff0c18';
+                                ctx.fill();
+                                setTimeout(endMe, 100);
+                            }
                         }
+                    }
+
+                    function endMe()
+                    {
+                        ctx.clearRect(x, y, self.width * 2, self.height * 2);
+                        self.atEnd = true;
                     }
                 }
 
@@ -174,7 +195,8 @@ makeChicken = function(ind)
 
                     //Draw
                     ctx.clearRect(self.prevX, self.yPos, self.width, self.height);
-                    ctx.drawImage(self.myImage, self.srcX, self.srcY, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
+                    if (!self.ending)
+                        ctx.drawImage(self.myImage, self.srcX, self.srcY, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
 
                     //Do gen
                     setTimeout(whenWeFly, self.timeOutTime);

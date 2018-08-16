@@ -3622,6 +3622,7 @@ function healthInventory()
     };
     hearts.onload = function()//Draw hearts
     {
+        ctx3.clearRect(0, 100, 200, 200);
         //Output "Health" to differentiate between lives
         ctx3.font = "30px Arial";
         ctx3.fillStyle = "#630105";
@@ -3641,6 +3642,7 @@ function healthInventory()
         ctx3.fillRect(14, 112, 1, 91);
         ctx3.fillRect(131, 112, 1, 91);
 
+        //Redraw
         switch (p.health)
         {
             case 6:
@@ -3861,7 +3863,17 @@ function resetLevel(time = 40)
         elevenHealth = 3;
         startGame();
     }
-
+    else if (l12)
+    {
+        clearInterval(addChickens);
+        clearInterval(moveMap);
+        clearInterval(checkMoving);
+        clearInterval(tutTurns);
+        clearInterval(tutClimb);
+        removeEventListener("keydown", input, false);
+        removeEventListener("keyup", lackOfInput, false);
+        ctx2.clearRect(0, 0, 360, 360);
+    }
 
         //If not out of live start the level again
     if (p.lives > 0)

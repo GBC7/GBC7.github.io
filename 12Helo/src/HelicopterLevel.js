@@ -1,8 +1,10 @@
 let heliCanvas, ctx2, left, down, right, up, climbing, chopper, helo, startBuilding, angle, rotAngle, climbSpeed, canvasX,
-    canvasY, checkMoving, tutorialPart, distanceTravelled, tutSpeed, helaIntro, leftAndRight, upAndDown, whew, tutTurns,
-    tutClimb, tutFall, pilotHadTo, doneTheTut, chickens, numOfChickens;
+    canvasY, checkMoving, distanceTravelled, tutSpeed, helaIntro, leftAndRight, upAndDown, whew, tutTurns,
+    tutClimb, tutFall, pilotHadTo, doneTheTut, chickens, numOfChickens, thudSound, hover, explode, unrotated, tutorialPart;
 
 let addChickens, moveMap;
+
+let alreadyTutted = false;
 
 
 //This probably initializes the level
@@ -47,11 +49,10 @@ function initializeCopterLevel()
             //Set all to false.. because none of them are true
             left = down = right = up = climbing = false;
 
-            //Tell the calculating machine that we're starting with a tutorial
-            tutorialPart = true;
-
             //Here, I set this variable to 3..
             climbSpeed = 3;
+
+            tutorialPart = true;
 
             //Place the canvas over the area where the helicopter should start
             canvasX = -110;
@@ -59,6 +60,8 @@ function initializeCopterLevel()
 
             //Current Angle
             angle = 0;
+
+            unrotated = false;
 
             //Amount the helicopter rotates by when rotating .. not when not rotating
             rotAngle = 2.5;
@@ -74,6 +77,21 @@ function initializeCopterLevel()
 
             //Interval speed for tutorial checks
             tutSpeed = 10;
+
+            thudSound = new Audio;
+            thudSound.src = "12Helo/audio/thud.mp3";
+            thudSound.volume = 0.2;
+            thudSound.playbackRate = 2.5;
+
+            hover = new Audio;
+            hover.src = "12Helo/audio/hover.mp3";
+            hover.volume = 0.2;
+            hover.loop = true;
+            hover.playbackRate = 2.5;
+
+            explode = new Audio;
+            explode.src = "12Helo/audio/explode.mp3";
+            explode.volume = 0.2;
 
             //Enemy array
             chickens = [];
@@ -103,10 +121,10 @@ function initializeCopterLevel()
                     yPos: 157.5,
 
                     //Used for accurate hit detecting
-                    leftSide: this.xPos,
-                    rightSide: 180 + (this.startWidth / 2),
-                    topSide: this.yPos,
-                    bottomSide: 180 + (this.startHeight / 2),
+                    leftSide: canvasX + 180 - (this.startWidth / 2),
+                    rightSide: canvasX + 180 + (this.startWidth / 2),
+                    topSide: canvasY + 180 - (this.startHeight / 2),
+                    bottomSide: canvasY + 180 + (this.startHeight / 2),
 
                     //Variables with the word speed in them
                     rotateSpeed: 10,
@@ -120,7 +138,9 @@ function initializeCopterLevel()
                     done: false,
 
                     //Health stat(s)
-                    health: 3,
+                    health: p.health,
+                    waiting: false,
+                    invincibleTime: 750,
 
                     //The thing that gets things done
                     takeOffEh: function()
@@ -166,12 +186,24 @@ function initializeCopterLevel()
                         function fall()
                         {
                             canvasY += self.fallSpeed;
+
+                            self.leftSide = canvasX + 180 - (self.actualWidth / 2);
+                            self.rightSide = canvasX + 180 + (self.actualWidth / 2);
+                            self.topSide = canvasY + 180 - (self.actualHeight / 2);
+                            self.bottomSide = canvasY + 180 + (self.actualHeight / 2);
+
+                           /* ctx.fillStyle = '#ff0c18';
+                            ctx.fillRect(self.leftSide, self.topSide, 5, self.actualHeight);
+                            ctx.fillRect(self.leftSide, self.topSide, self.actualWidth, 5);
+                            ctx.fillRect(self.rightSide, self.topSide, 5, self.actualHeight);
+                            ctx.fillRect(self.leftSide, self.bottomSide, self.actualWidth, 5);*/
+
                             moveCanvas(canvasX, canvasY);
                             drawTheChopper();
 
 
                             //Check for crash
-                            checkCrash();
+                            self.checkCrash();
                         }
 
                         function drawTheChopper()
@@ -207,8 +239,11 @@ function initializeCopterLevel()
                     removeEventListener("keydown", input, false);
                     removeEventListener("keydown", lackOfInput, false);
                     clearInterval(checkMoving);
+                    hover.pause();
+                    explode.play();
                     self.counter = 0;
                     self.crashed = true;
+                    self.done = true;
                     self.frame = 0;
                     self.srcX = ((self.frame % 6) * self.actualWidth);
                     self.srcY = 2;
@@ -216,7 +251,6 @@ function initializeCopterLevel()
                 }
                 else if (!self.timeOutCleared)
                 {
-                    setTimeout(chopper.drawCrash, 10);
                     self.timeOutCleared = true;
                 }
                 else if (self.counter < 7)
@@ -231,17 +265,70 @@ function initializeCopterLevel()
                     self.srcX = ((self.frame % 5) * self.actualWidth);
                 }
 
-
                 //Erase EVERYTHING.. on the secondary canvas anyway
                 ctx2.clearRect(0, 0, 360, 360);
 
                 //Draw the chopper where it's at .. just .. smaller
                 ctx2.drawImage(helo, self.srcX, self.srcY * self.actualHeight, self.actualWidth, self.actualHeight, self.xPos, self.yPos, self.startWidth, self.startHeight);
-                setTimeout(chopper.drawCrash, 120);
+
+                let restartable = true;
+
+                for (let allChickens = 0; allChickens < chickens.length; allChickens++)
+                {
+                    if (!chickens[allChickens].atEnd)
+                    {
+                        restartable = false;
+                    }
+
+                    if (allChickens === chickens.length - 1)
+                    {
+                        if (!restartable)
+                            setTimeout(chopper.drawCrash, 120);
+                        else
+                        {
+                            unRotate();
+                            resetLevel();
+                        }
+                    }
+                }
+
             };
             chopper.selfAssign = function()
             {
                 self = this;
+            };
+            chopper.checkCrash = function()
+            {
+                if (self.rightSide >= 800 || self.leftSide <= 0 || self.topSide <= 0 || self.bottomSide >= 600)//Right
+                {
+                    self.drawCrash();
+                }
+            };
+            chopper.takeDamage = function()
+            {
+                if (!self.waiting)
+                {
+                    self.waiting = true;
+                    self.health --;
+                    p.health --;
+                    healthInventory();
+
+                    thudSound.play();
+
+                    if (self.health < 1)
+                    {
+                        self.crashed = true;
+                        self.drawCrash();
+                    }
+                    else
+                        setTimeout(notWaiting, self.invincibleTime);
+
+                }
+
+                function notWaiting()
+                {
+                    self.waiting = false;
+                }
             };
         }
     }
@@ -271,6 +358,7 @@ function start()
 
         //Start blade rotating animation
         startRotating();
+        hover.play();
     }
     else//Probably where all side scrolling objects go to be animated
     {
@@ -593,15 +681,18 @@ function start()
 
     //Exit tutorial
     {
-        if (tutorialPart)
+        if (tutorialPart && !alreadyTutted)
             setTimeout(start, tutSpeed);
+        else if (tutorialPart && alreadyTutted)
+            doTheSetup();
         else
             startActualGamePlay();
 
         //Initialization for actual gamePlay portion
         function startActualGamePlay()
         {
-            console.log("started");
+            alreadyTutted = true;
+
             //Add event listeners
             addEventListener("keydown", input, false);
             addEventListener("keyup", lackOfInput, false);
@@ -624,6 +715,90 @@ function start()
 
             addChickens = setInterval(checkChickens, 10);
             moveMap = setInterval(moveBackground, tutSpeed);
+        }
+
+        function doTheSetup()
+        {
+            if (distanceTravelled === 0)//Initial setup for tutorial portion
+            {
+                //This draws a thing at a location
+                ctx.drawImage(startBuilding, 0, 0, 300, 198, 0, 402, 300, 198);
+
+                //Assign the variable self to this in the chopper so that functions will actually work
+                chopper.selfAssign();
+
+                //Start blade rotating animation
+                startRotating();
+                hover.play();
+            }
+            else//Probably where all side scrolling objects go to be animated
+            {
+                ctx.clearRect(0, 0, 800, 600);
+                //This draws a thing at a location
+                if (distanceTravelled <= 300)
+                    ctx.drawImage(startBuilding, 0, 0, 300, 198, -distanceTravelled, 402, 300, 198);
+                else if (distanceTravelled === 418)
+                {
+                    tutorialPart = false;
+                }
+            }
+
+            canvas.style.backgroundPositionX = -distanceTravelled + "px";
+
+            distanceTravelled++;
+
+
+            //Moving chopper to center and enlarging it
+            {
+                //Keep enlarging the chopper until it's its actual size
+                {
+                    if (chopper.startWidth < chopper.actualWidth)
+                        zoomInBaby();
+                    else if (chopper.startWidth > chopper.actualWidth)
+                    {
+                        chopper.startWidth = chopper.actualWidth;
+                        chopper.startHeight = chopper.actualHeight;
+                    }
+                }
+
+                //Animate the chopper moving until its in the middle of the canvas (horizontally)
+                {
+                    if (distanceTravelled < 200)
+                    {
+                        canvasY--;
+                        canvasX++;
+                        moveCanvas(canvasX, canvasY);
+                    }
+                    else if (distanceTravelled < 300)
+                    {
+                        canvasX++;
+                        moveCanvas(canvasX, canvasY);
+                    }
+                }
+
+                function zoomInBaby()
+                {
+                    //Resize the chopper
+                    chopper.startWidth += (chopper.startWidth/300);
+                    chopper.startHeight += (chopper.startHeight/300);
+
+                    //Setup chopper in middle of canvas based on its new size
+                    chopper.xPos = 180 - (chopper.startWidth / 2);
+                    chopper.yPos = 180 - (chopper.startHeight / 2);
+
+                    //Set choppers left side coordinates based on its new size
+                    chopper.leftSide = chopper.xPos;
+                    chopper.rightSide = 180 + (chopper.startWidth / 2);
+                    chopper.topSide = chopper.yPos;
+                    chopper.bottomSide = 180 + (chopper.startHeight / 2);
+
+                }
+            }
+
+            if (tutorialPart)
+                setTimeout(doTheSetup, tutSpeed);
+            else
+                startActualGamePlay();
         }
     }
 
@@ -689,10 +864,11 @@ function makeItMove()
     {
         canvasY -= climbSpeed * Math.cos(angle * Math.PI / 180);
         canvasX += climbSpeed * Math.sin(angle * Math.PI / 180);
+
         moveCanvas(canvasX, canvasY);
         chopper.drawIt();
 
-        checkCrash();
+        chopper.checkCrash();
     }
 }
 
@@ -709,12 +885,16 @@ function checkChickens()
 
     for (let i = 0; i < chickens.length; i++)
     {
-        if (chickens[i].atEnd && numOfChickens !== 35)
+        if (chickens[i].atEnd && numOfChickens !== 35 && !chopper.crashed)
         {
             land = false;
             makeChicken(i);
             chickens[i].fly();
             numOfChickens ++;
+        }
+        else if (chopper.crashed)
+        {
+            land = false;
         }
         else if (numOfChickens >= 35)
         {
@@ -727,26 +907,6 @@ function checkChickens()
     }
 
 
-}
-
-function checkCrash()
-{
-    if (canvasX + chopper.rightSide >= 800)//Right
-    {
-        chopper.drawCrash();
-    }
-    else if (canvasX + chopper.leftSide <= 0)//Left
-    {
-        chopper.drawCrash();
-    }
-    else if (canvasY + chopper.topSide <= 0)
-    {
-        chopper.drawCrash();
-    }
-    else if (canvasY + chopper.bottomSide >= 600)
-    {
-        chopper.drawCrash();
-    }
 }
 
 //This function is for... moving the canvas... ha..ha.. ya
@@ -818,6 +978,7 @@ function landIt()
     //Stop moving
     clearInterval(addChickens);
     clearInterval(moveMap);
+    clearInterval(checkMoving);
     //Animate landing
     goTheDistance();
 
@@ -839,51 +1000,73 @@ function landIt()
 
     function keepItGoing()
     {
-        chopper.frame++;
-        chopper.srcX = (chopper.frame % 6) * chopper.actualWidth;
-
-        if (canvasX > endX)
-            canvasX -= 0.01 * (endX - canvasX);
-        else if (canvasX < endX)
-            canvasX += 0.01 * (endX - canvasX);
-
-        if (canvasY > endY)
-            canvasY -= 0.01 * (endY - canvasY);
-        else if (canvasY < endY)
-            canvasY += 0.01 * (endY - canvasY);
-
-        moveCanvas(canvasX, canvasY);
-
-
-        if (angle % 360 > 0)
+        if (!chopper.crashed)
         {
-            angle -= rotAngle;
-            //Set canvas to operate from its center
-            ctx2.translate(180, 180);//180 .. because thats half of the canvas width/height and half of it translates to its center.. so .. it makes sense
+            chopper.frame++;
+            chopper.srcX = (chopper.frame % 6) * chopper.actualWidth;
 
-            ctx2.rotate(-rotAngle * Math.PI / 180);//Positive so it goes the this way.. not the other this way
+            if (canvasX > endX)
+                canvasX -= 0.01 * (endX - canvasX);
+            else if (canvasX < endX)
+                canvasX += 0.01 * (endX - canvasX);
 
-            ctx2.translate(-180, -180);//Change it back just in case that's important to do
+            if (canvasY > endY)
+                canvasY -= 0.01 * (endY - canvasY);
+            else if (canvasY < endY)
+                canvasY += 0.01 * (endY - canvasY);
+
+            moveCanvas(canvasX, canvasY);
+
+
+            if (!unrotated)
+                unRotate();
+
+            //Draw it
+            chopper.drawIt();
+
+
+
+            if (l12 && (chopper.xPos !== endX || chopper.yPos !== endY))
+                setTimeout(keepItGoing, 10);
+            else
+                hover.pause();
         }
-        else if (angle % 360 < 0)
-        {
-            angle += rotAngle;
-            //Set canvas to operate from its center
-            ctx2.translate(180, 180);//180 .. because thats half of the canvas width/height and half of it translates to its center.. so .. it makes sense
+    }
+}
 
-            ctx2.rotate(rotAngle * Math.PI / 180);//Positive so it goes the this way.. not the other this way
+function unRotate()
+{
+    unrotated = true;
 
-            ctx2.translate(-180, -180);//Change it back just in case that's important to do
-        }
+    if (angle > 0)
+    {
+        angle -= rotAngle;
+        //Reset position
+        ctx2.clearRect(self.prevX, self.prevY, self.width, self.height);
+        //Set canvas to operate from its center
+        ctx2.translate(180, 180);//180 .. because thats half of the canvas width/height and half of it translates to its center.. so .. it makes sense
+        //Rotate back
+        ctx2.rotate(-rotAngle * Math.PI / 180);//Positive so it goes the this way.. not the other this way
 
-        //Draw it
-        chopper.drawIt();
+        ctx2.translate(-180, -180);//Change it back just in case that's important to do
+        chopper.drawIt();//Drawing the thing we just did is prob a good idea
+        setTimeout(unRotate, 10);
+    }
+    else if (angle < 0)
+    {
+        angle += rotAngle;
+        //Reset position
+        ctx2.clearRect(self.prevX, self.prevY, self.width, self.height);
+        //Set canvas to operate from its center
+        ctx2.translate(180, 180);//180 .. because thats half of the canvas width/height and half of it translates to its center.. so .. it makes sense
+        //Rotate back
+        ctx2.rotate(rotAngle * Math.PI / 180);//Positive so it goes the this way.. not the other this way
 
-
-
-        if (l12 && (chopper.xPos !== endX || chopper.yPos !== endY))
-            setTimeout(keepItGoing, 10);
-
+        ctx2.translate(-180, -180);//Change it back just in case that's important to do
+        chopper.drawIt();//Drawing the thing we just did is prob a good idea
+        setTimeout(unRotate, 10);
     }
 
+    if (angle % 360 !== 0)
+        setTimeout(unRotate, 10);
 }
