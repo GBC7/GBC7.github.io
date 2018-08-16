@@ -1,9 +1,9 @@
 /*// Draw box around designated area for debugging purposes
-ctx.fillStyle = '#ff0c18';
-ctx.fillRect(xPos, yPos, 2, 32);
-ctx.fillRect(xPos, yPos, 32, 2);
-ctx.fillRect(xPos + 30, yPos, 2, 32);
-ctx.fillRect(xPos, yPos + 30, 32, 2);
+ctxP.fillStyle = '#ff0c18';
+ctxP.fillRect(xPos, yPos, 2, 32);
+ctxP.fillRect(xPos, yPos, 32, 2);
+ctxP.fillRect(xPos + 30, yPos, 2, 32);
+ctxP.fillRect(xPos, yPos + 30, 32, 2);
 // Draw box around designated area for debugging purposes*/
 
 //Current Level Int
@@ -155,6 +155,8 @@ let caneTrigger = false;
 let lighterTrigger = false;
 let l5DialogNum = 0;
 
+
+
 function startGame(dontDrawP)
 {
     theyIsOff = false;
@@ -217,6 +219,7 @@ function startGame(dontDrawP)
 
         else if (l12)//SewerPipe Map
         {
+            ctxP.clearRect(0, 0, 32, 48);
             initializeCopterLevel();
         }
 
@@ -274,6 +277,7 @@ function startGame(dontDrawP)
                 for (let ens = 0; ens < enemy[levs].length; ens++)
                 {
                     enemy[levs][ens].dead = true;
+                    enemy[levs][ens].ctxMe.clearRect(0, 0, enemy[levs][ens].width, enemy[levs][ens].height);
                 }
 
                 //Once they're all off
@@ -288,11 +292,9 @@ function startGame(dontDrawP)
 }
 
 function fillErasedMap()
-//Re-draws only the section of map that was erased by the character moving over
-//  it vs. redrawing the whole map.(helps with game speed)
 {
-
-    ctx.clearRect(p.prevCol * 32, p.prevRow * 32, 32, 48);
+    //
+    // ctxP.clearRect(0, 0, 32, 48);
 
     let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
 
@@ -304,6 +306,7 @@ function fillErasedMap()
 
             if (lMap[level] !== undefined && lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
             {
+                let floorSpriteX;
                 xPos = mC*32;
                 yPos = mR*32;
 
@@ -546,13 +549,13 @@ function fillErasedMap()
                 //Below is exclusively for sewer level
                 if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
                 {
-                    if (thingToDraw === sewerFloor  && (l2 || l11))
+                    if (thingToDraw === (d || e) && (l2 || l11))
                     // If drawing the floor on level 2
                     // then draw based on floorSpriteX var positioning
-                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
+                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, mC * 32, mR * 32, 32, 32);
                     else
                     //Otherwise draw regularly
-                        ctx.drawImage(thingToDraw, (mC * 32), (mR * 32));
+                        ctx.drawImage(thingToDraw, xPos, yPos);
                 }
 
                 if (xPos !== undefined && yPos !== undefined)
@@ -650,10 +653,17 @@ function changePStartPos()
                     lPMap[level][y][x] = 0;                           // and set their value to 0 (0 is nothing - 1 is player)
         }
     }
+    if (lPMap[level] !== undefined)
+        if (lPMap[level][startY[level]] !== undefined)
+            if (lPMap[level][startY[level]][startX[level]] !== undefined)
+                lPMap[level][startY[level]][startX[level]] = 1;   //Set players map position in the levels player map
 
-    lPMap[level][startY[level]][startX[level]] = 1;   //Set players map position in the levels player map
     p.row = startY[level];                              // then set player objects row
     p.col = startX[level];                                // and column to match
+
+    pCanv.style.top = p.row * 32 + "px";
+    pCanv.style.left = p.col * 32 + "px";
+
     p.prevRow = p.row;
     p.prevCol = p.col;
 }
@@ -781,14 +791,9 @@ function waitForLoading(dontDrawP)
             }
             else
             {
-                setTimeout(iDontCare, 200);
-
-                function iDontCare()//This level is rude with its loading so I don't care right now
-                {
-                    drawMap();
-                    turnOnEnemies();
-                    addEventListener("keydown", onKeyDown, false);
-                }
+                drawMap();
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
             }
             break;
     }
@@ -812,19 +817,21 @@ function drawPMap()//Player Map
             {
                 switch (lPMap[level][row][col])
                 {
-                    case 1:                                                 //If the element check contains the player
-                        if (!sewersDrained && l2 && (p.row < 11 || p.col > 11))                           //and the sewer is filled with water
+                    case 1: //If the element check contains the player
+                        if (!sewersDrained && l2 && (p.row < 11 || p.col > 11))//and the sewer is filled with water
                         //draw the players standing in water image
-                            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
-                        // Sprite change animation rollerblades disguise
-                        // else if (findDisguise && !findRollerblades)
-                        //     ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
-                        // else if (findRollerblades && !findDisguise)
-                        //     ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
-                        // else if (findDisguise && findRollerblades)
-                        //     ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
-                        else                                                 //and the sewer is  not filled with water//draw the players regular image
-                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
+                        {
+                            pCanv.style.top = destY + "px";
+                            pCanv.style.left = destX + "px";
+                            ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, p.width, p.height);
+                        }
+                        else //and the sewer is  not filled with water
+                        // draw the players regular image
+                        {
+                            pCanv.style.top = destY + "px";
+                            pCanv.style.left = destX + "px";
+                            ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, p.width, p.height);
+                        }
                         break;
                     case 2:
                         if (l2)
@@ -981,7 +988,7 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
                 for (let col = 0; col < lMap[level][0].length; col++)      // and columns, checking each elements contents
                 {
                     thingToDraw = undefined;       //Reset the thing that will be drawn to nothing
-
+                    let floorSpriteX;
 
                     switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
                     {
@@ -1221,7 +1228,7 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
 
                     if (thingToDraw !== undefined) //If this space has something to draw in it
                     {
-                        if (thingToDraw === sewerFloor  && (l2 || l11)) // and that thing is flooring
+                       if (thingToDraw === (d || e) && (l2 || l11)) // and that thing is flooring
                             ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (col * 32), (row * 32), 32, 32);// then draw it
                         // based on sprite
                         // sheet positions
@@ -1244,7 +1251,7 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
     }
 
 
-    if (l2)//If on lfillErasedMap();evel 2
+    if (l2)//If on level 2 fillErasedMap();
     {
 
         if (!sewersDrained) // and the sewer is turned on
@@ -1283,10 +1290,17 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
         }
         drawOMap();
         if (!lightsOn)      // and lights are on
-        {   //Draw a solid black block over entire canvas
-            // (fillErasedMap function will allow for small area around player to be 'lit' still)
-            ctx.fillStyle = "rgba(0, 0, 0, 1)";
-            ctx.fillRect(0, 0, 800, 600);
+        {
+            if (!lightsOn && l2)                //If 'the lights are off' on level two
+            {
+                let xPos = (p.col + 1) * 32, yPos = p.row * 32;
+
+                ctx.fillStyle = "rgba(0, 0, 0, 1)";     //Draw a black block over areas not 'lit by torch'
+                ctx.fillRect(xPos + 48, 0, 800, 600);
+                ctx.fillRect(0, yPos + 96, 800, 600);
+                ctx.fillRect(0, 0, xPos - 80, 600);
+                ctx.fillRect(0, 0, 800, yPos - 32);
+            }
         }
     }
 
@@ -1313,9 +1327,14 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             function goDownStays2()              //Animates player going down stairs and appearing in previous levels map
             {
                 numOfStairz++;                  //Increment stairs descended each time a stair is descended
-                ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
+                ctxP.clearRect(0, 0, p.width, p.height);//Clear portion of canvas the player was last on
                 fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                ctx.drawImage(scientist, ((p.srcX + numOfStairz) % 4) * 32, 48, 32, 48, p.col * 32 - (6 + 6 * numOfStairz) , p.row * 32 + (numOfStairz * 12), 32 - (numOfStairz * 5), 48 - (numOfStairz * 10));
+                let xPos = p.col * 32 - (6 + 6 * numOfStairz) ;
+                let yPos = p.row * 32 + 5 + (numOfStairz * 12);
+                pCanv.style.top = yPos + "px";
+                pCanv.style.left = xPos + "px";
+
+                ctxP.drawImage(scientist, ((p.srcX + numOfStairz) % 4) * 32, 48, 32, 48, 0, 0, 32 - (numOfStairz * 5), 48 - (numOfStairz * 10));
 
                 if (numOfStairz !== 5)            //If there are stairs to go down
                     setTimeout(goDownStays2, 180); //...Go down them
@@ -1348,11 +1367,15 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                 stepsUp++;
                 if (stepsUp < 12)
                 {
-                    ctx.clearRect(p.col * 32, p.row * 32 - (stepsUp * 5.3), 32, 48);
+                    ctxP.clearRect(0, 0 - (stepsUp * 5.3), 32, 48);
                     drawMap(0);
                     p.frameX++;
                     p.srcX = (p.frameX % 4) * 32;
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32 - (stepsUp * 5.3), 32, 48);
+
+                    let yPos = p.row * 32 - (stepsUp * 5.3);
+                    pCanv.style.top =  yPos + "px";
+
+                    ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                     setTimeout(goThroughWindowWithEyesClosed, walkingSpeed * 2);
                 }
                 else if (stepsUp === 12)
@@ -1389,16 +1412,21 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
                 if (stepsDown < 13)
                 {
-                    ctx.clearRect(p.col * 32, p.row * 32 - pixelsAbove + (stepsDown * 5.3), 32, 48);
+                    ctxP.clearRect(0, 0 - pixelsAbove + (stepsDown * 5.3), 32, 48);
                     drawMap(0);
                     p.srcY = 0;
                     p.frameX++;
                     p.srcX = (p.frameX % 4) * 32;
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32 - pixelsAbove + (stepsDown * 5.3), 32, 48);
+
+
+                    let yPos = p.row * 32 - pixelsAbove + (stepsDown * 5.3);
+                    pCanv.style.top =  yPos + "px";
+
+                    ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                     if (stepsDown === 12)
                     {
                         lPMap[level][p.row][p.col] = 1;
-                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                        ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                         addEventListener("keydown", onKeyDown, false);
                     }
                     else
@@ -1413,7 +1441,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
         if ((e === 38 || e === 87) && p.col === 0 && p.row === 0) //If going UP & character is right under door 1
         {
             removeEventListener("keydown", onKeyDown, false);
-            ctx.clearRect(0, 0, 32, 48);
+            ctxP.clearRect(0, 0, 32, 48);
             let sizer = 0;
             shrink();
 
@@ -1421,9 +1449,15 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             {
                 if (sizer < 2)//If is not small enough to fit through the door..
                 {
-                    ctx.clearRect(0, 0, 32, 48);
+                    ctxP.clearRect(0, 0, 32, 48);
                     fillErasedMap();
-                    ctx.drawImage(scientist, 0, 144, 32, 48, sizer*4, sizer*6, 28-(4*sizer), 42-(6*sizer));
+
+                    let xPos = p.col * 32 + sizer*4;
+                    let yPos = p.row * 32 + sizer*6;
+                    pCanv.style.top = yPos + "px";
+                    pCanv.style.left = xPos + "px";
+
+                    ctxP.drawImage(scientist, 0, 144, 32, 48, 0, 0, 28-(4*sizer), 42-(6*sizer));
                     sizer++;
                     setTimeout(shrink, 120);
                 }       //Shrink
@@ -1457,12 +1491,12 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             {
                 staysClimbed ++;                //Count each step taken
 
-                ctx.clearRect(96*8, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
+                ctxP.clearRect(0, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
                 fillErasedMap();        //Draw the map image that was cleared
 
                 //Draw scientist incrementally smaller each 'step' taken
                 // and move player slightly up to portray movement
-                ctx.drawImage(scientist, 0, 144 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed),96*8, 0, 32, 38 - (10 * staysClimbed));
+                ctx.drawImage(scientist, 0, 144 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed), 0, 0, 32, 38 - (10 * staysClimbed));
 
 
                 if (staysClimbed !== 4)         //If player has not climbed all stairs
@@ -1491,7 +1525,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             {
                 notWalking = false;
                 removeEventListener("keydown", onKeyDown, false);
-                ctx.clearRect(320, 0, 32, 48);
+                lPMap[level][p.row][p.col] = 0;
                 let sizer = 0;
                 getInTheTube();
 
@@ -1499,9 +1533,14 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                 {
                     if (sizer < 10)//If is not small enough to fit through the tube..
                     {
-                        ctx.clearRect(320, 0, 32, 48);
-                        fillErasedMap();
-                        ctx.drawImage(scientist, (p.srcX % 4)*32, 144, 32, 48, 320 + sizer, 5 + sizer, 32 - 2 * sizer, 48 - 4 * sizer);
+                        ctxP.clearRect(0, 0, 32, 48);
+
+                        let xPos = p.col * 32 + sizer;
+                        let yPos = p.row * 32 + 5 + sizer;
+                        pCanv.style.top = yPos + "px";
+                        pCanv.style.left = xPos + "px";
+
+                        ctxP.drawImage(scientist, (p.srcX % 4)*32, 144, 32, 48, 0, 0, 32 - 2 * sizer, 48 - 4 * sizer);
                         sizer++;
                         setTimeout(getInTheTube, 120);
                     }       //Shrink
@@ -1530,20 +1569,33 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
                         if (sizer > 5)
                         {
-                            fillErasedMap();
-                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48 - (2 * sizer), 389, 542 + (2 * sizer), 20, 33 - (2 * sizer));
+                            ctxP.clearRect(0, 0, 32, 48);
+
+                            let xPos = p.col * 32;
+                            let yPos = p.row * 32 + (2 * sizer);
+                            pCanv.style.top = yPos + "px";
+                            pCanv.style.left = xPos + "px";
+
+                            ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48 - (2 * sizer), 0, 0, 20, 33 - (2 * sizer));
                             sizer--;
                             setTimeout(emerge, 80);
                         }
                         else if (sizer > 0)//If is not small enough to fit through the tube..
                         {
-                            fillErasedMap();
+                            ctxP.clearRect(0, 0, 32, 48);
                             sizer--;
-                            ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY, 32, 48, 384 + sizer, 512 + (8 * sizer), 32 - 2 * sizer, 48 - 4 * sizer);
+
+                            let xPos = p.col * 32 + sizer;
+                            let yPos = p.row * 32 + (8 * sizer);
+                            pCanv.style.top = yPos + "px";
+                            pCanv.style.left = xPos + "px";
+
+                            ctxP.drawImage(scientist, (p.srcX % 4) * 32, p.srcY, 32, 48, 0, 0, 32 - 2 * sizer, 48 - 4 * sizer);
                             setTimeout(emerge, 60);
                         }       //Shrink
                         else
                         {
+                            lPMap[level][p.row][p.col] = 1;
                             addEventListener("keydown", onKeyDown, false);
                         }
                     }
@@ -1990,7 +2042,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
 function onKeyDown(e)
 {
-    console.log(e.keyCode);
     if (!l3)
         clearInterval(timer_level3);
 
@@ -2035,27 +2086,30 @@ function onKeyDown(e)
 
             function walkLeft()
             {
+
                 if (walk < 4)
                 {
                     notWalking = false;
                     //Increment in order to flip through the walking tiles for this direction
                     p.frameX ++;
                     walk++;
+                    let xPos = p.col * 32 - walk * 8;
+                    pCanv.style.left = xPos + "px";
                     p.srcX = p.width * (p.frameX % 4);
-                    //Fills portion of the canvas the player was just taking up
-                    //a,b,c,d,e... are passed from movePlayer function call
-                    ctx.clearRect((p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
-                    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+                    ctxP.clearRect(0, 0, 32, 48);
+
+                    if (l2)
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
                     drawL6();
 
                     if (l2 && underWater)
                     {
-                        ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
+                        ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                     }
                     else
-                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
-
-                    drawZeeEnemy();
+                        ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
 
                     setTimeout(walkLeft, walkingSpeed);
                 }
@@ -2068,8 +2122,9 @@ function onKeyDown(e)
                     //add player to updated row
                     lPMap[level][p.row][p.col] = 1;
                     walk = 0;
-                    drawZeeEnemy();
                     drawPMap();//Draws the new players position
+                    if (l2)
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                 }
             }
         }
@@ -2079,16 +2134,19 @@ function onKeyDown(e)
             p.frameY = 1;
             p.frameX ++;
 
-            ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-            fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            ctxP.clearRect(0, 0, 32, 48);
+
+            if (l2)
+                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
             drawL6();
             p.srcX = p.width * (p.frameX % 4);
             p.srcY = p.height * (p.frameY);
 
             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
-                ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
             else
-                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
 
         }
         detectMovementLevel3();
@@ -2113,21 +2171,27 @@ function onKeyDown(e)
                     //Increment in order to flip through the walking tiles for this direction
                     p.frameX ++;
                     walk++;
+
+                    //Move canvas
+                    let xPos = p.col * 32 + walk * 8;
+                    pCanv.style.left = xPos + "px";
+
                     p.srcX = p.width * (p.frameX % 4);
-                    //Fills portion of the canvas the player was just taking up
-                    //a,b,c,d,e... are passed from movePlayer function call
-                    ctx.clearRect((p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
-                    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+                    ctxP.clearRect(0, 0, 32, 48);
+
+                    if (l2)
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
                     drawL6();
 
                     if (l2 && underWater)
                     {
-                        ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                        ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                     }
                     else
-                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                        ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
 
-                    drawZeeEnemy();
                     setTimeout(walkRight, walkingSpeed);
                 }
                 else
@@ -2139,9 +2203,9 @@ function onKeyDown(e)
                     //add player to updated column
                     lPMap[level][p.row][p.col] = 1;
                     walk = 0;
-                    drawZeeEnemy();
                     drawPMap();//Draws the new players position
-
+                    if (l2)
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                 }
             }
         }
@@ -2150,16 +2214,19 @@ function onKeyDown(e)
             p.frameY = 2;
             p.frameX ++;
 
-            ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-            fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            ctxP.clearRect(0, 0, 32, 48);
+
+            if (l2)
+                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
             drawL6();
             p.srcX = p.width * (p.frameX % 4);
             p.srcY = p.height * (p.frameY);
 
             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
-                ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
             else
-                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
         }
         detectMovementLevel3();
     }
@@ -2183,32 +2250,38 @@ function onKeyDown(e)
                     //Increment in order to flip through the walking tiles for this direction
                     p.frameX ++;
                     walk++;
+
+                    //Move canvas
+                    let yPos = p.row * 32 - walk * 8;
+                    pCanv.style.top = yPos + "px";
+
                     p.srcX = p.width * (p.frameX % 4);
-                    //Fills portion of the canvas the player was just taking up
-                    //a,b,c,d,e... are passed from movePlayer function call
-                    ctx.clearRect(p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
-                    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+                    ctxP.clearRect(0, 0, 32, 48);
+
+                    if (l2)
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
                     drawL6();
 
                     if (l2)
                     {
                         if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
                         {
-                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 - (8 * walk)), 32, 48);
-                            ctx.drawImage(doorBare, 21*32, 7*32);
+                            ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
+                            ctxP.drawImage(doorBare, 0, 0);
                         }
                         else if (underWater)
-                            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                            ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                         else
-                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                            ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
 
                     }
                     else
                     {
-                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                        ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                     }
 
-                    drawZeeEnemy();
                     setTimeout(animateWalking, walkingSpeed);
                 }
                 else
@@ -2220,8 +2293,9 @@ function onKeyDown(e)
                     //add player to updated row
                     lPMap[level][p.row][p.col] = 1;
                     walk = 0;
-                    drawZeeEnemy();
                     drawPMap();//Draws the new players position
+                    if (l2)
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                 }
             }
         }
@@ -2230,15 +2304,19 @@ function onKeyDown(e)
             p.frameY = 3;
             p.frameX ++;
 
-            ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-            fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            ctxP.clearRect(0, 0, 32, 48);
+
+            if (l2)
+                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
             drawL6();
+
             p.srcX = p.width * (p.frameX % 4);
             p.srcY = p.height * (p.frameY);
             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
-                ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
             else
-                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
 
         }
         detectMovementLevel3();
@@ -2263,32 +2341,36 @@ function onKeyDown(e)
                     //Increment in order to flip through the walking tiles for this direction
                     p.frameX ++;
                     walk++;
+
+                    let yPos = p.row * 32 + walk * 8;
+                    pCanv.style.top = yPos + "px";
+
                     p.srcX = p.width * (p.frameX % 4);
-                    //Fills portion of the canvas the player was just taking up
-                    //a,b,c,d,e... are passed from movePlayer function call
-                    ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
-                    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+                    ctxP.clearRect(0, 0, 32, 48);
+
+                    if (l2)
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
                     drawL6();
 
                     if (l2)
                     {
                         if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
                         {
-                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
-                            ctx.drawImage(doorBare, 21 * 32, 7 * 32);
+                            ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
+                            ctxP.drawImage(doorBare, 0, 0);
                         }
                         else if (underWater)
-                            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                            ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                         else
-                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                            ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
 
                     }
                     else
                     {
-                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                        ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
                     }
-
-                    drawZeeEnemy();
 
                     setTimeout(walkDown, walkingSpeed);
 
@@ -2302,9 +2384,10 @@ function onKeyDown(e)
                     //add player to updated row
                     lPMap[level][p.row][p.col] = 1;
                     walk = 0;
-                    drawZeeEnemy();
-                    drawPMap();//Draws the new players position
 
+                    drawPMap();//Draws the new players position
+                    if (l2)
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                 }
             }
         }
@@ -2314,15 +2397,19 @@ function onKeyDown(e)
             p.frameY = 0;
             p.frameX ++;
 
-            ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-            fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            ctxP.clearRect(0, 0, 32, 48);
+
+            if (l2)
+                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
             drawL6();
             p.srcX = p.width * (p.frameX % 4);
             p.srcY = p.height * (p.frameY);
+
             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
-                ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                ctxP.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
             else
-                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                ctxP.drawImage(scientist, p.srcX, p.srcY, 32, 48, 0, 0, 32, 48);
         }
         detectMovementLevel3();
     }
@@ -2411,7 +2498,6 @@ function onKeyDown(e)
         l1 = true;                                  //Set level being travelled to as true
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
         startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 50) //2
     {
@@ -2419,10 +2505,8 @@ function onKeyDown(e)
         level = 2;              //Change level identifier appropriately
         l1 = l3 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
         l2 = true;                                  //Set level being travelled to as true
-
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
         startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 51) //3
     {
@@ -2430,10 +2514,8 @@ function onKeyDown(e)
         level = 3;              //Change level identifier appropriately
         l1 = l2 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
         l3 = true;                                  //Set level being travelled to as true
-
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
         startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 53) //5
     {
@@ -2441,10 +2523,8 @@ function onKeyDown(e)
         level = 5;              //Change level identifier appropriately
         l1 = l2 = l3 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
         l5 = true;                                  //Set level being travelled to as true
-
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
         startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 54) //6
     {
@@ -2455,24 +2535,7 @@ function onKeyDown(e)
         l1 = l2 = l3 = l5 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
         l6 = true;                                  //Set level being travelled to as true
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        l6Ready=false;
         startGame();                                //Load settings and assets for next map
-        waitForLoading();
-        function waitForLoading()
-        {
-            if (!l6Ready)
-            {
-                ctx.fillStyle = '#ffffff';
-                ctx.font="20px Arial";
-                ctx.fillText("Loading...", 350, 290);
-                setTimeout(waitForLoading, 10);
-            }
-            else
-            {
-                drawMap();                   //Draw next map
-            }
-        }
-
     }
     if (e.keyCode === 55) //7
     {
@@ -2481,24 +2544,7 @@ function onKeyDown(e)
         l1 = l2 = l3 = l5 = l6 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
         l7 = true;                                  //Set level being travelled to as true
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        l7Ready=false;
         startGame();                                //Load settings and assets for next map
-        waitForTheLoading();
-
-        function waitForTheLoading()
-        {
-            if (!l7Ready)
-            {
-                ctx.fillStyle = '#ffffff';
-                ctx.font="20px Arial";
-                ctx.fillText("Loading...", 350, 290);
-                setTimeout(waitForTheLoading, 10);
-            }
-            else
-            {
-                drawMap();                   //Draw next map
-            }
-        }
     }
     if (e.keyCode === 56) //8
     {
@@ -2507,24 +2553,16 @@ function onKeyDown(e)
         l1 = l2 = l3 = l5 = l6 = l7 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
         l8 = true;                                  //Set level being travelled to as true
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        l8Ready=false;
         startGame();                                //Load settings and assets for next map
-        waitForItToLoad();
-
-        function waitForItToLoad()
-        {
-            if (!l8Ready)
-            {
-                ctx.fillStyle = '#ffffff';
-                ctx.font="20px Arial";
-                ctx.fillText("Loading...", 350, 290);
-                setTimeout(waitForItToLoad, 10);
-            }
-            else
-            {
-                drawMap();                   //Draw next map
-            }
-        }
+    }
+    if (e.keyCode === 57)//9 (go to l11)
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 11;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l5 = l6 = l7 = l8 = l9 = l10 = false;             //Set all levels to false but the one being travelled to
+        l11 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
     }
     if (e.keyCode === 79)//0 - Calls gameover()
     {
@@ -2903,6 +2941,7 @@ function checkFloorObjects(e)//For picking something up when walking over it
             }
         }
     }
+    drawMap();
 }
 
 //Space bar actions
@@ -3423,6 +3462,7 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
                 enemy[level][enem].dead = true;
                 //Set enemy to destroyed so it does not set dead to true again upon level re-entry
                 enemy[level][enem].destroyed = true;
+                enemy[level][enem].ctxMe.clearRect(0, 0, enemy[level][enem].width, enemy[level][enem].height);
             }
             else
             {
@@ -3435,6 +3475,7 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
                     //Set enemy to destroyed so it does not set dead to true again upon level re-entry
                     enemy[level][enem].destroyed = true;
                     lMap[11][Math.round(enemy[11][enem].yPos/32)][Math.round(enemy[11][enem].xPos/32)] = 15;//Key
+                    enemy[level][enem].ctxMe.clearRect(0, 0, enemy[level][enem].width, enemy[level][enem].height);
                 }
             }
 
@@ -3480,8 +3521,7 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
                             lMap[level][thisY  - Math.ceil(enemy[level][enem].height/32) - 1][thisX] = 40;
                             droppedPaper = true;
                         }//Change that tile to a paper tile
-
-
+                    drawMap();
                 }
 
                 if (catsKicked === 3)
@@ -3497,7 +3537,6 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
             {
                 removeEventListener("keydown", onKeyDown, false);
                 enemy[level][10].dead = true;
-                enemy[level][10].drawMe2();
                 addEventListener('keydown', nextDialog, false);
 
                 function nextDialog(e)

@@ -2,6 +2,7 @@ let canvas;  //Not using these in any of the intro pages (title, controls, or wa
 let ctx;    //These are only defined after running loadActualGame() inside of the controlsPage() function;
 let scriptsLoaded = false;
 let ctx3;
+let ctxP, pCanv;//Player canvas
 let name = "";
 
 //TITLE PAGE
@@ -256,12 +257,19 @@ function controlsPage()
 
                 "<div id=\"center\">\n" +
                 "\n" +
+                "<canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
                 "\n" +
-                "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
-                "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
+                "<canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
                 "\n" +
                 "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
-                "    </div>";
+                "\n" +
+                "<canvas id = \"playerCanv\" width = \"32\" height = \"48\">Your browser does not support Canvas.</canvas>" +
+                "\n" +
+                "</div>" +
+                "\n" +
+                "<div id=\"enCanv\">" +
+                "\n" +
+                "</div>";
         }
         holder.style.width = "965px";
         holder.style.height = "600px";
@@ -281,6 +289,10 @@ function controlsPage()
             }
             else
             {
+                pCanv = document.getElementById("playerCanv");
+                ctxP = pCanv.getContext("2d");
+                pCanv.style.position = "absolute";
+                pCanv.style.zIndex = "1";
                 startGame();
             }
         }

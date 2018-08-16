@@ -89,6 +89,9 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             //For drawing enemies image and maps images respectively
             img: undefined,
             thingToDraw: undefined,
+            //Own canvas
+            ctxMe: undefined,
+            canvas: undefined,
             //Main function .. creates a secondary global function in its setup function
             roam: function ()
             {
@@ -98,404 +101,41 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 {
                     self.dead = false;
                     self.originalSpeed = self.scurrySpeed;
+                    self.canvas = document.getElementById("canvas" + self.myLevel + "" + self.indexNum);
+                    self.ctxMe = self.canvas.getContext("2d");
                     //Set image -- then start walking
                     self.thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                     self.img = new Image();
                     self.img.src = self.imagePath;
                     self.drawMe = function ()//Public function
                     {
-                        if (l5)
-                            enemy[level][10].drawMe2();
-
-                        if (l2)
+                        if ((self.bottomSide > (p.row - 1) * 32 && self.topSide < (p.row + 3) * 32 && self.rightSide > (p.row - 1.5) * 32 && self.leftSide < (p.col + 2.5) * 32) || self.myLevel !== 2 || lightsOn)
                         {
-                            if ((self.bottomSide > (p.row - 1) * 32 && self.topSide < (p.row + 3) * 32 && self.rightSide > (p.row - 1.5) * 32 && self.leftSide < (p.col + 2.5) * 32) || lightsOn)
+                            if (p.row * 32 + p.height < self.bottomSide)//If player is behind enemy
                             {
-                                ctx.clearRect(self.prevX, self.prevY, self.width, self.height);
+                                //Set players canvas Z to behind this enemies canvas
+                                self.canvas.style.zIndex = "2";
 
-                                let remainX = (self.xPos % 32), remainY = (self.yPos % 32);
-                                let col = (self.xPos - remainX)/32, row = (self.yPos - remainY)/32;
-                                let columns;
-
-                                if (level === 11)
-                                    columns = 4;
-                                else columns = 3;
-
-                                for (let mR = row - 2; mR < row + 4; mR ++) //Run through all rows in the levels map (mR = map row)
-                                {
-                                    for (let mC = col - 2; mC < col + columns; mC ++)//Run through all the columns in the levels map (mC = map Column)
-                                    {
-                                        let xPos = undefined, yPos= undefined; //Defined vars that will be used for positioning images to be drawn
-
-                                        if (lMap[level] !== undefined && lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
-                                        {
-                                            xPos = mC*32;
-                                            yPos = mR*32;
-
-                                            switch (lMap[level][mR][mC])//check what needs drawing based on map index
-                                            {
-                                                case 0:
-                                                    thingToDraw = a;
-                                                    break;
-                                                case 1:
-                                                    thingToDraw = b;
-                                                    break;
-                                                case 2:
-                                                    thingToDraw = c;
-                                                    break;
-                                                case 3:
-                                                    floorSpriteX = 32;
-                                                    thingToDraw = d;
-                                                    break;
-                                                case 4:
-                                                    floorSpriteX = 64;
-                                                    thingToDraw = e;
-                                                    break;
-                                                case 5:
-                                                    floorSpriteX = 96;
-                                                    thingToDraw = f;
-                                                    break;
-                                                case 6:
-                                                    thingToDraw = g;
-                                                    break;
-                                                case 7:
-                                                    if (l2 && !sewersDrained)
-                                                        thingToDraw = wetPipe;
-                                                    else
-                                                        thingToDraw = h;
-                                                    break;
-                                                case 8:
-                                                    thingToDraw = i;
-                                                    break;
-                                                case 9:
-                                                    thingToDraw = j;
-                                                    break;
-                                                case 10:
-                                                    thingToDraw = k;
-                                                    break;
-                                                case 11:
-                                                    thingToDraw = l;
-                                                    break;
-                                                case 12:
-                                                    thingToDraw = m;
-                                                    break;
-                                                case 13:
-                                                    thingToDraw = n;
-                                                    break;
-                                                case 14:
-                                                    thingToDraw = o;
-                                                    break;
-                                                case 15:
-                                                    thingToDraw = q;
-                                                    break;
-                                                case 16:
-                                                    thingToDraw = r;
-                                                    break;
-                                                case 17:
-                                                    thingToDraw = s;
-                                                    break;
-                                                case 18:
-                                                    thingToDraw = t;
-                                                    break;
-                                                case 19:
-                                                    thingToDraw = u;
-                                                    break;
-                                                case 20:
-                                                    thingToDraw = v;
-                                                    break;
-                                                case 21:
-                                                    thingToDraw = w;
-                                                    break;
-                                                case 22:
-                                                    thingToDraw = x;
-                                                    break;
-                                                case 23:
-                                                    thingToDraw = y;
-                                                    break;
-                                                case 24:
-                                                    thingToDraw = z;
-                                                    break;
-                                                case 25:
-                                                    thingToDraw = aa;
-                                                    break;
-                                                case 26:
-                                                    thingToDraw = bb;
-                                                    break;
-                                                case 27:
-                                                    thingToDraw = cc;
-                                                    break;
-                                                case 28:
-                                                    thingToDraw = dd;
-                                                    break;
-                                                case 29:
-                                                    thingToDraw = ee;
-                                                    break;
-                                                case 30:
-                                                    thingToDraw = ff;
-                                                    break;
-                                                case 31:
-                                                    thingToDraw = gg;
-                                                    break;
-                                                case 32:
-                                                    thingToDraw = hh;
-                                                    break;
-                                                case 33:
-                                                    thingToDraw = ii;
-                                                    break;
-                                                case 34:
-                                                    thingToDraw = jj;
-                                                    break;
-                                                case 35:
-                                                    thingToDraw = kk;
-                                                    break;
-                                                case 36:
-                                                    thingToDraw = ll;
-                                                    break;
-                                                case 37:
-                                                    thingToDraw = mm;
-                                                    break;
-                                                case 38:
-                                                    thingToDraw = nn;
-                                                    break;
-                                                case 39:
-                                                    thingToDraw = oo;
-                                                    break;
-                                                case 40:
-                                                    thingToDraw = qq;
-                                                    break;
-                                                case 41:
-                                                    thingToDraw = rr;
-                                                    break;
-                                                case 42:
-                                                    thingToDraw = ss;
-                                                    break;
-                                                case 43:
-                                                    thingToDraw = tt;
-                                                    break;
-                                                case 44:
-                                                    thingToDraw = uu;
-                                                    break;
-                                                case 45:
-                                                    thingToDraw = vv;
-                                                    break;
-                                                case 46:
-                                                    thingToDraw = ww;
-                                                    break;
-                                                case 47:
-                                                    thingToDraw = xx;
-                                                    break;
-                                                case 48:
-                                                    thingToDraw = yy;
-                                                    break;
-                                                case 49:
-                                                    thingToDraw = zz;
-                                                    break;
-                                                case 50:
-                                                    thingToDraw = aaa;
-                                                    break;
-                                                case 51:
-                                                    thingToDraw = bbb;
-                                                    break;
-                                                case 52:
-                                                    thingToDraw = ccc;
-                                                    break;
-                                                case 53:
-                                                    thingToDraw = ddd;
-                                                    break;
-                                                case 54:
-                                                    thingToDraw = eee;
-                                                    break;
-                                                case 55:
-                                                    thingToDraw = fff;
-                                                    break;
-                                                case 56:
-                                                    thingToDraw = ggg;
-                                                    break;
-                                                case 57:
-                                                    thingToDraw = hhh;
-                                                    break;
-                                                case 58:
-                                                    thingToDraw = iii;
-                                                    break;
-                                                case 59:
-                                                    thingToDraw = jjj;
-                                                    break;
-                                                case 60:
-                                                    thingToDraw = kkk;
-                                                    break;
-                                                case 61:
-                                                    thingToDraw = lll;
-                                                    break;
-                                                case 62:
-                                                    thingToDraw = mmm;
-                                                    break;
-                                                case 63:
-                                                    thingToDraw = nnn;
-                                                    break;
-                                                case 64:
-                                                    thingToDraw = ooo;
-                                                    break;
-                                                case 65:
-                                                    thingToDraw = qqq;
-                                                    break;
-                                                case 66:
-                                                    thingToDraw = rrr;
-                                                    break;
-                                                case 67:
-                                                    thingToDraw = sss;
-                                                    break;
-                                                case 68:
-                                                    thingToDraw = ttt;
-                                                    break;
-                                                case 69:
-                                                    thingToDraw = uuu;
-                                                    break;
-                                                case 70:
-                                                    thingToDraw = vvv;
-                                                    break;
-                                                case 71:
-                                                    thingToDraw = www;
-                                                    break;
-                                                case 72:
-                                                    thingToDraw = xxx;
-                                                    break;
-                                                case 73:
-                                                    thingToDraw = yyy;
-                                                    break;
-                                                case 74:
-                                                    thingToDraw = zzz;
-                                                    break;
-                                            }
-
-
-                                            //Below is exclusively for sewer level
-                                            if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
-                                            {
-                                                if (thingToDraw === sewerFloor  && (l2 || l11))
-                                                // If drawing the floor on level 2
-                                                // then draw based on floorSpriteX var positioning
-                                                    ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
-                                                else
-                                                //Otherwise draw regularly
-                                                    ctx.drawImage(thingToDraw, (mC * 32), (mR * 32));
-                                            }
-
-                                            if (xPos !== undefined && yPos !== undefined)
-                                            {
-                                                if (!sewersDrained && l2)//Draw the section of sewage that was just erased
-                                                {
-                                                    ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
-                                                    if ((yPos === 0 && xPos !== 320) && xPos < 576)
-                                                        ctx.fillRect(xPos, yPos + 24, 32, 24);//Draw over the bottom quarter of the tiles on row 0 (to make water look knee level)
-                                                    else if (yPos === 352 && xPos < 384)
-                                                        ctx.fillRect(xPos, yPos, 32, 2);
-                                                    else if (yPos === 352 && xPos === 384)//Steps
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                    else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
-                                                    {
-                                                        ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
-                                                        ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
-                                                        ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
-
-
-                                                        ctx.fillRect(xPos + 15, yPos, 17, 32);
-                                                    }
-                                                    else if (yPos >= 416 && xPos > 352 && xPos < 576)
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                    else if (yPos >= 352 && xPos > 352 && xPos < 576)
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                    else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
-                                                        ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
-                                                    else if (yPos > 0 && yPos < 352 && xPos === 320)                  //      ^^^^^
-                                                        ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
-                                                    else if (yPos === 224 && xPos >= 576)
-                                                        ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles// of the secondary rooms outer wall// (to make water look knee level)
-                                                    else if (yPos > 224 && xPos >= 576)
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-
-                                                    ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
-
-                                                    if ((yPos === 0 && xPos !== 320) && xPos < 576)
-                                                        ctx.fillRect(xPos, yPos + 24, 32, 24);
-                                                    else if (yPos === 352 && xPos < 384)
-                                                        ctx.fillRect(xPos, yPos, 32, 2);
-                                                    else if (yPos === 352 && xPos === 384)//Steps
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                    else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
-                                                    {
-                                                        ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
-                                                        ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
-                                                        ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
-
-                                                        ctx.fillRect(xPos + 15, yPos, 17, 32);
-                                                    }
-                                                    else if (yPos >= 416 && xPos > 352 && xPos < 576)
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                    else if (yPos >= 352 && xPos > 352 && xPos < 576)
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                    else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                    else if (yPos > 0 && yPos < 352 && xPos === 320)
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                    else if (yPos === 224 && xPos >= 576)
-                                                        ctx.fillRect(xPos, yPos + 28, 32, 4);
-                                                    else if (yPos > 224 && xPos >= 576)
-                                                        ctx.fillRect(xPos, yPos, 32, 32);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                //Draw player over map and mouse
-                                if (p.row * 32 + p.height < self.bottomSide)//If player is behind enemy.. draw player first
-                                {
-                                    if (notWalking)
-                                    {
-                                        drawPMap();
-                                    }
-                                    //Draw new position
-                                    ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
-                                }
-                                else//Otherwise draw enemy first
-                                {
-                                    //Draw new position
-                                    ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
-                                    if (notWalking)
-                                    {
-                                        drawPMap();
-                                    }
-
-                                }
-                            }
-                        }
-                        else
-                        {
-                            //Draw player over map and mouse
-                            if (p.row * 32 + p.height < self.bottomSide)//If player is behind enemy.. draw player first
-                            {
                                 if (notWalking)
-                                {
                                     drawPMap();
-                                }
-                                //Draw new position
-                                ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
                             }
                             else//Otherwise draw enemy first
                             {
-                                //Draw new position
-                                ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
-                                if (notWalking)
-                                {
-                                    drawPMap();
-                                }
+                                //Set players canvas Z to in front of this enemies canvas
+                                self.canvas.style.zIndex = "0";
 
+                                if (notWalking)
+                                    drawPMap();
                             }
+
+                            //Draw the player
+                            self.ctxMe.clearRect(0, 0, self.width, self.height);
+                            self.ctxMe.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, 0, 0, self.width, self.height);
                         }
-                    };
-                    self.drawMe2 = function ()//Public function
-                    {
-                        ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
+                        else
+                        {
+                            self.ctxMe.clearRect(0, 0, self.width, self.height);
+                        }
                     };
                     self.startWalking = function ()
                     {
@@ -1528,6 +1168,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Change position
                         self.xPos -= self.travelDist;
+                        self.canvas.style.left = self.xPos + "px";
 
                         //Update topside, bottomside, rightside, and leftside
                         updateLRTBSide();
@@ -1585,6 +1226,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Change position
                         self.xPos += self.travelDist;
+                        self.canvas.style.left = self.xPos + "px";
 
                         //Update topside, bottomside, rightside, and leftside
                         updateLRTBSide();
@@ -1643,6 +1285,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Change position
                         self.yPos += self.travelDist;
+                        self.canvas.style.top = self.yPos + "px";
 
                         //Update topside, bottomside, rightside, and leftside
                         updateLRTBSide();
@@ -1699,6 +1342,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Change position
                         self.yPos -= self.travelDist;
+                        self.canvas.style.top = self.yPos + "px";
 
                         //Update topside, bottomside, rightside, and leftside
                         updateLRTBSide();
@@ -1747,370 +1391,36 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 //Drawing rat in new position -- called by walkLeft, walkRight .... functions (then call walk function to start over)
                 function drawIt()                           //May have to change up the drawImage command (self.img to something else)
                 {
-                    //If within the lit up area of level 2
                     if ((self.bottomSide > (p.row - 1) * 32 && self.topSide < (p.row + 3) * 32 && self.rightSide > (p.row - 1.5) * 32 && self.leftSide < (p.col + 2.5) * 32) || self.myLevel !== 2 || lightsOn)
                     {
-                        ctx.clearRect(self.prevX, self.prevY, self.width, self.height);
-
-                        let remainX = (self.xPos % 32), remainY = (self.yPos % 32);
-                        let col = (self.xPos - remainX)/32, row = (self.yPos - remainY)/32;
-                        let columns;
-
-                        if (level === 11)
-                            columns = 4;
-                        else columns = 3;
-
-                        for (let mR = row - 2; mR < row + 4; mR ++) //Run through all rows in the levels map (mR = map row)
+                        if (p.row * 32 + p.height < self.bottomSide)//If player is behind enemy
                         {
-                            for (let mC = col - 2; mC < col + columns; mC ++)//Run through all the columns in the levels map (mC = map Column)
-                            {
-                                let xPos = undefined, yPos= undefined; //Defined vars that will be used for positioning images to be drawn
+                            //Set players canvas Z to in front of this enemies canvas
+                            self.canvas.style.zIndex = "2";
 
-                                if (lMap[level] !== undefined && lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
-                                {
-                                    xPos = mC*32;
-                                    yPos = mR*32;
-
-                                    switch (lMap[level][mR][mC])//check what needs drawing based on map index
-                                    {
-                                        case 0:
-                                            thingToDraw = a;
-                                            break;
-                                        case 1:
-                                            thingToDraw = b;
-                                            break;
-                                        case 2:
-                                            thingToDraw = c;
-                                            break;
-                                        case 3:
-                                            floorSpriteX = 32;
-                                            thingToDraw = d;
-                                            break;
-                                        case 4:
-                                            floorSpriteX = 64;
-                                            thingToDraw = e;
-                                            break;
-                                        case 5:
-                                            floorSpriteX = 96;
-                                            thingToDraw = f;
-                                            break;
-                                        case 6:
-                                            thingToDraw = g;
-                                            break;
-                                        case 7:
-                                            if (l2 && !sewersDrained)
-                                                thingToDraw = wetPipe;
-                                            else
-                                                thingToDraw = h;
-                                            break;
-                                        case 8:
-                                            thingToDraw = i;
-                                            break;
-                                        case 9:
-                                            thingToDraw = j;
-                                            break;
-                                        case 10:
-                                            thingToDraw = k;
-                                            break;
-                                        case 11:
-                                            thingToDraw = l;
-                                            break;
-                                        case 12:
-                                            thingToDraw = m;
-                                            break;
-                                        case 13:
-                                            thingToDraw = n;
-                                            break;
-                                        case 14:
-                                            thingToDraw = o;
-                                            break;
-                                        case 15:
-                                            thingToDraw = q;
-                                            break;
-                                        case 16:
-                                            thingToDraw = r;
-                                            break;
-                                        case 17:
-                                            thingToDraw = s;
-                                            break;
-                                        case 18:
-                                            thingToDraw = t;
-                                            break;
-                                        case 19:
-                                            thingToDraw = u;
-                                            break;
-                                        case 20:
-                                            thingToDraw = v;
-                                            break;
-                                        case 21:
-                                            thingToDraw = w;
-                                            break;
-                                        case 22:
-                                            thingToDraw = x;
-                                            break;
-                                        case 23:
-                                            thingToDraw = y;
-                                            break;
-                                        case 24:
-                                            thingToDraw = z;
-                                            break;
-                                        case 25:
-                                            thingToDraw = aa;
-                                            break;
-                                        case 26:
-                                            thingToDraw = bb;
-                                            break;
-                                        case 27:
-                                            thingToDraw = cc;
-                                            break;
-                                        case 28:
-                                            thingToDraw = dd;
-                                            break;
-                                        case 29:
-                                            thingToDraw = ee;
-                                            break;
-                                        case 30:
-                                            thingToDraw = ff;
-                                            break;
-                                        case 31:
-                                            thingToDraw = gg;
-                                            break;
-                                        case 32:
-                                            thingToDraw = hh;
-                                            break;
-                                        case 33:
-                                            thingToDraw = ii;
-                                            break;
-                                        case 34:
-                                            thingToDraw = jj;
-                                            break;
-                                        case 35:
-                                            thingToDraw = kk;
-                                            break;
-                                        case 36:
-                                            thingToDraw = ll;
-                                            break;
-                                        case 37:
-                                            thingToDraw = mm;
-                                            break;
-                                        case 38:
-                                            thingToDraw = nn;
-                                            break;
-                                        case 39:
-                                            thingToDraw = oo;
-                                            break;
-                                        case 40:
-                                            thingToDraw = qq;
-                                            break;
-                                        case 41:
-                                            thingToDraw = rr;
-                                            break;
-                                        case 42:
-                                            thingToDraw = ss;
-                                            break;
-                                        case 43:
-                                            thingToDraw = tt;
-                                            break;
-                                        case 44:
-                                            thingToDraw = uu;
-                                            break;
-                                        case 45:
-                                            thingToDraw = vv;
-                                            break;
-                                        case 46:
-                                            thingToDraw = ww;
-                                            break;
-                                        case 47:
-                                            thingToDraw = xx;
-                                            break;
-                                        case 48:
-                                            thingToDraw = yy;
-                                            break;
-                                        case 49:
-                                            thingToDraw = zz;
-                                            break;
-                                        case 50:
-                                            thingToDraw = aaa;
-                                            break;
-                                        case 51:
-                                            thingToDraw = bbb;
-                                            break;
-                                        case 52:
-                                            thingToDraw = ccc;
-                                            break;
-                                        case 53:
-                                            thingToDraw = ddd;
-                                            break;
-                                        case 54:
-                                            thingToDraw = eee;
-                                            break;
-                                        case 55:
-                                            thingToDraw = fff;
-                                            break;
-                                        case 56:
-                                            thingToDraw = ggg;
-                                            break;
-                                        case 57:
-                                            thingToDraw = hhh;
-                                            break;
-                                        case 58:
-                                            thingToDraw = iii;
-                                            break;
-                                        case 59:
-                                            thingToDraw = jjj;
-                                            break;
-                                        case 60:
-                                            thingToDraw = kkk;
-                                            break;
-                                        case 61:
-                                            thingToDraw = lll;
-                                            break;
-                                        case 62:
-                                            thingToDraw = mmm;
-                                            break;
-                                        case 63:
-                                            thingToDraw = nnn;
-                                            break;
-                                        case 64:
-                                            thingToDraw = ooo;
-                                            break;
-                                        case 65:
-                                            thingToDraw = qqq;
-                                            break;
-                                        case 66:
-                                            thingToDraw = rrr;
-                                            break;
-                                        case 67:
-                                            thingToDraw = sss;
-                                            break;
-                                        case 68:
-                                            thingToDraw = ttt;
-                                            break;
-                                        case 69:
-                                            thingToDraw = uuu;
-                                            break;
-                                        case 70:
-                                            thingToDraw = vvv;
-                                            break;
-                                        case 71:
-                                            thingToDraw = www;
-                                            break;
-                                        case 72:
-                                            thingToDraw = xxx;
-                                            break;
-                                        case 73:
-                                            thingToDraw = yyy;
-                                            break;
-                                        case 74:
-                                            thingToDraw = zzz;
-                                            break;
-                                    }
-
-
-                                    //Below is exclusively for sewer level
-                                    if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
-                                    {
-                                        if (thingToDraw === sewerFloor  && (l2 || l11))
-                                        // If drawing the floor on level 2
-                                        // then draw based on floorSpriteX var positioning
-                                            ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
-                                        else
-                                        //Otherwise draw regularly
-                                            ctx.drawImage(thingToDraw, (mC * 32), (mR * 32));
-                                    }
-
-                                    if (xPos !== undefined && yPos !== undefined)
-                                    {
-                                        if (!sewersDrained && l2)//Draw the section of sewage that was just erased
-                                        {
-                                            ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
-                                            if ((yPos === 0 && xPos !== 320) && xPos < 576)
-                                                ctx.fillRect(xPos, yPos + 24, 32, 24);//Draw over the bottom quarter of the tiles on row 0 (to make water look knee level)
-                                            else if (yPos === 352 && xPos < 384)
-                                                ctx.fillRect(xPos, yPos, 32, 2);
-                                            else if (yPos === 352 && xPos === 384)//Steps
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                            else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
-                                            {
-                                                ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
-                                                ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
-                                                ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
-
-
-                                                ctx.fillRect(xPos + 15, yPos, 17, 32);
-                                            }
-                                            else if (yPos >= 416 && xPos > 352 && xPos < 576)
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                            else if (yPos >= 352 && xPos > 352 && xPos < 576)
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                            else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
-                                                ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
-                                            else if (yPos > 0 && yPos < 352 && xPos === 320)                  //      ^^^^^
-                                                ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
-                                            else if (yPos === 224 && xPos >= 576)
-                                                ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles// of the secondary rooms outer wall// (to make water look knee level)
-                                            else if (yPos > 224 && xPos >= 576)
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-
-                                            ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
-
-                                            if ((yPos === 0 && xPos !== 320) && xPos < 576)
-                                                ctx.fillRect(xPos, yPos + 24, 32, 24);
-                                            else if (yPos === 352 && xPos < 384)
-                                                ctx.fillRect(xPos, yPos, 32, 2);
-                                            else if (yPos === 352 && xPos === 384)//Steps
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                            else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
-                                            {
-                                                ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
-                                                ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
-                                                ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
-
-                                                ctx.fillRect(xPos + 15, yPos, 17, 32);
-                                            }
-                                            else if (yPos >= 416 && xPos > 352 && xPos < 576)
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                            else if (yPos >= 352 && xPos > 352 && xPos < 576)
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                            else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                            else if (yPos > 0 && yPos < 352 && xPos === 320)
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                            else if (yPos === 224 && xPos >= 576)
-                                                ctx.fillRect(xPos, yPos + 28, 32, 4);
-                                            else if (yPos > 224 && xPos >= 576)
-                                                ctx.fillRect(xPos, yPos, 32, 32);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        //Draw player over map and mouse
-                        if (p.row * 32 + p.height < self.bottomSide)//If player is behind enemy.. draw player first
-                        {
                             if (notWalking)
-                            {
                                 drawPMap();
-                            }
-                            //Draw new position
-                            ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
-                            drawZeeEnemy();
                         }
                         else//Otherwise draw enemy first
                         {
-                            //Draw new position
-                            ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
-                            if (notWalking)
-                            {
-                                drawPMap();
-                            }
-                            drawZeeEnemy();
-                        }
-                    }
+                            //Set players canvas Z to in front of this enemies canvas
+                            self.canvas.style.zIndex = "0";
 
-                    if (self.hostile)
-                        checkIfHit();
+                            if (notWalking)
+                                drawPMap();
+                        }
+
+                        //Draw the player
+                        self.ctxMe.clearRect(0, 0, self.width, self.height);
+                        self.ctxMe.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, 0, 0, self.width, self.height);
+
+                        if (self.hostile)
+                            checkIfHit();
+                    }
+                    else
+                    {
+                        self.ctxMe.clearRect(0, 0, self.width, self.height);
+                    }
                 }
 
             }
@@ -2119,6 +1429,12 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
     //Uses constructor to set blueprint values as given values
     {
+        let box = document.getElementById("enCanv");
+        box.innerHTML += "<div id = \"div" + lvl + "" + enemy[lvl].length +  "\"></div>";
+        let thisDiv = document.getElementById("div" + lvl + "" + enemy[lvl].length);
+        thisDiv.innerHTML += "<canvas id=\"canvas" + lvl + "" + enemy[lvl].length + "\" width = \"" + wid + "\" height = \"" + hei + "\">Your browser does not support canvas</canvas>";
+        let thisCanvas = document.getElementById("canvas" + lvl + "" + enemy[lvl].length);
+
         thisEnemy.hostile = canAttack;
         thisEnemy.width = wid;
         thisEnemy.height = hei;
@@ -2132,6 +1448,14 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
         thisEnemy.travelDist = strideLength;
         thisEnemy.indexNum = enemy[lvl].length;
         thisEnemy.attackTimeout = attTimeOut;
+
+        //Testing -- giving each enemy their own canvas
+        thisCanvas.style.position = "absolute";
+        thisEnemy.canvas = thisCanvas;
+        thisEnemy.ctxMe = thisCanvas.getContext("2d");
+
+
+        //Testing -- giving each enemy their own canvas
     }
 
 
@@ -2246,7 +1570,11 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 setItsPosition();
             }
             else
+            {
+                thisEnemy.canvas.style.left = thisEnemy.xPos + "px";
+                thisEnemy.canvas.style.top = thisEnemy.yPos + "px";
                 enemy[lvl].push(thisEnemy);
+            }
         }
     }
 }

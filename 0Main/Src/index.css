@@ -1,6 +1,6 @@
 html
 {
-    background-color: #3c3c3c;
+    background-color: #151515;
 }
 
 #holder
@@ -19,7 +19,15 @@ html
     width: 965px;
     height: 600px;
     margin: 0 auto;
-    /*border: 2px inset black;*/
+}
+
+#enCanv
+
+{
+    position: absolute;
+    width: 965px;
+    height: 600px;
+    margin: 0 auto;
 }
 
 #regular

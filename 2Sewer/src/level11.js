@@ -29,7 +29,6 @@ function initializeLV11()
     let barrelPileB2 = new Image();
     let barrelPileB3 = new Image();
     let barrelPile2T1 = new Image();
-
     let barrelPile2T3 = new Image();
     let barrelPile2M1 = new Image();
     let barrelPile2M2 = new Image();
@@ -41,7 +40,7 @@ function initializeLV11()
     let sidewaysBarrelFloor = new Image();
     let pipeInWallT = new Image();
     let pipeInWallB = new Image();
-
+    let sewerFloor = new Image();
     let barrelPile2T2 = new Image();
 
 
@@ -81,6 +80,7 @@ function initializeLV11()
         sidewaysBarrelFloor.src = "2Sewer/images/sidewaysBarrel.png";
         pipeInWallT.src = "2Sewer/images/pipewwallnfloorT.png";
         pipeInWallB.src = "2Sewer/images/pipewwallnfloorB.png";
+        sewerFloor.src = "2Sewer/images/floor.png";
         barrelPile2T2.src = "2Sewer/images/barrelpile2T2.png";
     }//Defining images src properties
 

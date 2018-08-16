@@ -2019,7 +2019,7 @@ function initializeLV2(dontDrawP)
         l2Ready=true;
     };
 
-    waitForLoading(dontDrawP);//Universal.. ish
+    waitForLoading(dontDrawP);
 
     burning = setInterval(letEmBurn, 120);              //Turn on the FYAAAA!!!!
 
