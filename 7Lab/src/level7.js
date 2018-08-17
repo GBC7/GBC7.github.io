@@ -1,4 +1,6 @@
 //L7 & 8
+let appearances;
+
 let windowClosed = false;
 let researchPaper = false;
 let researchBurned = false;
@@ -182,5 +184,4 @@ function initializeLV7()
 
     screenRight.onload = function(){l7Ready=true;};
     waitForLoading();//Universal.. ish
-
 }

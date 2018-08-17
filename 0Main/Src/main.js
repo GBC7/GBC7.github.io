@@ -124,6 +124,7 @@ let aghh = new Audio;//          below this one.
 {
     scientist.src = "0Main/images/scientist2.png";
     aghh.src = ("0Main/audio/aghh.mp3");
+    aghh.volume = 0.25;
 }
 
 //Player object
@@ -884,7 +885,11 @@ function drawPMap()//Player Map
             alreadyDoinIt = true;
             removeEventListener("keydown", onKeyDown, false);
             let steps = 0;
-            lPMap[level][14][10] = 0;
+
+            if (lPMap[level]!== undefined)
+                if (lPMap[level][14]!== undefined)
+                    if (lPMap[level][14][10]!== undefined)
+                        lPMap[level][14][10] = 0;
 
             upTheFireEscape();
             function upTheFireEscape()
@@ -2585,363 +2590,368 @@ function onKeyDown(e)
 
 function checkBoundaries(e)//Gets called each step
 {
-    if ((e === 37 || e === 65) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
+    if (lMap[level] !== undefined)
     {
-        if (l1 || l7 || l8)
-            canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
-        else if (l2)
+        if ((e === 37 || e === 65) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
         {
-            if (!lightsOn && p.row === 11 && p.col === 9)
+            if (l1 || l7 || l8)
+                canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
+            else if (l2)
             {
-                canGoThisWay = false;
+                if (!lightsOn && p.row === 11 && p.col === 9)
+                {
+                    canGoThisWay = false;
+                }
+                else
+                {
+                    canGoThisWay =
+                        (
+                            lMap[level][p.row + 1][p.col - 1] === 3 ||
+                            lMap[level][p.row + 1][p.col - 1] === 4 ||
+                            lMap[level][p.row + 1][p.col - 1] === 5 ||
+                            lMap[level][p.row + 1][p.col - 1] === 29 ||
+                            lMap[level][p.row + 1][p.col - 1] === 30 ||
+                            (
+                                lMap[level][p.row + 1][p.col - 1] === 15 ||
+                                lMap[level][p.row + 1][p.col - 1] === 9
+                                &&
+                                doorThreeOpen
+                            )
+
+                        );
+                }
             }
-            else
+            else if (l11)
             {
                 canGoThisWay =
                     (
                         lMap[level][p.row + 1][p.col - 1] === 3 ||
                         lMap[level][p.row + 1][p.col - 1] === 4 ||
-                        lMap[level][p.row + 1][p.col - 1] === 5 ||
-                        lMap[level][p.row + 1][p.col - 1] === 29 ||
-                        lMap[level][p.row + 1][p.col - 1] === 30 ||
+                        lMap[level][p.row + 1][p.col - 1] === 0
+                    );
+            }
+            else if (l5)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 1][p.col - 1] === floorNumbers[level] ||
+                        lMap[level][p.row + 1][p.col - 1] === 40
+                    );
+            }
+            else if (l6)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 1][p.col - 1] === 0 ||
+                        lMap[level][p.row + 1][p.col - 1] === 4
+                    );
+            }
+            else if (l3)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 1][p.col - 1] === 16 ||
+                        lMap[level][p.row + 1][p.col - 1] === 17 ||
+                        lMap[level][p.row + 1][p.col - 1] === 0
+                    );
+            }
+
+        }
+        if ((e === 39 || e === 68) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
+        {
+            if (l1 || l7 || l8)
+                canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
+            else if (l2)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 1][p.col + 1] === 3 ||
+                        lMap[level][p.row + 1][p.col + 1] === 4 ||
+                        lMap[level][p.row + 1][p.col + 1] === 5 ||
+                        lMap[level][p.row + 1][p.col + 1] === 29 ||
+                        lMap[level][p.row + 1][p.col + 1] === 30 ||
                         (
-                            lMap[level][p.row + 1][p.col - 1] === 15 ||
-                            lMap[level][p.row + 1][p.col - 1] === 9
+                            lMap[level][p.row + 1][p.col + 1] === 15 ||
+                            lMap[level][p.row + 1][p.col + 1] === 9
                             &&
                             doorThreeOpen
                         )
-
+                    );
+            }
+            else if (l11)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 1][p.col + 1] === 3 ||
+                        lMap[level][p.row + 1][p.col + 1] === 4 ||
+                        lMap[level][p.row + 1][p.col + 1] === 0
+                    );
+            }
+            else if (l5)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 1][p.col + 1] === floorNumbers[level] ||
+                        lMap[level][p.row + 1][p.col + 1] === 40
+                    );
+            }
+            else if (l6)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 1][p.col + 1] === 0 ||
+                        lMap[level][p.row + 1][p.col + 1] === 4
+                    );
+            }
+            else if (l3)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 1][p.col + 1] === 16 ||
+                        lMap[level][p.row + 1][p.col + 1] === 17 ||
+                        lMap[level][p.row + 1][p.col + 1] === 0
                     );
             }
         }
-        else if (l11)
+        if ((e === 38 || e === 87) && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
         {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col - 1] === 3 ||
-                    lMap[level][p.row + 1][p.col - 1] === 4 ||
-                    lMap[level][p.row + 1][p.col - 1] === 0
-                );
-        }
-        else if (l5)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col - 1] === floorNumbers[level] ||
-                    lMap[level][p.row + 1][p.col - 1] === 40
-                );
-        }
-        else if (l6)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col - 1] === 0 ||
-                    lMap[level][p.row + 1][p.col - 1] === 4
-                );
-        }
-        else if (l3)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col - 1] === 16 ||
-                    lMap[level][p.row + 1][p.col - 1] === 17 ||
-                    lMap[level][p.row + 1][p.col - 1] === 0
-                );
-        }
-
-    }
-    if ((e === 39 || e === 68) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
-    {
-        if (l1 || l7 || l8)
-            canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
-        else if (l2)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col + 1] === 3 ||
-                    lMap[level][p.row + 1][p.col + 1] === 4 ||
-                    lMap[level][p.row + 1][p.col + 1] === 5 ||
-                    lMap[level][p.row + 1][p.col + 1] === 29 ||
-                    lMap[level][p.row + 1][p.col + 1] === 30 ||
-                    (
-                        lMap[level][p.row + 1][p.col + 1] === 15 ||
-                        lMap[level][p.row + 1][p.col + 1] === 9
-                        &&
-                        doorThreeOpen
-                    )
-                );
-        }
-        else if (l11)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col + 1] === 3 ||
-                    lMap[level][p.row + 1][p.col + 1] === 4 ||
-                    lMap[level][p.row + 1][p.col + 1] === 0
-                );
-        }
-        else if (l5)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col + 1] === floorNumbers[level] ||
-                    lMap[level][p.row + 1][p.col + 1] === 40
-                );
-        }
-        else if (l6)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col + 1] === 0 ||
-                    lMap[level][p.row + 1][p.col + 1] === 4
-                );
-        }
-        else if (l3)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col + 1] === 16 ||
-                    lMap[level][p.row + 1][p.col + 1] === 17 ||
-                    lMap[level][p.row + 1][p.col + 1] === 0
-                );
-        }
-    }
-    if ((e === 38 || e === 87) && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
-    {
-        if (l1 || l7 || l8)
-            canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
-        else if (l2)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row][p.col] === 3 ||
-                    lMap[level][p.row][p.col] === 4 ||
-                    lMap[level][p.row][p.col] === 5 ||
-                    lMap[level][p.row][p.col] === 29 ||
-                    lMap[level][p.row][p.col] === 30 ||
-                    (
-                        lMap[level][p.row][p.col] === 15 ||
-                        lMap[level][p.row][p.col] === 9
-                        &&
-                        doorThreeOpen
-                    )
-                );
-        }
-        else if (l11)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row][p.col] === 3 ||
-                    lMap[level][p.row][p.col] === 4 ||
-                    lMap[level][p.row][p.col] === 0
-                );
-        }
-        else if (l5)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row][p.col] === floorNumbers[level] ||
-                    lMap[level][p.row][p.col] === 40
-                );
-        }
-        else if (l6)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row][p.col] === 0 ||
-                    lMap[level][p.row][p.col] === 4
-                );
-        }
-        else if (l3)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row][p.col] === 16 ||
-                    lMap[level][p.row][p.col] === 17 ||
-                    lMap[level][p.row][p.col] === 0
-                );
-        }
-    }
-    if ((e === 40 || e === 83) && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
-    {
-        if (l1 || l7 || l8)
-            canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
-        else if (l2)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 2][p.col] === 3 ||
-                    lMap[level][p.row + 2][p.col] === 4 ||
-                    lMap[level][p.row + 2][p.col] === 5 ||
-                    lMap[level][p.row + 2][p.col] === 29 ||
-                    lMap[level][p.row + 2][p.col] === 30 ||
-                    (
-                        lMap[level][p.row + 2][p.col]  === 15 ||
-                        lMap[level][p.row + 2][p.col] === 9
-                        &&
-                        doorThreeOpen
-                    )
-                );
-        }
-        else if (l11)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 2][p.col] === 3 ||
-                    lMap[level][p.row + 2][p.col] === 4 ||
-                    lMap[level][p.row + 2][p.col] === 0
-                );
-        }
-        else if (l5)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 2][p.col] === floorNumbers[level] ||
-                    lMap[level][p.row + 2][p.col] === 40
-                );
-        }
-        else if (l6)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 2][p.col] === 0 ||
-                    lMap[level][p.row + 2][p.col] === 4
-                );
-        }
-        else if (l3)
-        {
-            canGoThisWay =
-                (
-                    lMap[level][p.row + 2][p.col] === 16 ||
-                    lMap[level][p.row + 2][p.col] === 17 ||
-                    lMap[level][p.row + 2][p.col] === 0
-                );
-        }
-    }
-
-    if (l2)
-    {
-        if (!lightsOn && p.row === 11 && p.col === 9)//Shiver
-        {
-            let shivers = 0;
-            removeEventListener("keydown", onKeyDown, false);
-
-            dialogText(names[1], DialogLevel2[2], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-
-            if (!alreadyShivering)
+            if (l1 || l7 || l8)
+                canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
+            else if (l2)
             {
-                shiver();
-                ratOfDeath.play();
+                canGoThisWay =
+                    (
+                        lMap[level][p.row][p.col] === 3 ||
+                        lMap[level][p.row][p.col] === 4 ||
+                        lMap[level][p.row][p.col] === 5 ||
+                        lMap[level][p.row][p.col] === 29 ||
+                        lMap[level][p.row][p.col] === 30 ||
+                        (
+                            lMap[level][p.row][p.col] === 15 ||
+                            lMap[level][p.row][p.col] === 9
+                            &&
+                            doorThreeOpen
+                        )
+                    );
             }
-
-            function shiver()
+            else if (l11)
             {
-                shivers++;
-                alreadyShivering = true;
+                canGoThisWay =
+                    (
+                        lMap[level][p.row][p.col] === 3 ||
+                        lMap[level][p.row][p.col] === 4 ||
+                        lMap[level][p.row][p.col] === 0
+                    );
+            }
+            else if (l5)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row][p.col] === floorNumbers[level] ||
+                        lMap[level][p.row][p.col] === 40
+                    );
+            }
+            else if (l6)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row][p.col] === 0 ||
+                        lMap[level][p.row][p.col] === 4
+                    );
+            }
+            else if (l3)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row][p.col] === 16 ||
+                        lMap[level][p.row][p.col] === 17 ||
+                        lMap[level][p.row][p.col] === 0
+                    );
+            }
+        }
+        if ((e === 40 || e === 83) && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
+        {
+            if (l1 || l7 || l8)
+                canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
+            else if (l2)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 2][p.col] === 3 ||
+                        lMap[level][p.row + 2][p.col] === 4 ||
+                        lMap[level][p.row + 2][p.col] === 5 ||
+                        lMap[level][p.row + 2][p.col] === 29 ||
+                        lMap[level][p.row + 2][p.col] === 30 ||
+                        (
+                            lMap[level][p.row + 2][p.col]  === 15 ||
+                            lMap[level][p.row + 2][p.col] === 9
+                            &&
+                            doorThreeOpen
+                        )
+                    );
+            }
+            else if (l11)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 2][p.col] === 3 ||
+                        lMap[level][p.row + 2][p.col] === 4 ||
+                        lMap[level][p.row + 2][p.col] === 0
+                    );
+            }
+            else if (l5)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 2][p.col] === floorNumbers[level] ||
+                        lMap[level][p.row + 2][p.col] === 40
+                    );
+            }
+            else if (l6)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 2][p.col] === 0 ||
+                        lMap[level][p.row + 2][p.col] === 4
+                    );
+            }
+            else if (l3)
+            {
+                canGoThisWay =
+                    (
+                        lMap[level][p.row + 2][p.col] === 16 ||
+                        lMap[level][p.row + 2][p.col] === 17 ||
+                        lMap[level][p.row + 2][p.col] === 0
+                    );
+            }
+        }
 
-                if (shivers !== 22)
-                {
-                    setTimeout(shiverLeft, 15);
-                }
-                else
-                {
-                    alreadyShivering = false;
-                    addEventListener("keydown", onKeyDown, false);
+        if (l2)
+        {
+            if (!lightsOn && p.row === 11 && p.col === 9)//Shiver
+            {
+                let shivers = 0;
+                removeEventListener("keydown", onKeyDown, false);
 
-                }
-                function shiverLeft()
+                dialogText(names[1], DialogLevel2[2], "20 px", "white");
+                setTimeout(dialogInitialize, 3000);
+
+                if (!alreadyShivering)
                 {
-                    ctx.clearRect(p.col*32, p.row*32, 32, 48);
-                    fillErasedMap();
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32) - 1, (p.row * 32) + 0.25, 32, 48);
-                    setTimeout(shiverRight, 15);
-                }
-                function shiverRight()
-                {
-                    ctx.clearRect(p.col*32, p.row*32, 32, 48);
-                    fillErasedMap();
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32) + 1, (p.row * 32) - 0.25, 32, 48);
-                    setTimeout(shiver, 10);
+                    shiver();
+                    ratOfDeath.play();
                 }
 
+                function shiver()
+                {
+                    shivers++;
+                    alreadyShivering = true;
+
+                    if (shivers !== 22)
+                    {
+                        setTimeout(shiverLeft, 15);
+                    }
+                    else
+                    {
+                        alreadyShivering = false;
+                        addEventListener("keydown", onKeyDown, false);
+
+                    }
+                    function shiverLeft()
+                    {
+                        ctx.clearRect(p.col*32, p.row*32, 32, 48);
+                        fillErasedMap();
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32) - 1, (p.row * 32) + 0.25, 32, 48);
+                        setTimeout(shiverRight, 15);
+                    }
+                    function shiverRight()
+                    {
+                        ctx.clearRect(p.col*32, p.row*32, 32, 48);
+                        fillErasedMap();
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32) + 1, (p.row * 32) - 0.25, 32, 48);
+                        setTimeout(shiver, 10);
+                    }
+
+                }
             }
         }
     }
-
 }
 
 function checkFloorObjects(e)//For picking something up when walking over it
 {
-    if ((e === 37 || e === 65) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
+    if (lMap[level] !== undefined)
     {
-        if (lMap[level][p.row + 1][p.col - 1] === floorObjects[level])
+        if ((e === 37 || e === 65) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
         {
-            if (l5)
+            if (lMap[level][p.row + 1][p.col - 1] === floorObjects[level])
             {
-                lMap[level][p.row + 1][p.col - 1] = 2;
-                publishersPaper = true;
-            }
-            else if (l11)
-            {
-                lMap[level][p.row + 1][p.col - 1] = 4;//Change that tile to a floor tile
-                drawMap();
-                keyFound = true;
+                if (l5)
+                {
+                    lMap[level][p.row + 1][p.col - 1] = 2;
+                    publishersPaper = true;
+                }
+                else if (l11)
+                {
+                    lMap[level][p.row + 1][p.col - 1] = 4;//Change that tile to a floor tile
+                    drawMap();
+                    keyFound = true;
+                }
             }
         }
-    }
-    if ((e === 39 || e === 68) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
-    {
-        if (lMap[level][p.row + 1][p.col + 1] === floorObjects[level])
+        if ((e === 39 || e === 68) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
         {
-            if (l5)
+            if (lMap[level][p.row + 1][p.col + 1] === floorObjects[level])
             {
-                lMap[level][p.row + 1][p.col + 1] = 2;
-                publishersPaper = true;
-            }
-            else if (l11)
-            {
-                lMap[level][p.row + 1][p.col + 1] = 4;//Change that tile to a floor tile
-                drawMap();
-                keyFound = true;
+                if (l5)
+                {
+                    lMap[level][p.row + 1][p.col + 1] = 2;
+                    publishersPaper = true;
+                }
+                else if (l11)
+                {
+                    lMap[level][p.row + 1][p.col + 1] = 4;//Change that tile to a floor tile
+                    drawMap();
+                    keyFound = true;
+                }
             }
         }
-    }
-    if ((e === 38 || e === 87) && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
-    {
-        if (lMap[level][p.row][p.col] === floorObjects[level])
+        if ((e === 38 || e === 87) && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
         {
-            if (l5)
+            if (lMap[level][p.row][p.col] === floorObjects[level])
             {
-                lMap[level][p.row][p.col] = 2;
-                publishersPaper = true;
-            }
-            else if (l11)
-            {
-                lMap[level][p.row][p.col] = 4;//Change that tile to a floor tile
-                drawMap();
-                keyFound = true;
+                if (l5)
+                {
+                    lMap[level][p.row][p.col] = 2;
+                    publishersPaper = true;
+                }
+                else if (l11)
+                {
+                    lMap[level][p.row][p.col] = 4;//Change that tile to a floor tile
+                    drawMap();
+                    keyFound = true;
+                }
             }
         }
-    }
-    if ((e === 40 || e === 83) && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
-    {
-        if (lMap[level][p.row + 2][p.col] === floorObjects[level])
+        if ((e === 40 || e === 83) && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
         {
-            if (l5)
+            if (lMap[level][p.row + 2][p.col] === floorObjects[level])
             {
-                lMap[level][p.row + 2][p.col] = 2;
-                publishersPaper = true;
-            }
-            else if (l11)
-            {
-                lMap[level][p.row + 2][p.col] = 4;//Change that tile to a floor tile
-                drawMap();
-                keyFound = true;
+                if (l5)
+                {
+                    lMap[level][p.row + 2][p.col] = 2;
+                    publishersPaper = true;
+                }
+                else if (l11)
+                {
+                    lMap[level][p.row + 2][p.col] = 4;//Change that tile to a floor tile
+                    drawMap();
+                    keyFound = true;
+                }
             }
         }
+        drawMap();
     }
-    drawMap();
 }
 
 //Space bar actions
@@ -3463,6 +3473,14 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
                 //Set enemy to destroyed so it does not set dead to true again upon level re-entry
                 enemy[level][enem].destroyed = true;
                 enemy[level][enem].ctxMe.clearRect(0, 0, enemy[level][enem].width, enemy[level][enem].height);
+                let remove = document.getElementById("div" + level + "" + enemy[level][enem].indexNum) !== null;
+
+                if (!remove)
+                {
+                    let parent = document.getElementById("enCanv");
+                    let child = document.getElementById("canvas" + level + "" + enemy[level][enem].indexNum);
+                    parent.removeChild(child);
+                }
             }
             else
             {
@@ -3476,6 +3494,15 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
                     enemy[level][enem].destroyed = true;
                     lMap[11][Math.round(enemy[11][enem].yPos/32)][Math.round(enemy[11][enem].xPos/32)] = 15;//Key
                     enemy[level][enem].ctxMe.clearRect(0, 0, enemy[level][enem].width, enemy[level][enem].height);
+                    let remove = document.getElementById("div" + level + "" + enemy[level][enem].indexNum) !== null;
+
+                    if (!remove)
+                    {
+                        let parent = document.getElementById("enCanv");
+                        let child = document.getElementById("canvas" + level + "" + enemy[level][enem].indexNum);
+                        parent.removeChild(child);
+                    }
+
                 }
             }
 
@@ -3593,6 +3620,8 @@ function turnOnEnemies()
             if (enemy[level][num].dead && enemy[level][num].setup)
             {
                 enemy[level][num].dead = false;
+                enemy[level][num].canvas = document.getElementById("canvas" + level + "" + num);
+                enemy[level][num].ctxMe = enemy[level][num].canvas.getContext("2d");
                 enemy[level][num].startWalking();
             }
             else
@@ -3890,6 +3919,12 @@ function resetLevel(time = 40)
     function resetTheEnsArray()//Pull the enemies out of the array so that we can put them back in
     {
             enemy[level] = [];
+            for (let numOf = 0; numOf < enemy[level].length; numOf++)
+            {
+                let parent = document.getElementById("enCanv");
+                let child = document.getElementById("div" + level + "" + enemy[level][numOf].indexNum);
+                parent.removeChild(child);
+            }
             putEmBack();
     }
     function putEmBack()

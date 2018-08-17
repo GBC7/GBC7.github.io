@@ -1429,10 +1429,12 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
     //Uses constructor to set blueprint values as given values
     {
-        let box = document.getElementById("enCanv");
-        box.innerHTML += "<div id = \"div" + lvl + "" + enemy[lvl].length +  "\"></div>";
-        let thisDiv = document.getElementById("div" + lvl + "" + enemy[lvl].length);
-        thisDiv.innerHTML += "<canvas id=\"canvas" + lvl + "" + enemy[lvl].length + "\" width = \"" + wid + "\" height = \"" + hei + "\">Your browser does not support canvas</canvas>";
+        let notNeedsNew = document.getElementById("canvas" + lvl + "" + enemy[lvl].length) !== null;
+        if (!notNeedsNew)
+        {
+            let box = document.getElementById("enCanv");
+            box.innerHTML += "<canvas id=\"canvas" + lvl + "" + enemy[lvl].length + "\" width = \"" + wid + "\" height = \"" + hei + "\">Your browser does not support canvas</canvas>";
+        }
         let thisCanvas = document.getElementById("canvas" + lvl + "" + enemy[lvl].length);
 
         thisEnemy.hostile = canAttack;

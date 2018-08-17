@@ -87,7 +87,7 @@ function initializeCopterLevel()
 
             hover = new Audio;
             hover.src = "12Helo/audio/hover.mp3";
-            hover.volume = 0.2;
+            hover.volume = 0.1;
             hover.loop = true;
             hover.playbackRate = 2.5;
 
@@ -711,7 +711,7 @@ function start()
                 makeChicken(chickens.length);
                 chickens[chickens.length - 1].fly();
 
-                if(chickens.length !== 4)
+                if(chickens.length !== 3)
                     setTimeout(putEmIn, 1400);
             }
 

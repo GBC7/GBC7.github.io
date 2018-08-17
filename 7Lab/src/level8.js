@@ -1,12 +1,12 @@
 //LV8
 
+
 function initializeLV8()
 {
     canvas.style.backgroundImage = "";
 
 
     let floor = new Image();
-    let floor2 = new Image();
     let wall = new Image();
     let door1 = new Image();
     let stairs = new Image();
@@ -72,7 +72,6 @@ function initializeLV8()
         screen.src = "7Lab/images/screen.png";
         screenLeft.src = "7Lab/images/screen-left.png";
         screenRight.src = "7Lab/images/screen-right.png";
-        floor2.src = "7Lab/images/Floor2.png";
         labEquipmentTop.src = "7Lab/images/labEquipment-top.png";
         labEquipmentMiddle.src = "7Lab/images/labEquipment-middle.png";
         labEquipmentBottom.src = "7Lab/images/labEquipment-bottom.png";
@@ -131,7 +130,7 @@ function initializeLV8()
         ff = labEquipmentMiddle;	// 30
         gg = labEquipmentBottom;	// 31
         hh = computer2Top;			// 32
-        ii = computer2Bottom		// 33
+        ii = computer2Bottom;		// 33
         jj = undefined;
         kk = undefined;
     }//Assigning images to global variables
@@ -189,6 +188,20 @@ function initializeLV8()
     changePStartPos();
 
 
-    computer2Bottom.onload = function(){l8Ready=true;};
+    computer2Bottom.onload = function(){l8Ready=true;/*setTimeout(checkWindow, 1000);*/};
     waitForLoading();//Universal.. ish
+
+   /* function checkWindow()
+    {
+        if (!windowClosed)
+        {
+            setTimeout(spawn, 5000);
+        }
+    }
+
+    function spawn()
+    {
+        Enemy(true, 32, 48, 3, 3, "6Roof/images/roofEnemy1.png", 4, 120, 40, 8, 8, 0, 800, 0, 600, 1000);
+        setTimeout(checkWindow, 1000);
+    }*/
 }
